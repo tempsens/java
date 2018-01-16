@@ -18,8 +18,8 @@ public class JavaApplication2 {
        // TODO code application logic here
        
        System.out.println("Jukka PERKELE!!!"); // Aivan asiatonta!
-       System.out.println("Jukka PERKELE!!!");
-       System.out.println("Jukka PERKELE!!!");
+       System.out.println("Matti PERKELE!!!");
+       System.out.println("Joakim PERKELE!!!");
     }
     
 }
