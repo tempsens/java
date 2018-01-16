@@ -19,6 +19,7 @@ public class JavaApplication2 {
        
        System.out.println("Jukka PERKELE!!!"); // Aivan asiatonta!
        System.out.println("Jukka PERKELE!!!");
+       System.out.println("Jukka PERKELE!!!");
     }
     
 }
