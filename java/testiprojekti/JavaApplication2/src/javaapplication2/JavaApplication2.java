@@ -18,7 +18,7 @@ public class JavaApplication2 {
        // TODO code application logic here
        
        System.out.println("Jukka PERKELE!!!"); // Aivan asiatonta!
-       
+       System.out.println("Jukka PERKELE!!!");
     }
     
 }
