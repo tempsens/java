@@ -19,7 +19,7 @@ public class JavaApplication2 {
        
        System.out.println("Jukka PERKELE!!!"); // Aivan asiatonta!
        System.out.println("Matti PERKELE!!!");
-       System.out.println("Joakim PERKELE!!!");
+       System.out.println("Joakim PERKELE!!!"); // Toimii :)
     }
     
 }
