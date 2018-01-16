@@ -15,7 +15,10 @@ public class JavaApplication2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       System.out.println("Jukka PERKELE!!!"); // TODO code application logic here
+       // TODO code application logic here
+       
+       System.out.println("Jukka PERKELE!!!"); // Aivan asiatonta!
+       
     }
     
 }
