@@ -2,6 +2,7 @@
 loop
 {
 	// START OF USER INPUT SECTION
+	login				{ }				// Check username/password/level			-Suni
 	getinput
 		case help		{ }				// print help								-Joakim
 		
@@ -32,5 +33,5 @@ loop
 	// END OF USER INPUT SECTION
 	
 	temp value generator				// inserts values in table 1/sec	
-	server-client communication			// data transfer between server and clients	-Jukka
+	server-client communication			// data transfer between server and clients
 }

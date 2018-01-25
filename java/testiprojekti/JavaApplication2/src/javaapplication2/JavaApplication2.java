@@ -15,11 +15,16 @@ public class JavaApplication2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       // TODO code application logic here
-       
-       System.out.println("Jukka PERKELE!!!"); // Aivan asiatonta!
-       System.out.println("Matti PERKELE!!!");
-       System.out.println("Joakim PERKELE!!!"); // Toimii :)
+	int userLevel = 0;
+	System.out.println("Tästä se ohjelma alkaa!");
+	
+	// Het alkuusa myö kutsumma sissää kirjaatumise (usr=test, pwd=passu)
+	userControl userControl = new userControl();
+	while (userLevel < 1) {
+	    userLevel = userControl.login();
+	}
+	// Ohjelman looppi alkaa tästä
+	System.out.println("Ines ollaha!");
     }
-    
+
 }
