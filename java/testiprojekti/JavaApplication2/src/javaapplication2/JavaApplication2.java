@@ -34,7 +34,7 @@ public class JavaApplication2 {
 	Inputti inputti = new Inputti();
 	
         while (!komento.equals("exit")) {
-            System.out.print("Anna komento (help = apuuwa): ");
+            System.out.print("Anna komento: ");
             komento = scanner.nextLine();
         
                 switch(komento.toLowerCase()){
@@ -43,6 +43,12 @@ public class JavaApplication2 {
                         if(inputti.Help() == 0) {
 			    System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA
 			}
+			break;
+			
+		    case "exit": break;
+
+		    default: System.out.println("Kirjoita 'help' jos et osaa!");
+
                 }
         }
     }
