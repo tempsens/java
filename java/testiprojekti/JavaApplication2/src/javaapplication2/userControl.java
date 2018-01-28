@@ -24,7 +24,8 @@ public class userControl {
 
     public int login() {
 	Scanner input = new Scanner(System.in);  // Reading from System.in
-
+	FileOut fileout = new FileOut();
+	
 	System.out.print("\nUsername: ");
 	String userInput = input.next();
 
@@ -42,6 +43,7 @@ public class userControl {
 	    this.username = "";
 	    this.password = "";
 	    this.userLevel = 0;
+	    fileout.console("LOGIN ERROR: u:" + userInput + " p:" + passInput);
 	    return 0;
 	}
     }
