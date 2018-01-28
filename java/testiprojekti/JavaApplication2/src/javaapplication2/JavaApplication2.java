@@ -29,16 +29,20 @@ public class JavaApplication2 {
         }
         // Ohjelman looppi alkaa tästä
         System.out.println("Ines ollaha!");
+	
         String komento = "";
-
-        while ("exit".equals(komento)) {
+	Inputti inputti = new Inputti();
+	
+        while (!komento.equals("exit")) {
             System.out.print("Anna komento (help = apuuwa): ");
             komento = scanner.nextLine();
         
                 switch(komento.toLowerCase()){
                 
                     case "help":
-                        System.out.println(inputti.Help());
+                        if(inputti.Help() == 0) {
+			    System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA
+			}
                 }
         }
     }

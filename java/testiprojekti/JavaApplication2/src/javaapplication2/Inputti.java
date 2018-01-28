@@ -10,19 +10,29 @@ package javaapplication2;
  * @author Joakim
  */
 public class Inputti {
-
+/*
     final String txtHelp = ""
             + "HELP - Commands \r\n"
             + "------------------------------- \r\n"
-            + "start \t Start logging \r\n"
-            + "stop \t Stop logging \r\n"
-            + "restart \t Restart loggin \r\n"
-            + "users \t Show users"
-            + "temps \t List last 50 rows"
-            + "exit \t Exit program";
-
-    public String Help() {
-        return txtHelp;
+            + "start \t\t Start logging\r\n"
+            + "stop \t\t Stop logging\r\n"
+            + "restart \t Restart loggin\r\n"
+            + "users \t\t Show users\r\n"
+            + "temps \t\t List last 50 rows\r\n"
+            + "exit \t\t Exit program\r\n";
+*/
+    public int Help() {
+//        return txtHelp;
+	System.out.println(""
+            + "HELP - Commands \r\n"
+            + "------------------------------- \r\n"
+            + "start \t\t Start logging\r\n"
+            + "stop \t\t Stop logging\r\n"
+            + "restart \t Restart loggin\r\n"
+            + "users \t\t Show users\r\n"
+            + "temps \t\t List last 50 rows\r\n"
+            + "exit \t\t Exit program\r\n");
+	return 1;
     }
 
 
