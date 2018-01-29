@@ -2,9 +2,9 @@
 loop
 {
 	// START OF USER INPUT SECTION
-	login				{ }				// Check username/password/level			-Suni
+	login				{ }				// Check username/password/level			-Suni			-Done
 	getinput
-		case help		{ }				// print help								-Joakim
+		case help		{ }				// print help								-Joakim			-Done
 		
 		case start		{ }				// start logging
 		case stop		{ }				// stop logging
@@ -22,13 +22,13 @@ loop
 				gt						// --> error: no value given
 					VALUE { }			// list 50 greatest rows				50?
 					
-		case fileout					// --> error: missing parameter				- Matti
-			log			{ }				// write console to logfile(s)
-			users		{ }				// write userlist to file
+		case fileout					// --> error: missing parameter				- Matti/Jukka	-Done
+			log			{ }				// write console to logfile(s)								-Done
+			users		{ }				// write userlist to file									-Done
 			
 		case tempout	{ }				// push temperature info in JAVA, later to db
 			
-		case exit		{ }				// exit program	-Joakim
+		case exit		{ }				// exit program								-Joakim			-Done
 		
 	// END OF USER INPUT SECTION
 	

@@ -19,10 +19,22 @@ public class FileOut {
 
     String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
 
+    public int loginError(String viesti) {
+	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
+	    String textToWrite = today + "Server: LOGIN ERROR! (" + viesti + ")\r\n";
+	    writer.write(textToWrite);
+	    writer.close();
+	    return 1;
+	} catch (IOException ex) {
+	    System.out.println("IOException: " + ex.getMessage());
+	    return 0;
+	}	
+    }
+    
     public int console(String viesti) {
 	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
 	    String textToWrite = viesti;
-	    writer.write(today + "Server: " + textToWrite + "\r\n");
+	    writer.write(textToWrite + "\r\n");
 	    writer.close();
 	    return 1;
 	} catch (IOException ex) {

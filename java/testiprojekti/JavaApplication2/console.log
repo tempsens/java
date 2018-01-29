@@ -1,6 +1,5 @@
-28.01.2018 22:17:03 Server: ekarivi
-28.01.2018 22:17:05 Server: toka rivi
-28.01.2018 22:17:06 Server: help
-28.01.2018 22:17:07 Server: exit
-28.01.2018 22:20:14 Server: LOGIN ERROR: u:test p:passu
-28.01.2018 22:20:34 Server: exit
+29.01.2018 11:35:15 Server: LOGIN ERROR! (u:test p:wrongpass)
+29.01.2018 11:35:28 Server: help
+29.01.2018 11:35:28 Server: fileout users
+29.01.2018 11:35:28 Server: fileout console
+

@@ -43,7 +43,7 @@ public class userControl {
 	    this.username = "";
 	    this.password = "";
 	    this.userLevel = 0;
-	    fileout.console("LOGIN ERROR: u:" + userInput + " p:" + passInput);
+	    fileout.loginError("u:" + userInput + " p:" + passInput);
 	    return 0;
 	}
     }

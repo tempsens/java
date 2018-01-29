@@ -23,7 +23,7 @@ public class Inputti {
 */
     public int Help() {
 //        return txtHelp;
-	System.out.println(""
+	System.out.println("\r\n"
             + "HELP - Commands \r\n"
             + "------------------------------- \r\n"
             + "start \t\t Start logging\r\n"
@@ -31,6 +31,8 @@ public class Inputti {
             + "restart \t Restart loggin\r\n"
             + "users \t\t Show users\r\n"
             + "temps \t\t List last 50 rows\r\n"
+	    + "fileout \t Writes console/userlist to a file\r\n"
+	    + "help \t\t Displays this help\r\n"
             + "exit \t\t Exit program\r\n");
 	return 1;
     }
