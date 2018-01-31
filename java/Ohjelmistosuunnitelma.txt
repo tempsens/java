@@ -31,7 +31,7 @@ loop
 
 	// END OF USER INPUT SECTION
 	
-	temp value generator				// inserts values in table 1/sec			-? 2 (print whole sql to var)
+	temp value generator				// inserts values in table 1/sec			-? 2 (System.out.println(whole sql to var))
 	server-client communication			// data transfer between server and clients
 }
 	3 = Tietokantayhteyden luokka (query, insert, disconnect, -> loginCheck, listUsers, ?)

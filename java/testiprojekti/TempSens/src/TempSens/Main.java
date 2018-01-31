@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication2;
+package TempSens;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -14,7 +14,7 @@ import java.util.Scanner;
  *
  * @author juksu
  */
-public class JavaApplication2 {
+public class Main {
 
     /**
      * @param args the command line arguments
@@ -42,6 +42,7 @@ public class JavaApplication2 {
 	while (!komento.equals("exit")) {
 	    System.out.print("Anna komento: ");
 	    komento = scanner.nextLine();
+	    DB kanta = new DB();
 	    switch (komento.toLowerCase()) {
 		case "help":
 		    commandLog = commandLog + today + "Server: " + "help\r\n";
@@ -65,12 +66,15 @@ public class JavaApplication2 {
 		    break;
 
 		case "fileout users":
-		    commandLog = commandLog + today + "Server: " + "fileout users\r\n";
-		    if(fileout.users() < 1) {
+		    commandLog = commandLog + today + "Server: " + "fileout userlist\r\n";
+		    if(fileout.userlist() < 1) {
 			System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA			
 		    } else {
 			System.out.println("users.log writen.");
 		    }
+		    break;
+		case "testcon":
+		    kanta.connect();
 		    break;
 
 		case "exit":

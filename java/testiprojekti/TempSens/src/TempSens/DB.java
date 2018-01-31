@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication2;
+package TempSens;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
  * @author juksu
  */
 public class DB {
@@ -26,8 +25,8 @@ public class DB {
 // YHTEYDEN MUODOSTUS
     public void connect() {
 	try {
-	    conn = DriverManager.getConnection("jdbc:mysql://localhost/oma1?"
-		    + "user=root&password=Passu0");
+	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/_tempsens?"
+		    + "user=&password="); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
 	} catch (SQLException ex) {
 	    System.out.println("SQLException: " + ex.getMessage());
 	    System.out.println("SQLState: " + ex.getSQLState());

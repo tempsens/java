@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication2;
+package TempSens;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class FileOut {
 	}
     }
 
-    public int users() {
+    public int userlist() {
 	try (FileWriter writer = new FileWriter("users.log", TRUE)) {
 	    String textToWrite = "Userlist:\r\n1: test\r\n2: \r\n3: \r\n4: \r\n5: \r\n";
 	    writer.write(today + textToWrite + "\r\n");

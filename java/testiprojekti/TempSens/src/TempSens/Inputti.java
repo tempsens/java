@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication2;
+package TempSens;
 
 /**
  *
@@ -26,14 +26,13 @@ public class Inputti {
 	System.out.println("\r\n"
             + "HELP - Commands \r\n"
             + "------------------------------- \r\n"
-            + "start \t\t Start logging\r\n"
-            + "stop \t\t Stop logging\r\n"
-            + "restart \t Restart loggin\r\n"
-            + "users \t\t Show users\r\n"
-            + "temps \t\t List last 50 rows\r\n"
-	    + "fileout \t Writes console/userlist to a file\r\n"
-	    + "help \t\t Displays this help\r\n"
-            + "exit \t\t Exit program\r\n");
+            + "start \t\t\t Start logging\r\n"
+            + "stop \t\t\t Stop logging\r\n"
+            + "restart \t\t Restart logging\r\n"
+            + "list [args]\t\t Show list of users/temps\r\n"
+	    + "fileout [args]\t\t Writes console/userlist to a file\r\n"
+	    + "help \t\t\t Displays this help\r\n"
+            + "exit \t\t\t Exit program\r\n");
 	return 1;
     }
 
