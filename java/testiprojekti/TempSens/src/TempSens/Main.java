@@ -15,6 +15,7 @@ import java.util.Scanner;
  * @author juksu
  */
 public class Main {
+    static final String peruspalaute = "Kirjoita 'help' jos et muuta osaa!\r\n";
 
     /**
      * @param args the command line arguments
@@ -50,7 +51,41 @@ public class Main {
 			System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA
 		    }
 		    break;
+                case "add user":
+                    commandLog = commandLog + today + "Server: " + "help\r\n";
+                    if (userLevel >= 10) {
+                        Scanner input = new Scanner(System.in);  // Reading from System.in
 
+                        System.out.print("\nGive username for new user: ");
+                        String newUserInput = input.next();
+
+                        System.out.print("Anna käyttäjä taso: ");
+                        int newUserLevel = Integer.parseInt(input.next());
+                        DB uusiUseri = new DB();
+                        uusiUseri.connect();
+
+                        uusiUseri.insertUser(newUserLevel, newUserInput);
+
+                        uusiUseri.disconnect();
+                        break;
+                        
+                    } else {
+                        System.out.println(peruspalaute);
+                    }
+           
+                 
+                        
+
+
+// starts a program addUser
+                    // && userLever=10 then --> add user [username] [userlevel]
+                    // string()=komento.split(" ")
+                    // string(2)= username
+                    // 
+                    // string(3)=userlevel
+                    // db.connect()
+                    // db.insertuser()
+                    
 		case "fileout":
 		    commandLog = commandLog + today + "Server: " + "fileout\r\n";
 		    System.out.println("Missing parameter! (console or users needed)");
@@ -73,15 +108,30 @@ public class Main {
 			System.out.println("users.log writen.");
 		    }
 		    break;
-		case "testcon":
-		    kanta.connect();
-		    break;
+		//case "testcon":
+		  // kanta.connect();
+		  //break;
+                case "test":
+                    Shuffle shuffle = new Shuffle();
+                    DB db = new DB();
+                    String luku;
+                    db.connect();
+                    
+                    for (int laskuri = 1; laskuri <= 10; laskuri++) {
 
-		case "exit":
+                        luku = shuffle.ShuffleTemp(1);
+                        System.out.println(luku);
+                        
+                  //      db.insert("temps", "value", Double.parseDouble(luku));
+                        db.insertTemp(Double.parseDouble(luku), 1);
+
+                    }
+                    break;
+               	case "exit":
 		    break;
 
 		default:
-		    System.out.println("Kirjoita 'help' jos et osaa!");
+		    System.out.println(peruspalaute);
 	    }
 	}
     }

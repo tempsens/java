@@ -24,7 +24,7 @@ public class Inputti {
     public int Help() {
 //        return txtHelp;
 	System.out.println("\r\n"
-            + "HELP - Commands \r\n"
+            + "HELP - Commands \r\n"                    // TODO admin help eller user help riippuen userLevelistä
             + "------------------------------- \r\n"
             + "start \t\t\t Start logging\r\n"
             + "stop \t\t\t Stop logging\r\n"
@@ -32,6 +32,7 @@ public class Inputti {
             + "list [args]\t\t Show list of users/temps\r\n"
 	    + "fileout [args]\t\t Writes console/userlist to a file\r\n"
 	    + "help \t\t\t Displays this help\r\n"
+            + "newpass \t\t Change password\r\n"          // <-- to be needed?
             + "exit \t\t\t Exit program\r\n");
 	return 1;
     }

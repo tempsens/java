@@ -22,7 +22,7 @@ public class userControl {
     private final String testPass = "passu";
     private final int testLevel = 10;
 
-    public int login() {
+    public int login() {    //TODO If password is empty then force loop to add password
 	Scanner input = new Scanner(System.in);  // Reading from System.in
 	FileOut fileout = new FileOut();
 	
@@ -33,9 +33,14 @@ public class userControl {
 	String passInput = input.next();
 
 	// TODO: db connection and query
-	if (userInput.equals(testUser) && passInput.equals(testPass)) {
+	DB user = new DB();
+        user.connect();
+        
+        return (user.checkUser(userInput, passInput));
+        
+/*        if (userInput.equals(testUser) && passInput.equals(testPass)) {
 	    this.username = userInput;
-	    this.password = passInput;
+    this.password = passInput;
 	    this.userLevel = testLevel;
 	    return this.userLevel;
 	} else {
@@ -47,4 +52,6 @@ public class userControl {
 	    return 0;
 	}
     }
+        */
+}
 }
