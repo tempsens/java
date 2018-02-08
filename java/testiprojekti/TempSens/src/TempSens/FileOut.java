@@ -31,6 +31,18 @@ public class FileOut {
 	}	
     }
     
+    public int loginSuccess(String viesti) {
+	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
+	    String textToWrite = today + "Server: LOGIN: (" + viesti + ")\r\n";
+	    writer.write(textToWrite);
+	    writer.close();
+	    return 1;
+	} catch (IOException ex) {
+	    System.out.println("IOException: " + ex.getMessage());
+	    return 0;
+	}	
+    }
+    
     public int console(String viesti) {
 	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
 	    String textToWrite = viesti;

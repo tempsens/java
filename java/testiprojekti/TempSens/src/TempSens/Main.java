@@ -41,7 +41,7 @@ public class Main {
    
 	// Ohjelman looppi alkaa tästä
 	while (!komento.equals("exit")) {
-	    System.out.print("Anna komento: ");
+	    System.out.print("["+userLevel+"]"+"Anna komento: ");	// Userlevel added to beginning
 	    komento = scanner.nextLine();
 	    DB kanta = new DB();
 	    switch (komento.toLowerCase()) {
