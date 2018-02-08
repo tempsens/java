@@ -12,14 +12,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
- * @author juksu
+ * @author PetShopBoys
  */
 public class FileOut {
 
     String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
 
-    public int loginError(String viesti) {
+    public int loginError(String viesti) {	    // Prints to file if login fails
 	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
 	    String textToWrite = today + "Server: LOGIN ERROR! (" + viesti + ")\r\n";
 	    writer.write(textToWrite);
@@ -31,7 +30,7 @@ public class FileOut {
 	}	
     }
     
-    public int loginSuccess(String viesti) {
+    public int loginSuccess(String viesti) {	   // Prints to file who has logged in
 	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
 	    String textToWrite = today + "Server: LOGIN: (" + viesti + ")\r\n";
 	    writer.write(textToWrite);
@@ -55,7 +54,7 @@ public class FileOut {
 	}
     }
 
-    public int userlist() {
+    public int userlist() {			// NEEDED TO CONVERT TO USE DATABASE
 	try (FileWriter writer = new FileWriter("users.log", TRUE)) {
 	    String textToWrite = "Userlist:\r\n1: test\r\n2: \r\n3: \r\n4: \r\n5: \r\n";
 	    writer.write(today + textToWrite + "\r\n");

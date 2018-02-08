@@ -8,8 +8,7 @@ package TempSens;
 import java.util.Scanner;
 
 /**
- *
- * @author juksu
+ * @author PetShopBoys
  */
 public class userControl {
 

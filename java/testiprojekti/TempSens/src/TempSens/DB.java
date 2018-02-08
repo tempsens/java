@@ -11,11 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-//import java.util.regex.Pattern;
-//import static jdk.nashorn.tools.ShellFunctions.input;
 
 /**
- * @author juksu
+ * @author PetShopBoys
  */
 public class DB {
 
@@ -26,174 +24,151 @@ public class DB {
 
 // YHTEYDEN MUODOSTUS
     public void connect() {
-        try {
-            //	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/XXXXXXXX_tempsens?"
-            //      + "user=XXXX_XXXXX&password=XXXXXXX"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
+	try {
+	    //	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/XXXXXXXX_tempsens?"
+	    //      + "user=XXXX_XXXXX&password=XXXXXXX"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
 
-            conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/_tempsens?"
-             + "user=&password="); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
+	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/_tempsens?"
+		    + "user=&password="); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
 
-        } catch (SQLException ex) {
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
+	} catch (SQLException ex) {		// handle any errors
+	    System.out.println("SQLException: " + ex.getMessage());
+	    System.out.println("SQLState: " + ex.getSQLState());
+	    System.out.println("VendorError: " + ex.getErrorCode());
+	}
     }
 
     public void disconnect() {
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException sqlEx) {
-            } // ignore
-            rs = null;
-        }
-
-        if (stmt != null) {
-            try {
-                stmt.close();
-            } catch (SQLException sqlEx) {
-            } // ignore
-            stmt = null;
-        }
+	if (rs != null) {
+	    try {
+		rs.close();
+	    } catch (SQLException sqlEx) { }		// handle any errors - EMPTY
+	    rs = null;
+	}
+	if (stmt != null) {
+	    try {
+		stmt.close();
+	    } catch (SQLException sqlEx) { }		// handle any errors - EMPTY
+	    stmt = null;
+	}
     }
+    
 // KYSELY
-
     /**
      *
-     * @param objects
-     * @param table
-     * @param where
-     * @return
+     * @param objects	- Mitkä kentät valitaan
+     * @param table	- Taulun nimi
+     * @param where	- Hakuehdot (WHERE value > 20.0 AND value < 30.0)
+     * @return	    - Palauttaa kaikkien valittujen kenttien (objects) arvot
      */
     public ResultSet query(String objects, String table, String where) {
-        try {
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT " + objects + " FROM " + table + " " + where + " LIMIT 100");
-            /*
-	    // TOISTA "num_rows"
-	    while (rs.next()) {
-		System.out.println("id=" + rs.getString(1) + " kuvaus=" + rs.getString(2) + " timestamp=" + rs.getString(3));
-	    }
-             */
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-        return rs;
+	try {
+	    stmt = conn.createStatement();
+	    rs = stmt.executeQuery("SELECT " + objects + " FROM " + table + " " + where + " LIMIT 100");
+	} catch (SQLException ex) {
+	    // handle any errors
+	    System.out.println("SQLException: " + ex.getMessage());
+	    System.out.println("SQLState: " + ex.getSQLState());
+	    System.out.println("VendorError: " + ex.getErrorCode());
+	}
+	return rs;
     }
 
+// Käyttäjän lisääminen
     public void insertUser(int val1, String val2) {
-         this.connect();
-        try {
-            String query = "INSERT INTO users (userlvl, username, password) VALUES(" + val1 + ", '" + val2 + "', '" + val2 + "')";
-            // String query = "INSERT INTO temps (value) VALUES(0.0);";
-            // System.out.println(query);
-            stmt = conn.createStatement();
-            if (stmt.execute(query)) {
-                rs = stmt.getResultSet();
-            }
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-          this.disconnect();
+	this.connect();
+	try {
+	    String query = "INSERT INTO users (userlvl, username, password) VALUES(" + val1 + ", '" + val2 + "', '" + val2 + "')";
+	    stmt = conn.createStatement();
+	    if (stmt.execute(query)) {
+		rs = stmt.getResultSet();
+	    }
+	} catch (SQLException ex) {		// handle any errors
+	    System.out.println("SQLException: " + ex.getMessage());
+	    System.out.println("SQLState: " + ex.getSQLState());
+	    System.out.println("VendorError: " + ex.getErrorCode());
+	}
+	this.disconnect();
     }
 
+// Lämpötilan lisääminen
     public void insertTemp(double val1, int val2) {
-        // this.connect();
-        try {
-            String query = "INSERT INTO temps (value, sensor) VALUES ('" + val1 + "', " + val2 + ")";
-            // String query = "INSERT INTO temps (value) VALUES(0.0);";
-            System.out.println(query);
-            stmt = conn.createStatement();
-            if (stmt.execute(query)) {
-                rs = stmt.getResultSet();
-            }
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-        // this.disconnect();
+	// this.connect();
+	try {
+	    String query = "INSERT INTO temps (value, sensor) VALUES ('" + val1 + "', " + val2 + ")";
+	    System.out.println(query);
+	    stmt = conn.createStatement();
+	    if (stmt.execute(query)) {
+		rs = stmt.getResultSet();
+	    }
+	} catch (SQLException ex) {		// handle any errors
+	    System.out.println("SQLException: " + ex.getMessage());
+	    System.out.println("SQLState: " + ex.getSQLState());
+	    System.out.println("VendorError: " + ex.getErrorCode());
+	}
+	// this.disconnect();
     }
 
+// Käyttäjätietojen tarkastaminen ("login")
     public int checkUser(String user, String pass) {
-
-        int leveli = 0;
-        try {
-            String query = "SELECT userlvl FROM users WHERE username='" + user + "' AND password='" + pass + "'";
-            // String query = "INSERT INTO temps (value) VALUES(0.0);";
-            // System.out.println(query);
-            stmt = conn.createStatement();
-            ResultSet resSet = stmt.executeQuery(query);
-		FileOut fileout = new FileOut();
-            if (resSet.next()) {
+	int leveli = 0;
+	try {
+	    String query = "SELECT userlvl FROM users WHERE username='" + user + "' AND password='" + pass + "'";
+	    stmt = conn.createStatement();
+	    ResultSet resSet = stmt.executeQuery(query);
+	    FileOut fileout = new FileOut();
+	    if (resSet.next()) {
 		fileout.loginSuccess("u:" + user);
-                leveli = resSet.getInt(1);
-            } else {				// Login failures to logfile -Suni-
+		leveli = resSet.getInt(1);
+	    } else {				// Login failures to logfile -Suni-
 		fileout.loginError("u:" + user);
 	    }
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-        disconnect();
+	} catch (SQLException ex) {		// handle any errors
+	    System.out.println("SQLException: " + ex.getMessage());
+	    System.out.println("SQLState: " + ex.getSQLState());
+	    System.out.println("VendorError: " + ex.getErrorCode());
+	}
+	disconnect();
 
-        return leveli;
-        
+	return leveli;
+
     }
-         public void listUsers()  {
-              this.connect();   
-        try {
-            String query = "SELECT username FROM users";
-            // String query = "INSERT INTO temps (value) VALUES(0.0);";
-            // System.out.println(query);
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-             
-                System.out.println(rs.getString("username"));
-            }
-          
 
-            
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-        disconnect();
-         }
-         public void listTemps()  {
-              this.connect();   
-        try {
-            String query = "SELECT paivays, value, sensor  FROM temps";
-            // String query = "INSERT INTO temps (value) VALUES(0.0);";
-            // System.out.println(query);
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-             
-                System.out.println(rs.getString(1) + "\t" +  rs.getDouble(2) + "\t" + rs.getInt(3));
-            }
-          
+// Käyttäjien listaaminen tietokannasta
+    public void listUsers() {
+	this.connect();
+	try {
+	    String query = "SELECT username FROM users";
+	    stmt = conn.createStatement();
+	    ResultSet rs = stmt.executeQuery(query);
+	    while (rs.next()) {
 
-            
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-        disconnect();
-         }
+		System.out.println(rs.getString("username"));
+	    }
+	} catch (SQLException ex) {		// handle any errors
+	    System.out.println("SQLException: " + ex.getMessage());
+	    System.out.println("SQLState: " + ex.getSQLState());
+	    System.out.println("VendorError: " + ex.getErrorCode());
+	}
+	disconnect();
+    }
+
+// Lämpötila-arvojen listaaminen tietokannasta	    -- FROM temps LIMIT 50 pitäis lisätä?
+    public void listTemps() {
+	this.connect();
+	try {
+	    String query = "SELECT paivays, value, sensor  FROM temps";
+	    stmt = conn.createStatement();
+	    ResultSet rs = stmt.executeQuery(query);
+	    while (rs.next()) {
+
+		System.out.println(rs.getString(1) + "\t" + rs.getDouble(2) + "\t" + rs.getInt(3));
+	    }
+	} catch (SQLException ex) {		// handle any errors
+	    System.out.println("SQLException: " + ex.getMessage());
+	    System.out.println("SQLState: " + ex.getSQLState());
+	    System.out.println("VendorError: " + ex.getErrorCode());
+	}
+	disconnect();
+    }
 }
