@@ -60,24 +60,34 @@ public class Main {
                         String newUserInput = input.next();
 
                         System.out.print("Anna käyttäjä taso: ");
-                        int newUserLevel = Integer.parseInt(input.next());
+                        //int newUserLevel = Integer.parseInt(input.next());
+                        double UserLevel = Integer.parse(input.next());
+                        int newUserLevel = Integer.parseInt(String.format("%d", (int)UserLevel));
                         DB uusiUseri = new DB();
                         uusiUseri.connect();
-
                         uusiUseri.insertUser(newUserLevel, newUserInput);
-
-                        uusiUseri.disconnect();
                         break;
                         
                     } else {
                         System.out.println(peruspalaute);
                     }
            
-                 
-                        
-
-
-// starts a program addUser
+                case "list users":
+                    commandLog = commandLog + today + "Server: " + "help\r\n";
+                    if (userLevel >= 10){
+                        DB listuser = new DB();
+                        listuser.listUsers();
+                    }
+                    break;
+                    
+                     case "list temps":
+                    commandLog = commandLog + today + "Server: " + "help\r\n";
+                    
+                        DB listtemps = new DB();
+                        listtemps.listTemps();
+                    
+                    break;
+                    // starts a program addUser
                     // && userLever=10 then --> add user [username] [userlevel]
                     // string()=komento.split(" ")
                     // string(2)= username

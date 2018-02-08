@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+//import java.util.regex.Pattern;
+//import static jdk.nashorn.tools.ShellFunctions.input;
 
 /**
  * @author juksu
@@ -28,8 +30,8 @@ public class DB {
             //	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/XXXXXXXX_tempsens?"
             //      + "user=XXXX_XXXXX&password=XXXXXXX"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
 
-            conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/_tempsens?"
-                    + "user=&password="); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
+            conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/juksohia_tempsens?"
+                    + "user=juksohia_sensor&password=!sensor1"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -83,11 +85,11 @@ public class DB {
     }
 
     public void insertUser(int val1, String val2) {
-        // this.connect();
+         this.connect();
         try {
             String query = "INSERT INTO users (userlvl, username, password) VALUES(" + val1 + ", '" + val2 + "', '" + val2 + "')";
             // String query = "INSERT INTO temps (value) VALUES(0.0);";
-            System.out.println(query);
+            // System.out.println(query);
             stmt = conn.createStatement();
             if (stmt.execute(query)) {
                 rs = stmt.getResultSet();
@@ -98,7 +100,7 @@ public class DB {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-        //  this.disconnect();
+          this.disconnect();
     }
 
     public void insertTemp(double val1, int val2) {
@@ -142,7 +144,52 @@ public class DB {
         disconnect();
 
         return leveli;
-
+        
     }
+         public void listUsers()  {
+              this.connect();   
+        try {
+            String query = "SELECT username FROM users";
+            // String query = "INSERT INTO temps (value) VALUES(0.0);";
+            // System.out.println(query);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+             
+                System.out.println(rs.getString("username"));
+            }
+          
 
+            
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        disconnect();
+         }
+         public void listTemps()  {
+              this.connect();   
+        try {
+            String query = "SELECT paivays, value, sensor  FROM temps";
+            // String query = "INSERT INTO temps (value) VALUES(0.0);";
+            // System.out.println(query);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+             
+                System.out.println(rs.getString(1) + "\t" +  rs.getDouble(2) + "\t" + rs.getInt(3));
+            }
+          
+
+            
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        disconnect();
+         }
 }
