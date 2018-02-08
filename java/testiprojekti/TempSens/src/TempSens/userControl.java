@@ -18,9 +18,9 @@ public class userControl {
     private int userLevel;
 
 // These 3 are temporaty variables - remove after db connection works
-    private final String testUser = "test";
-    private final String testPass = "passu";
-    private final int testLevel = 10;
+    private final String testUser = "test";				    // Voidaan poistaa?
+    private final String testPass = "passu";				    // Voidaan poistaa?
+    private final int testLevel = 10;					    // Voidaan poistaa?
 
     public int login() {    //TODO If password is empty then force loop to add password
 	Scanner input = new Scanner(System.in);  // Reading from System.in
@@ -40,7 +40,7 @@ public class userControl {
         
 /*        if (userInput.equals(testUser) && passInput.equals(testPass)) {
 	    this.username = userInput;
-    this.password = passInput;
+	    this.password = passInput;
 	    this.userLevel = testLevel;
 	    return this.userLevel;
 	} else {

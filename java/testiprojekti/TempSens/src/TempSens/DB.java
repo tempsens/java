@@ -30,8 +30,9 @@ public class DB {
             //	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/XXXXXXXX_tempsens?"
             //      + "user=XXXX_XXXXX&password=XXXXXXX"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
 
-            conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/juksohia_tempsens?"
-                    + "user=juksohia_sensor&password=!sensor1"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
+            conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/_tempsens?"
+             + "user=&password="); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
+
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -130,11 +131,14 @@ public class DB {
             // String query = "INSERT INTO temps (value) VALUES(0.0);";
             // System.out.println(query);
             stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            if (rs.next()) {
-                leveli = rs.getInt(1);
-
-            }
+            ResultSet resSet = stmt.executeQuery(query);
+		FileOut fileout = new FileOut();
+            if (resSet.next()) {
+		fileout.loginSuccess("u:" + user);
+                leveli = resSet.getInt(1);
+            } else {				// Login failures to logfile -Suni-
+		fileout.loginError("u:" + user);
+	    }
         } catch (SQLException ex) {
             // handle any errors
             System.out.println("SQLException: " + ex.getMessage());
