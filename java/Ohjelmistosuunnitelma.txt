@@ -2,9 +2,9 @@
 	login				{ }				// Check username/password/level			-Suni			-Done
 		case help		{ }				// print help								-Joakim			-Done
 		case start		{ }				// start temp logging					   \
-		case stop		{ }				// stop temp logging						-? 1
+		case stop		{ }				// stop temp logging						==>						TO DO
 		case restart	{ }				// restart temp logging					   /
-		case list
+		case list						// --> error: argument needed								-Done
 			users		{ }				// show users (and logged users)							-Done
 			temps						// list last 50 rows				50?						-Done
 				from					// --> error: no date given
@@ -16,22 +16,21 @@
 				gt						// --> error: no value given
 					VALUE { }			// list 50 greatest rows			50?
 		case fileout					// --> error: missing parameter				- Matti/Jukka	-Done
-			log			{ }				// write console to logfile(s)								-Done
-			users		{ }				// write userlist to file											NOT DONE
+			console		{ }				// write console to logfile(s)								-Done
+			userlist	{ }				// write userlist to file											NOT DONE
 		case tempout	{ }				// push temperature info in JAVA, later to db						NOT DONE
 		case exit		{ }				// exit program								-Joakim			-Done
 // END OF USER INPUT SECTION
 	temp value generator				// inserts values in table 1/sec			-Joakim			-Done
 	server-client communication			// data transfer between server and clients				WORKING ON IT -Suni-
-
 	Tietokantayhteyden luokka (query, insert, disconnect, -> loginCheck, listUsers)	-Matti/Joakim	-Done
 
-	TODO:
-		poista salasanan näkyminen console.logista!													-Done (Tarkasta. git-päivitys kahdesta lähteestä)
-		RAPORTOINTI, TOTEUTUNEET KESTOT JA AIKA-ARVIOT
-		TOTEUTUNEET / TULEVAT PALAVERIT JNE
-			-?24.01.?20.30 - 00.00 - ?		(Jukka at charge)
-			- 31.01. 20.30 - 00.00 - MySQL..? (Joakim at charge)
-			- 07.02. 20.30 - 00.30 - MySQL..? (Matti in charge)
-		-> Successful login saves username and time to log
-		fileout users tietokannasta
+TODO:
+	[X]	poista salasanan näkyminen console.logista!													-Done
+	[ ]	RAPORTOINTI, TOTEUTUNEET KESTOT JA AIKA-ARVIOT				-->Projektiaikataulu.txt	WORKING ON IT -Suni-
+	[ ]	TOTEUTUNEET / TULEVAT PALAVERIT JNE							-->Projektiaikataulu.txt	WORKING ON IT -Suni-
+			-?24.01.?20.30 - 00.00 - ?		(Jukka in charge)		-----/
+			- 31.01. 20.30 - 00.00 - MySQL..? (Joakim in charge)    ----/
+			- 07.02. 20.30 - 00.30 - MySQL..? (Matti in charge)		---/
+	[X]	-> Successful login saves username and time to log											-Done
+	[X]	fileout users tietokannasta																	-Done
