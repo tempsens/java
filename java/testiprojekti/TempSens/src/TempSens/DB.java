@@ -171,4 +171,26 @@ public class DB {
 	}
 	disconnect();
     }
+     public String GetUsersFromDB(){
+         this.connect();
+         String palautus = "USERS LIST" + "\r\n\r\n" + "nro" + "\t" + "Username" + "\t" + "Userlevel" + "\r\n" + "---------------------------------------------------------" + "\r\n";
+         int i = 1;
+
+         try {
+             String query = "SELECT username, userlvl FROM users ORDER BY username ASC";
+             stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query);
+             while (rs.next()) {
+
+                 palautus += Integer.toString(i) + "\t" + rs.getString(1) + "\t" + rs.getString(2) + "\r\n";
+             }
+         } catch (SQLException ex) {		// handle any errors
+             System.out.println("SQLException: " + ex.getMessage());
+             System.out.println("SQLState: " + ex.getSQLState());
+             System.out.println("VendorError: " + ex.getErrorCode());
+         }
+         disconnect();
+         return palautus;
+    
+    }
 }
