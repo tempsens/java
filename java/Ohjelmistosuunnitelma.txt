@@ -18,7 +18,7 @@
 		case fileout					// --> error: missing parameter				- Matti/Jukka	-Done
 			console		{ }				// write console to logfile(s)								-Done
 			userlist	{ }				// write userlist to file											NOT DONE
-		case tempout	{ }				// push temperature info in JAVA, later to db						NOT DONE
+		case tempout	{ }				// push temperature info in NySQL, later to db						NOT DONE
 		case exit		{ }				// exit program								-Joakim			-Done
 // END OF USER INPUT SECTION
 	temp value generator				// inserts values in table 1/sec			-Joakim			-Done
