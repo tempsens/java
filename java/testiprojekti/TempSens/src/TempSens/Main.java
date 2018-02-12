@@ -22,140 +22,151 @@ public class Main {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-	int userLevel = 0;
-	String commandLog = "";
-	System.out.println("Temperature recorder software");
-	Scanner scanner = new Scanner(System.in);
+        int userLevel = 0;
+        String commandLog = "";
+        System.out.println("Temperature recorder software");
+        Scanner scanner = new Scanner(System.in);
 
-	// Het alkuusa myö kutsumma sissää kirjaatumise (usr=test, pwd=passu)
-	userControl userControl = new userControl();
-	while (userLevel < 1) {
-	    userLevel = userControl.login();
-	}
+        // Het alkuusa myö kutsumma sissää kirjaatumise (usr=test, pwd=passu)
+        userControl userControl = new userControl();
+        while (userLevel < 1) {
+            userLevel = userControl.login();
+        }
 
-	// Muuttujat ja luokat pääohjelmalle
-	String komento = "";
-	Inputti inputti = new Inputti();
-	FileOut fileout = new FileOut();
-	String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
-	DB kanta = new DB();
-	serverControl srvC = new serverControl();
+        // Muuttujat ja luokat pääohjelmalle
+        String komento = "";
+        Inputti inputti = new Inputti();
+        FileOut fileout = new FileOut();
+        String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
+        DB kanta = new DB();
+        serverControl srvC = new serverControl();
 
-	// Ohjelman looppi alkaa tästä
-	while (!komento.equals("exit")) {
-	    System.out.print("[" + userLevel + "]" + "Anna komento: ");	// Userlevel added to beginning
-	    komento = scanner.nextLine();
-	    switch (komento.toLowerCase()) {
-		case "help":
-		    commandLog = commandLog + today + "Server: " + "help\r\n";
-		    if (inputti.Help() == 0) {
-			System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA
-		    }
-		    break;
-		case "add user":
-		    commandLog = commandLog + today + "Server: " + "add user\r\n";
-		    if (userLevel >= 10) {
-			Scanner input = new Scanner(System.in);  // Reading from System.in
+        // Ohjelman looppi alkaa tästä
+        while (!komento.equals("exit")) {
+            System.out.print("[" + userLevel + "]" + "Anna komento: ");	// Userlevel added to beginning
+            komento = scanner.nextLine();
+            switch (komento.toLowerCase()) {
+                case "help":
+                    commandLog = commandLog + today + "Server: " + "help\r\n";
+                    if (inputti.Help() == 0) {
+                        System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA
+                    }
+                    break;
+                case "add user":
+                    commandLog = commandLog + today + "Server: " + "add user\r\n";
+                    if (userLevel >= 10) {
+                        Scanner input = new Scanner(System.in);  // Reading from System.in
 
-			System.out.print("\nGive username for new user: ");
-			String newUserInput = input.next();
+                        System.out.print("\nGive username for new user: ");
+                        String newUserInput = input.next();
 
-			System.out.print("Anna käyttäjä taso: ");
-			//int newUserLevel = Integer.parseInt(input.next());
-			double UserLevel = Integer.parseInt(input.next());
-			//int newUserLevel = Integer.parseInt(String.format("%d", (int) UserLevel));
-			int newUserLevel = (int) UserLevel;
+                        System.out.print("Anna käyttäjä taso: ");
+                        //int newUserLevel = Integer.parseInt(input.next());
+                        double UserLevel = Integer.parseInt(input.next());
+                        //int newUserLevel = Integer.parseInt(String.format("%d", (int) UserLevel));
+                        int newUserLevel = (int) UserLevel;
                         DB uusiUseri = new DB();
-			uusiUseri.connect();
-			uusiUseri.insertUser(newUserLevel, newUserInput);
-			uusiUseri.disconnect();
-			break;
+                        uusiUseri.connect();
+                        uusiUseri.insertUser(newUserLevel, newUserInput);
+                        uusiUseri.disconnect();
+                        break;
 
-		    } else {
-			System.out.println(PERUSPALAUTE);
-		    }
-                    
-                    case "insert temp":  // THIS CASE WILL BE REMOVED LATER
+                    } else {
+                        System.out.println(PERUSPALAUTE);
+                    }
+
+                case "insert temp":  // THIS CASE WILL BE REMOVED LATER
                     commandLog = commandLog + today + "Server: " + "insert temps\r\n";
                     DB db2 = new DB();
-		    //String luku1;
-		    db2.connect();
-                    
-                    System.out.println(luku);
-                    db2.insertTemp(Double.parseDouble(luku), 1);
-		    
-		    break;
+                    //String luku1;
+                    db2.connect();
 
-		case "list users":
-		    commandLog = commandLog + today + "Server: " + "list users\r\n";
-		    if (userLevel >= 10) {
-			DB listuser = new DB();
-			listuser.listUsers();
-		    }
-		    break;
+                    break;
 
-		case "list temps":
-		    commandLog = commandLog + today + "Server: " + "list temps\r\n";
-		    DB listtemps = new DB();
-		    listtemps.listTemps();
-		    break;
+                case "list users":
+                    commandLog = commandLog + today + "Server: " + "list users\r\n";
+                    if (userLevel >= 10) {
+                        DB listuser = new DB();
+                        listuser.listUsers();
+                    }
+                    break;
 
-		case "fileout":
-		    commandLog = commandLog + today + "Server: " + "fileout\r\n";
-		    System.out.println("Missing parameter! (console or userlist needed)");
-		    break;
+                case "list temps":
+                    commandLog = commandLog + today + "Server: " + "list temps\r\n";
+                    DB listtemps = new DB();
+                    listtemps.listTemps();
+                    break;
 
-		case "fileout console":
-		    commandLog = commandLog + today + "Server: " + "fileout console\r\n";
-		    if (fileout.console(commandLog) < 1) {
-			System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA			
-		    } else {
-			System.out.println("console.log writen.");
-		    }
-		    break;
+                case "fileout":
+                    commandLog = commandLog + today + "Server: " + "fileout\r\n";
+                    System.out.println("Missing parameter! (console or userlist needed)");
+                    break;
 
-		case "fileout userlist":
-		    commandLog = commandLog + today + "Server: " + "fileout userlist\r\n";
-		    if (fileout.userlist() < 1) {
-			System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA
-		    } else {
-			System.out.println("users.log writen.");
-		    }
-		    break;
+                case "fileout console":
+                    commandLog = commandLog + today + "Server: " + "fileout console\r\n";
+                    if (fileout.console(commandLog) < 1) {
+                        System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA			
+                    } else {
+                        System.out.println("console.log writen.");
+                    }
+                    break;
 
-		case "test":			    // THIS CASE WILL BE REMOVED LATER
-		    Shuffle shuffle = new Shuffle();
-		    DB db = new DB();
-		    String luku;
-		    db.connect();
+                case "fileout userlist":
+                    commandLog = commandLog + today + "Server: " + "fileout userlist\r\n";
+                    if (fileout.userlist() < 1) {
+                        System.out.println("Errori!"); // KORVATAAN LOGIIN KIRJOTUKSELLA
+                    } else {
+                        System.out.println("users.log writen.");
+                    }
+                    break;
 
-		    for (int laskuri = 1; laskuri <= 10; laskuri++) {
-			luku = shuffle.ShuffleTemp(1);
-			System.out.println(luku);
-			db.insertTemp(Double.parseDouble(luku), 1);
-		    }
-		    break;
+                case "test":			    // THIS CASE WILL BE REMOVED LATER
+                    Shuffle shuffle = new Shuffle();
+                    DB db = new DB();
+                    String luku;
+                    db.connect();
 
-		case "exit":
-		    break;
-		    
-		case "start":
-		    commandLog = commandLog + today + "Server: " + komento + "\r\n";
-		    srvC.start();
-		    break;
-		case "stop":
-		    commandLog = commandLog + today + "Server: " + komento + "\r\n";
-		    srvC.stop();
-		    break;
-		case "restart":
-		    commandLog = commandLog + today + "Server: " + komento + "\r\n";
-		    srvC.restart();
-		    break;
+                    for (int laskuri = 1; laskuri <= 100; laskuri++) {
+                        luku = shuffle.ShuffleTemp(1);
+                        System.out.println(luku);
+                        db.insertTemp(Double.parseDouble(luku), 1);
+                    }
+                    break;
 
-		default:
-		    commandLog = commandLog + today + "Server: " + komento + "\r\n";
-		    System.out.println(PERUSPALAUTE);
-	    }	// SWITCHin loppusulje
-	}	// Ohjelmaloopin loppusulje
+                case "exit":
+                    break;
+
+                case "start":
+                    commandLog = commandLog + today + "Server: " + komento + "\r\n";
+                    srvC.start();
+                    break;
+                case "stop":
+                    commandLog = commandLog + today + "Server: " + komento + "\r\n";
+                    srvC.stop();
+                    break;
+                case "restart":
+                    commandLog = commandLog + today + "Server: " + komento + "\r\n";
+                    srvC.restart();
+                    break;
+
+                default:
+                    commandLog = commandLog + today + "Server: " + komento + "\r\n";
+                    String[] array = komento.split(" ", -1);
+                    if (array[0].equals("add") && array[1].equals("temp")) {
+                        if (srvC.getStatus() == 1) {
+                            DB db3 = new DB();
+                            db3.connect();
+                            System.out.println(array[2]);
+                            db3.insertTemp(Double.parseDouble(array[2]), Integer.parseInt(array[3]));
+                            db3.disconnect();
+                        } else {
+                            System.out.println("Server is offline");
+                        }
+                   
+                    } else {
+                        System.out.println(PERUSPALAUTE);
+                    }
+            }	// SWITCHin loppusulje
+        }	// Ohjelmaloopin loppusulje
     }		// Pääohjelman loppusulje
 }		// Pääluokan loppusulje
