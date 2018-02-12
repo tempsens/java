@@ -15,7 +15,6 @@ import java.net.ServerSocket;
 public class theListener {
 
     public void listenSocket() {
-//	String hostName = "localhost";
 	int serverPort = 4321;
 	
 	String textArea = "cl: Testiä, testiä";

@@ -22,7 +22,7 @@ Yhteenveto:
 	sprintin aikana.
 
 Palaverit:
-	24.01.		20.30 - 00.00 		?					(Jukka in charge)
+	24.01.		20.30 - 00.00 		Komentotulkki, jne	(Jukka in charge)
 	31.01.		20.30 - 00.00 		MySQL..?			(Joakim in charge)
 
 
@@ -38,17 +38,20 @@ SPRINT 2																		/	 /
 | Kirjautumistietojen muutto käyttämään tietokantaa					| 2h	  | 2h		|
 | Lämpötilojen taulu + generaattori datan luomiseen					| 2h	  |      2h |
 | Käyttäjien ja lämpötilatietojen tulostus tietokannasta konsoliin	| 1h	  | 1h		|
-| Start/Stop/Restart -luokan teko alustavasti						| 1h	  |	(12.2)	| <-- MUISTA PÄIVITTÄÄ
+| Start/Stop/Restart -luokan teko alustavasti						| 1h	  |		 1h	|
+| add temp [temp] [sensor#], fileout userlist, etc					| 2h	  | 2h	 2h |
 |-------------------------------------------------------------------|---------|---------|
-| TOTAL																| 8h	  | 7h + 4h |
+| TOTAL																| 10h	  | 8h + 7h |
 '-------------------------------------------------------------------'---------'---------'
 
 Yhteenveto:
-	Työtunteja: XXh - Miestyötunteja (3xXh + Xh) = XXh
+	Työtunteja: 14h - Miestyötunteja (3x8h + 7h) = 28h
+	Aika-arviot ylittyivät, mutta tavoitteet ehdittiin saavuttaa kahden viikon
+	sprintin aikana.
 	
 Palaverit:
 	07.02.		20.30 - 00.30		MySQL..?			(Matti in charge)
-	12.02.		19.00 - 			Sprint loppusilaus	( in charge)
+	12.02.		19.00 - 23.30		Sprint2 loppusilaus	(Matti in charge)
 
 
 
@@ -61,7 +64,7 @@ SPRINT 3																		/	 /
 | Tehtävä															|  Arvio  | Toteuma |
 |-------------------------------------------------------------------|---------|---------|
 |-------------------------------------------------------------------|---------|---------|
-| TOTAL																| 8h	  | 7h + 4h |
+| TOTAL																| Xh	  | Xh + Xh |
 '-------------------------------------------------------------------'---------'---------'
 
 Yhteenveto:
@@ -77,7 +80,7 @@ SPRINT 4																		/	 /
 | Tehtävä															|  Arvio  | Toteuma |
 |-------------------------------------------------------------------|---------|---------|
 |-------------------------------------------------------------------|---------|---------|
-| TOTAL																| 8h	  | 7h + 4h |
+| TOTAL																| Xh	  | Xh + Xh |
 '-------------------------------------------------------------------'---------'---------'
 
 Yhteenveto:
