@@ -21,6 +21,10 @@ Yhteenveto:
 	Aika-arviot ylittyivät, mutta tavoitteet ehdittiin saavuttaa kahden viikon
 	sprintin aikana.
 
+Palaverit:
+	24.01.		20.30 - 00.00 		?					(Jukka in charge)
+	31.01.		20.30 - 00.00 		MySQL..?			(Joakim in charge)
+
 
 
 ==============================================================================================
@@ -34,13 +38,18 @@ SPRINT 2																		/	 /
 | Kirjautumistietojen muutto käyttämään tietokantaa					| 2h	  | 2h		|
 | Lämpötilojen taulu + generaattori datan luomiseen					| 2h	  |      2h |
 | Käyttäjien ja lämpötilatietojen tulostus tietokannasta konsoliin	| 1h	  | 1h		|
-| Start/Stop/Restart -luokan teko alustavasti						| 1h	  |			|
+| Start/Stop/Restart -luokan teko alustavasti						| 1h	  |	(12.2)	| <-- MUISTA PÄIVITTÄÄ
 |-------------------------------------------------------------------|---------|---------|
 | TOTAL																| 8h	  | 7h + 4h |
 '-------------------------------------------------------------------'---------'---------'
 
 Yhteenveto:
 	Työtunteja: XXh - Miestyötunteja (3xXh + Xh) = XXh
+	
+Palaverit:
+	07.02.		20.30 - 00.30		MySQL..?			(Matti in charge)
+	12.02.		19.00 - 			Sprint loppusilaus	( in charge)
+
 
 
 
