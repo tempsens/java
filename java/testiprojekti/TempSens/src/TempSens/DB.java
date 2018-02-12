@@ -173,7 +173,7 @@ public class DB {
     }
      public String GetUsersFromDB(){
          this.connect();
-         String palautus = "USERS LIST" + "\r\n\r\n" + "nro" + "\t" + "Username" + "\t" + "Userlevel" + "\r\n" + "---------------------------------------------------------" + "\r\n";
+         String palautus = "USERS LIST" + "\r\n\r\n" + "nro" + "\t" + "Username" + "\t\t" + "Userlevel" + "\r\n" + "---------------------------------------------------------" + "\r\n";
          int i = 1;
 
          try {
@@ -183,6 +183,7 @@ public class DB {
              while (rs.next()) {
 
                  palautus += Integer.toString(i) + "\t" + rs.getString(1) + "\t" + rs.getString(2) + "\r\n";
+            i++;
              }
          } catch (SQLException ex) {		// handle any errors
              System.out.println("SQLException: " + ex.getMessage());
