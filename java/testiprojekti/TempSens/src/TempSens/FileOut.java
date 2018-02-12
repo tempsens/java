@@ -54,7 +54,7 @@ public class FileOut {
 	}
     }
 
-    public int userlist() {			// NEEDED TO CONVERT TO USE DATABASE
+    public int userlist() {			// NEEDED TO CONVERT TO USE DATABASE 
 	try (FileWriter writer = new FileWriter("users.txt", TRUE)) {
             DB db = new DB();
             // Ladataan käyttäjät tietokannasta
