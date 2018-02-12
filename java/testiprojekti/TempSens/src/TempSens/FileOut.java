@@ -55,14 +55,19 @@ public class FileOut {
     }
 
     public int userlist() {			// NEEDED TO CONVERT TO USE DATABASE
-	try (FileWriter writer = new FileWriter("users.log", TRUE)) {
-	    String textToWrite = "Userlist:\r\n1: test\r\n2: \r\n3: \r\n4: \r\n5: \r\n";
-	    writer.write(today + textToWrite + "\r\n");
+	try (FileWriter writer = new FileWriter("users.txt", TRUE)) {
+            DB db = new DB();
+            // Ladataan käyttäjät tietokannasta
+            String textToWrite = db.GetUsersFromDB();
+            // Tallennetaan käyttäjätiedot tiedostoon
+            writer.write(today + textToWrite + "\r\n");
 	    writer.close();
-	    return 1;
+            System.out.println("Users list -file created [users.txt]");
+            return 1;
 	} catch (IOException ex) {
 	    System.out.println("IOException: " + ex.getMessage());
 	    return 0;
 	}
     }
+   
 }

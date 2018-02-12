@@ -17,8 +17,8 @@
 					VALUE { }			// list 50 greatest rows			50?
 		case fileout					// --> error: missing parameter				- Matti/Jukka	-Done
 			console		{ }				// write console to logfile(s)								-Done
-			userlist	{ }				// write userlist to file											NOT DONE
-		case tempout	{ }				// push temperature info in NySQL, later to db						NOT DONE
+			userlist	{ }				// write userlist to file					-Joakim					NOT DONE
+		case tempout	{ }				// push temperature info in MySQL			-Matti					NOT DONE
 		case exit		{ }				// exit program								-Joakim			-Done
 // END OF USER INPUT SECTION
 	temp value generator				// inserts values in table 1/sec			-Joakim			-Done
@@ -27,10 +27,7 @@
 
 TODO:
 	[X]	poista salasanan näkyminen console.logista!													-Done
-	[ ]	RAPORTOINTI, TOTEUTUNEET KESTOT JA AIKA-ARVIOT				-->Projektiaikataulu.txt	WORKING ON IT -Suni-
-	[ ]	TOTEUTUNEET / TULEVAT PALAVERIT JNE							-->Projektiaikataulu.txt	WORKING ON IT -Suni-
-			-?24.01.?20.30 - 00.00 - ?		(Jukka in charge)		-----/
-			- 31.01. 20.30 - 00.00 - MySQL..? (Joakim in charge)    ----/
-			- 07.02. 20.30 - 00.30 - MySQL..? (Matti in charge)		---/
+	[X]	RAPORTOINTI, TOTEUTUNEET KESTOT JA AIKA-ARVIOT				-->Projektiaikataulu.txt		-Done
+	[X]	TOTEUTUNEET / TULEVAT PALAVERIT JNE							-->Projektiaikataulu.txt		-Done
 	[X]	-> Successful login saves username and time to log											-Done
 	[X]	fileout users tietokannasta																	-Done

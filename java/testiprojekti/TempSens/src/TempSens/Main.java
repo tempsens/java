@@ -38,12 +38,13 @@ public class Main {
 	Inputti inputti = new Inputti();
 	FileOut fileout = new FileOut();
 	String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
+	DB kanta = new DB();
+	serverControl srvC = new serverControl();
 
 	// Ohjelman looppi alkaa tästä
 	while (!komento.equals("exit")) {
 	    System.out.print("[" + userLevel + "]" + "Anna komento: ");	// Userlevel added to beginning
 	    komento = scanner.nextLine();
-	    DB kanta = new DB();
 	    switch (komento.toLowerCase()) {
 		case "help":
 		    commandLog = commandLog + today + "Server: " + "help\r\n";
@@ -67,6 +68,7 @@ public class Main {
                         DB uusiUseri = new DB();
 			uusiUseri.connect();
 			uusiUseri.insertUser(newUserLevel, newUserInput);
+			uusiUseri.disconnect();
 			break;
 
 		    } else {
@@ -136,8 +138,22 @@ public class Main {
 
 		case "exit":
 		    break;
+		    
+		case "start":
+		    commandLog = commandLog + today + "Server: " + komento + "\r\n";
+		    srvC.start();
+		    break;
+		case "stop":
+		    commandLog = commandLog + today + "Server: " + komento + "\r\n";
+		    srvC.stop();
+		    break;
+		case "restart":
+		    commandLog = commandLog + today + "Server: " + komento + "\r\n";
+		    srvC.restart();
+		    break;
 
 		default:
+		    commandLog = commandLog + today + "Server: " + komento + "\r\n";
 		    System.out.println(PERUSPALAUTE);
 	    }	// SWITCHin loppusulje
 	}	// Ohjelmaloopin loppusulje
