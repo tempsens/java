@@ -62,8 +62,9 @@ public class Main {
 			System.out.print("Anna käyttäjä taso: ");
 			//int newUserLevel = Integer.parseInt(input.next());
 			double UserLevel = Integer.parseInt(input.next());
-			int newUserLevel = Integer.parseInt(String.format("%d", (int) UserLevel));
-			DB uusiUseri = new DB();
+			//int newUserLevel = Integer.parseInt(String.format("%d", (int) UserLevel));
+			int newUserLevel = (int) UserLevel;
+                        DB uusiUseri = new DB();
 			uusiUseri.connect();
 			uusiUseri.insertUser(newUserLevel, newUserInput);
 			break;
@@ -71,6 +72,17 @@ public class Main {
 		    } else {
 			System.out.println(PERUSPALAUTE);
 		    }
+                    
+                    case "insert temp":  // THIS CASE WILL BE REMOVED LATER
+                    commandLog = commandLog + today + "Server: " + "insert temps\r\n";
+                    DB db2 = new DB();
+		    //String luku1;
+		    db2.connect();
+                    
+                    System.out.println(luku);
+                    db2.insertTemp(Double.parseDouble(luku), 1);
+		    
+		    break;
 
 		case "list users":
 		    commandLog = commandLog + today + "Server: " + "list users\r\n";
