@@ -25,11 +25,10 @@ public class DB {
 // YHTEYDEN MUODOSTUS
     public void connect() {
 	try {
-	   // 	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/XXXXXXXX_tempsens?"
-	   //     + "user=XXXX_XXXXX&password=XXXXXXX"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
-            conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/tempsens?"
-		    + "user=&password="); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
-	  
+	    // 	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/XXXXXXXX_tempsens?"
+	    //     + "user=XXXX_XXXXX&password=XXXXXXX"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
+	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/juksohia_tempsens?"
+		    + "user=juksohia_user&password=!kayttaja1"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
 
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
@@ -42,24 +41,26 @@ public class DB {
 	if (rs != null) {
 	    try {
 		rs.close();
-	    } catch (SQLException sqlEx) { }		// handle any errors - EMPTY
+	    } catch (SQLException sqlEx) {
+	    }		// handle any errors - EMPTY
 	    rs = null;
 	}
 	if (stmt != null) {
 	    try {
 		stmt.close();
-	    } catch (SQLException sqlEx) { }		// handle any errors - EMPTY
+	    } catch (SQLException sqlEx) {
+	    }		// handle any errors - EMPTY
 	    stmt = null;
 	}
     }
-    
+
 // KYSELY
     /**
      *
      * @param objects	- Mitkä kentät valitaan
      * @param table	- Taulun nimi
-     * @param where	- Hakuehdot (WHERE value > 20.0 AND value < 30.0)
-     * @return	    - Palauttaa kaikkien valittujen kenttien (objects) arvot
+     * @param where	- Hakuehdot (WHERE value > 20.0 AND value < 30.0) @
+     * return	- Palauttaa kaikkien valittujen kenttien (objects) arvot
      */
     public ResultSet query(String objects, String table, String where) {
 	try {
@@ -83,6 +84,7 @@ public class DB {
 	    if (stmt.execute(query)) {
 		rs = stmt.getResultSet();
 	    }
+	    System.out.println("User added to database.");
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
 	    System.out.println("SQLState: " + ex.getSQLState());
@@ -96,11 +98,13 @@ public class DB {
 	//this.connect();
 	try {
 	    String query = "INSERT INTO temps (value, sensor) VALUES ('" + val1 + "', " + val2 + ")";
-	    System.out.println(query);
+	    // System.out.println(query); // Print query - just for debugging
 	    stmt = conn.createStatement();
 	    if (stmt.execute(query)) {
 		rs = stmt.getResultSet();
+
 	    }
+	    System.out.println("Temperature added to database.");
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
 	    System.out.println("SQLState: " + ex.getSQLState());
@@ -171,27 +175,28 @@ public class DB {
 	}
 	disconnect();
     }
-     public String GetUsersFromDB(){
-         this.connect();
-         String palautus = "USERS LIST" + "\r\n\r\n" + "nro" + "\t" + "Username" + "\t" + "Userlevel" + "\r\n" + "---------------------------------------------------------" + "\r\n";
-         int i = 1;
 
-         try {
-             String query = "SELECT username, userlvl FROM users ORDER BY username ASC";
-             stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query);
-             while (rs.next()) {
+    public String GetUsersFromDB() {
+	this.connect();
+	String palautus = "USERS LIST" + "\r\n\r\n" + "nro" + "\t" + "Username" + "\t" + "Userlevel" + "\r\n" + "---------------------------------------------------------" + "\r\n";
+	int i = 1;
 
-                 palautus += Integer.toString(i) + "\t" + rs.getString(1) + "\t\t" + rs.getString(2) + "\r\n";
-            i++;
-             }
-         } catch (SQLException ex) {		// handle any errors
-             System.out.println("SQLException: " + ex.getMessage());
-             System.out.println("SQLState: " + ex.getSQLState());
-             System.out.println("VendorError: " + ex.getErrorCode());
-         }
-         disconnect();
-         return palautus;
-    
+	try {
+	    String query = "SELECT username, userlvl FROM users ORDER BY username ASC";
+	    stmt = conn.createStatement();
+	    ResultSet rs = stmt.executeQuery(query);
+	    while (rs.next()) {
+
+		palautus += Integer.toString(i) + "\t" + rs.getString(1) + "\t\t" + rs.getString(2) + "\r\n";
+		i++;
+	    }
+	} catch (SQLException ex) {		// handle any errors
+	    System.out.println("SQLException: " + ex.getMessage());
+	    System.out.println("SQLState: " + ex.getSQLState());
+	    System.out.println("VendorError: " + ex.getErrorCode());
+	}
+	disconnect();
+	return palautus;
+
     }
 }

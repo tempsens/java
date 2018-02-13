@@ -39,13 +39,14 @@ SPRINT 2																		/	 /
 | Lämpötilojen taulu + generaattori datan luomiseen					| 2h	  |      2h |
 | Käyttäjien ja lämpötilatietojen tulostus tietokannasta konsoliin	| 1h	  | 1h		|
 | Start/Stop/Restart -luokan teko alustavasti						| 1h	  |		 1h	|
-| add temp [temp] [sensor#], fileout userlist, etc					| 2h	  | 2h	 2h |
+| add temp [temp] [sensor#], fileout userlist, jne					| 2h	  | 2h	 2h |
+| Ohjelmistotestaus + bugikorjaukset								| 1h	  | 	 1h |
 |-------------------------------------------------------------------|---------|---------|
-| TOTAL																| 10h	  | 8h + 7h |
+| TOTAL																| 10h	  | 8h + 8h |
 '-------------------------------------------------------------------'---------'---------'
 
 Yhteenveto:
-	Työtunteja: 14h - Miestyötunteja (3x8h + 7h) = 28h
+	Työtunteja: 16h - Miestyötunteja (3x8h + 8h) = 29h
 	Aika-arviot ylittyivät, mutta tavoitteet ehdittiin saavuttaa kahden viikon
 	sprintin aikana.
 	

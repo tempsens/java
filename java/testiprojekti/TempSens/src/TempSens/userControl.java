@@ -16,41 +16,19 @@ public class userControl {
     private String password;
     private int userLevel;
 
-// These 3 are temporaty variables - remove after db connection works
-    private final String testUser = "test";				    // Voidaan poistaa?
-    private final String testPass = "passu";				    // Voidaan poistaa?
-    private final int testLevel = 10;					    // Voidaan poistaa?
-
-    public int login() {    //TODO If password is empty then force loop to add password
+    public int login() {
 	Scanner input = new Scanner(System.in);  // Reading from System.in
 	FileOut fileout = new FileOut();
-	
+
 	System.out.print("\nUsername: ");
 	String userInput = input.next();
 
 	System.out.print("Password: ");
 	String passInput = input.next();
 
-	// TODO: db connection and query
 	DB user = new DB();
-        user.connect();
-        
-        return (user.checkUser(userInput, passInput));
-        
-/*        if (userInput.equals(testUser) && passInput.equals(testPass)) {
-	    this.username = userInput;
-	    this.password = passInput;
-	    this.userLevel = testLevel;
-	    return this.userLevel;
-	} else {
-	    System.out.println("Login incorrect!");
-	    this.username = "";
-	    this.password = "";
-	    this.userLevel = 0;
-	    fileout.loginError("u:" + userInput + " p:" + passInput);
-	    return 0;
-	}
+	user.connect();
+
+	return (user.checkUser(userInput, passInput));
     }
-        */
-}
 }

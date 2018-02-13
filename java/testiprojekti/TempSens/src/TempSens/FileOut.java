@@ -23,6 +23,7 @@ public class FileOut {
 	    String textToWrite = today + "Server: LOGIN ERROR! (" + viesti + ")\r\n";
 	    writer.write(textToWrite);
 	    writer.close();
+	    System.out.println("Login incorrect!");
 	    return 1;
 	} catch (IOException ex) {
 	    System.out.println("IOException: " + ex.getMessage());
@@ -62,7 +63,6 @@ public class FileOut {
             // Tallennetaan käyttäjätiedot tiedostoon
             writer.write(today + textToWrite + "\r\n");
 	    writer.close();
-            System.out.println("Users list -file created [users.txt]");
             return 1;
 	} catch (IOException ex) {
 	    System.out.println("IOException: " + ex.getMessage());

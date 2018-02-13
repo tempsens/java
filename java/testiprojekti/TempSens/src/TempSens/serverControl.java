@@ -10,25 +10,36 @@ package TempSens;
  * @author PetShopBoys
  */
 public class serverControl {
+
     private int serverRunning = 0;
-    
+
     public void start() {
-	this.serverRunning = 1;
+	if (this.serverRunning == 0) {
+	    this.serverRunning = 1;
+	System.out.println("Server started.");
+	} else {
+	    System.out.println("Server already started.");
+	}
     }
-    
+
     public void stop() {
-	this.serverRunning = 0;
-	DB db = new DB();
-	db.disconnect();
+	if (this.serverRunning == 1) {
+	    this.serverRunning = 0;
+	    DB db = new DB();
+	    db.disconnect();
+	    System.out.println("Server stopped.");
+	} else {
+	    System.out.println("Server already stopped.");
+	}
     }
-    
+
     public void restart() {
 	stop();
 	start();
     }
-    
+
     public int getStatus() {
 	return this.serverRunning;
     }
-    
+
 }
