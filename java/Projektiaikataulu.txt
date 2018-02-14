@@ -1,5 +1,5 @@
 
-AIKATAULUTUS
+PROJEKTIAIKATAULU
 
 ==============================================================================================
 																				  Ryhmässä
@@ -17,7 +17,7 @@ SPRINT 1																		/	 /
 '-------------------------------------------------------------------'---------'---------'
 
 Yhteenveto:
-	Työtunteja: 11h - Miestyötunteja (3x7h + 4h) = 25h
+	Työtunteja: 11h - Miestyötunteja (3 x 7h + 4h) = 25h
 	Aika-arviot ylittyivät, mutta tavoitteet ehdittiin saavuttaa kahden viikon
 	sprintin aikana.
 
@@ -46,10 +46,10 @@ SPRINT 2																		/	 /
 '-------------------------------------------------------------------'---------'---------'
 
 Yhteenveto:
-	Työtunteja: 16h - Miestyötunteja (3x8h + 8h) = 29h
+	Työtunteja: 16h - Miestyötunteja (3x8h + 8h) = 32h
 	Aika-arviot ylittyivät, mutta tavoitteet ehdittiin saavuttaa kahden viikon
 	sprintin aikana.
-	
+
 Palaverit:
 	07.02.		20.30 - 00.30		MySQL..?			(Matti in charge)
 	12.02.		19.00 - 23.30		Sprint2 loppusilaus	(Matti in charge)
