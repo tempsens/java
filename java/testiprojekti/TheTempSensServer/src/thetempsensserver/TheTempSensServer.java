@@ -48,13 +48,18 @@ public class TheTempSensServer {
         try {
             clientSocket = serveri.accept();
             is = new DataInputStream(clientSocket.getInputStream());
-            os = new PrintStream(clientSocket.getOutputStream());
+      //      os = new PrintStream(clientSocket.getOutputStream());
 // As long as we receive data, echo that data back to the client.
             while (true) {
                 line = is.readLine();
-                os.println(line);
-
-                System.out.println(line);
+         //       os.println(line);
+                   MainMenu mainMenu = new MainMenu();
+                   
+                   mainMenu.SwitchCase(line, clientSocket);
+                   
+                           
+                
+                //System.out.println(line);
             }
         } catch (IOException e) {
             System.out.println(e);

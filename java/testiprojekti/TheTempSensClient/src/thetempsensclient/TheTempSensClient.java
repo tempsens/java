@@ -10,6 +10,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 /**
  *
@@ -17,12 +18,11 @@ import java.net.UnknownHostException;
  */
 public class TheTempSensClient {
 
-   // CLIENT
- 
+    // CLIENT
     /**
      * @param args the command line arguments
      */
-     private static final int PORT = 1234;
+    private static final int PORT = 1234;
 
     public static void main(String[] args) {
 
@@ -40,33 +40,42 @@ public class TheTempSensClient {
         }
         if (MyClient != null && os != null && is != null) {
             try {
-// The capital string before each colon has a special meaning to SMTP
-// you may want to read the SMTP specification, RFC1822/3
-                os.writeBytes("HELO\n");
-                os.writeBytes("MAIL From: k3is@fundy.csd.unbsj.ca\n");
-                os.writeBytes("RCPT To: k3is@fundy.csd.unbsj.ca\n");
-                os.writeBytes("DATA\n");
-                os.writeBytes("From: k3is@fundy.csd.unbsj.ca\n");
-                os.writeBytes("Subject: testing\n");
-                os.writeBytes("Hi there\n"); // message body
-                os.writeBytes("\n.\n");
-                os.writeBytes("QUIT");
-// keep on reading from/to the socket till we receive the "Ok" from SMTP,
-// once we received that then we want to break.
+                // The capital string before each colon has a special meaning to SMTP
+                // you may want to read the SMTP specification, RFC1822/3
+                //        os.writeBytes("help\n");
+                // keep on reading from/to the socket till we receive the "Ok" from SMTP,
+                // once we received that then we want to break.
                 String responseLine;
-                while ((responseLine = is.readLine()) != null) {
-                    System.out.println("Server: " + responseLine);
-                    if (responseLine.indexOf("Ok") != -1) {
-                        break;
+                Scanner scanner = new Scanner(System.in);
+                String komento = "";
+
+                while (!komento.equals("exit")) {
+                        // exit ei toimi
+                    System.out.print(": ");
+                    komento = scanner.nextLine() + "\n";
+                    os.writeBytes(komento);
+                    
+                    while ((responseLine = is.readLine()) != null) {
+                       
+                        if (responseLine.contains("QQ")) {
+
+                            break;
+                        }
+                        System.out.println("Server: " + responseLine);
+                      
                     }
                 }
+
 // clean up:
-// close the output stream
-// close the input stream
-// close the socket
+                System.out.println("PUHDISTAA");
+
+                // close the output stream
+                // close the input stream
+                // close the socket
                 os.close();
                 is.close();
                 MyClient.close();
+
             } catch (UnknownHostException e) {
                 System.err.println("Trying to connect to unknown host: " + e);
             } catch (IOException e) {
@@ -74,5 +83,5 @@ public class TheTempSensClient {
             }
         }
     }
-    
+
 }
