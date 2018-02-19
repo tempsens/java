@@ -52,7 +52,9 @@ public class TheTempSensServer {
 // As long as we receive data, echo that data back to the client.
             while (true) {
                 line = is.readLine();
+
          //       os.println(line);
+	 System.out.println(line);		// COMMAND ECHO FOR DEBUGGING
                    MainMenu mainMenu = new MainMenu();
                    
                    mainMenu.SwitchCase(line, clientSocket);

@@ -5,37 +5,75 @@
  */
 package thetempsensserver;
 
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+
 /**
  *
  * @author PetShopBoys
  */
 public class serverControl {
 
+    PrintStream os = null;
     private int serverRunning = 0;
 
-    public void start() {
-	if (this.serverRunning == 0) {
-	    this.serverRunning = 1;
-	System.out.println("Server started.");
-	} else {
-	    System.out.println("Server already started.");
+    public void start(Socket soketti) {
+	try {
+	    os = new PrintStream(soketti.getOutputStream());
+	    if (this.serverRunning == 0) {
+		this.serverRunning = 1;
+		os.println("Server started.");
+	    } else {
+		os.println("Server already started.");
+	    }
+	} catch (IOException e) {
+	    System.out.println(e);
 	}
+
     }
 
-    public void stop() {
+    public void stop(Socket soketti) {
+	try {
+	    os = new PrintStream(soketti.getOutputStream());
+	    if (this.serverRunning == 1) {
+		this.serverRunning = 0;
+		DB db = new DB();
+		db.disconnect();
+		os.println("Server stopped.");
+	    } else {
+		os.println("Server already stopped.");
+	    }
+	} catch (IOException e) {
+	    System.out.println(e);
+	}
+
+    }
+
+    public void restart(Socket soketti) {
+	try {
+	    os = new PrintStream(soketti.getOutputStream());
+	} catch (IOException e) {
+	    System.out.println(e);
+	}
+
+	// DO STOP
 	if (this.serverRunning == 1) {
 	    this.serverRunning = 0;
 	    DB db = new DB();
 	    db.disconnect();
-	    System.out.println("Server stopped.");
+	    os.println("Server stopped.");
 	} else {
-	    System.out.println("Server already stopped.");
+	    os.println("Server already stopped.");
 	}
-    }
 
-    public void restart() {
-	stop();
-	start();
+	// DO START
+	if (this.serverRunning == 0) {
+	    this.serverRunning = 1;
+	    os.println("Server started.");
+	} else {
+	    os.println("Server already started.");
+	}
     }
 
     public int getStatus() {

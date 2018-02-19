@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class MainMenu {
 
-    static final String PERUSPALAUTE = "Kirjoita 'help' jos et muuta osaa!\r\nQQ";
+    static final String PERUSPALAUTE = "Kirjoita 'help' jos et muuta osaa!\r\n";
   
     void MainMenu() {
 
@@ -42,7 +42,9 @@ public class MainMenu {
         } catch (IOException e) {
             System.out.println(e);
 
-        }
+        } finally {
+	    if(os == null) { System.exit(0); }
+	}
 
         //       while (!komento.equals("exit")) {
         //           System.out.print("[" + userLevel + "]" + "Anna komento: ");	// Userlevel added to beginning
@@ -84,6 +86,7 @@ public class MainMenu {
             case "list":
                 commandLog = commandLog + today + "Server: " + komento + "\r\n";
                 System.out.println("Missing parameter! (users or temps needed)");
+                os.println("Missing parameter! (users or temps needed)");
                 break;
 
             case "list users":
@@ -97,7 +100,7 @@ public class MainMenu {
             case "list temps":
                 commandLog = commandLog + today + "Server: " + komento + "\r\n";
                 DB listtemps = new DB();
-                listtemps.listTemps();
+                listtemps.listTemps(soketti);
                 break;
 
             case "fileout":
@@ -141,15 +144,19 @@ public class MainMenu {
                 break;
             case "start":
                 commandLog = commandLog + today + "Server: " + komento + "\r\n";
-                srvC.start();
+                srvC.start(soketti);
                 break;
             case "stop":
                 commandLog = commandLog + today + "Server: " + komento + "\r\n";
-                srvC.stop();
+                srvC.stop(soketti);
                 break;
             case "restart":
                 commandLog = commandLog + today + "Server: " + komento + "\r\n";
-                srvC.restart();
+                srvC.restart(soketti);
+                break;
+            case "status":
+                commandLog = commandLog + today + "Server: " + komento + "\r\n";
+                os.println(srvC.getStatus());
                 break;
 
             default:
@@ -176,9 +183,8 @@ public class MainMenu {
 
                 }
         }	// SWITCHin loppusulje
-                       os.println("QQ");
+        os.println("QQ");
  
-    }	// Ohjelmaloopin loppusulje
-
-//    }
+    }	// Ohjelmaloopin loppusulje 
+ 
 }
