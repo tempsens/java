@@ -97,7 +97,7 @@ public class DB {
     }
 
 // Lämpötilan lisääminen
-    public void insertTemp(double val1, int val2) {
+    public void insertTemp(double val1, int val2, String dagen) {
 	//this.connect();
 	try {
 	    String query = "INSERT INTO temps (value, sensor) VALUES ('" + val1 + "', " + val2 + ")";
@@ -107,7 +107,7 @@ public class DB {
 		rs = stmt.getResultSet();
 
 	    }
-	    System.out.println("Temperature added to database.");
+	   System.out.println(dagen+" Temperature " + val1 + " \tadded to database from sensor "+ val2);
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
 	    System.out.println("SQLState: " + ex.getSQLState());
@@ -153,7 +153,7 @@ public class DB {
 	    while (rs.next()) {
 		os.println(rs.getString("username"));
 	    }
-	    os.println("QQ");
+	 //   os.println("QQ");
 
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
@@ -167,7 +167,7 @@ public class DB {
     }
 
 // Lämpötila-arvojen listaaminen tietokannasta	    -- FROM temps LIMIT 50 pitäis lisätä?
-    public void listTemps(Socket soketti) {
+    public void listTemps(Socket soketti) { // OK
 	this.connect();
 	try {
 	    PrintStream os = new PrintStream(soketti.getOutputStream());

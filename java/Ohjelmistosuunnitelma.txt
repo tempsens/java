@@ -1,37 +1,33 @@
-
-loop
-{
-	// START OF USER INPUT SECTION
-	login				{ }				// Check username/password/level			-Suni			-Done
-	getinput
+// START OF USER INPUT SECTION
+	login				{ }				// Check username/password/level			-Jukka			-Done
 		case help		{ }				// print help								-Joakim			-Done
-		
-		case start		{ }				// start logging
-		case stop		{ }				// stop logging
-		case restart	{ }				// restart logging
-		
-		case list
-			users		{ }				// show users (and logged users)
-			temps						// list last 50 rows					50?
-				from					// --> error: no date given
-					DATE { }			// list last 50 rows from date			50?
-						to				// --> error: no date given
-							DATE { }	// list last 50 rows from range			50?
-				lt						// --> error: no value given
-					VALUE { }			// list 50 smallest rows				50?
-				gt						// --> error: no value given
-					VALUE { }			// list 50 greatest rows				50?
-					
+		case start		{ }				// start temp logging				\
+		case stop		{ }				// stop temp logging				 ==>	-Jukka			-Done
+		case restart	{ }				// restart temp logging				/
+		case list						// --> error: argument needed								-Done
+			users		{ }				// show users (and logged users)							-Done
+			temps						// list last 100 rows				100?					-Done
+				from					// --> error: no date given							-Sprint 4 - TO DO
+					DATE { }			// list last 100 rows from date		100?			-Sprint 4 - TO DO
+						to				// --> error: no date given							-Sprint 4 - TO DO
+							DATE { }	// list last 100 rows from range	100?			-Sprint 4 - TO DO
+				lt						// --> error: no value given						-Sprint 4 - TO DO
+					VALUE { }			// list 100 smallest rows			100?			-Sprint 4 - TO DO
+				gt						// --> error: no value given						-Sprint 4 - TO DO
+					VALUE { }			// list 100 greatest rows			100?			-Sprint 4 - TO DO
 		case fileout					// --> error: missing parameter				- Matti/Jukka	-Done
-			log			{ }				// write console to logfile(s)								-Done
-			users		{ }				// write userlist to file									-Done
-			
-		case tempout	{ }				// push temperature info in JAVA, later to db
-			
+			console		{ }				// write console to logfile(s)								-Done
+			userlist	{ }				// write userlist to file					-Joakim			-Done
+		case tempout	{ }				// push temperature info in MySQL			-Matti			-Done
 		case exit		{ }				// exit program								-Joakim			-Done
-		
-	// END OF USER INPUT SECTION
-	
-	temp value generator				// inserts values in table 1/sec	
-	server-client communication			// data transfer between server and clients
-}
+// END OF USER INPUT SECTION
+	temp value generator				// inserts values in table 1/sec			-Joakim			-Done
+	server-client communication			// data transfer between server and clients			-Sprint 3 - TO DO
+	Tietokantayhteyden luokka (query, insert, disconnect, -> loginCheck, listUsers)	-Matti/Joakim	-Done
+
+TODO:
+	[X]	poista salasanan näkyminen console.logista!													-Done
+	[X]	RAPORTOINTI, TOTEUTUNEET KESTOT JA AIKA-ARVIOT				-->Projektiaikataulu.txt		-Done
+	[X]	TOTEUTUNEET / TULEVAT PALAVERIT JNE							-->Projektiaikataulu.txt		-Done
+	[X]	-> Successful login saves username and time to log											-Done
+	[X]	fileout users tietokannasta																	-Done

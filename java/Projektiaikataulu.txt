@@ -1,0 +1,92 @@
+
+PROJEKTIAIKATAULU
+
+==============================================================================================
+																				  Ryhmässä
+																				 /	  Itsenäisesti
+SPRINT 1																		/	 /
+.-------------------------------------------------------------------.---------.---------.
+| Tehtävä															|  Arvio  | Toteuma |
+|-------------------------------------------------------------------|---------|---------|
+| Java-ohjelma, jossa inputloop, eli "komentokehote"				| 1h	  |	1h		|
+| Perustoiminnot: sisäänkirjautuminen, help, exit					| 3h	  |	3h + 2h	|
+| fileOut -luokka ja konsolikomentojen tallennus					| 3h	  |	3h + 1h	|
+| Sisäänkirjautumisvirheiden tallennus logiin						| 1h	  |		 1h	|
+|-------------------------------------------------------------------|---------|---------|
+| TOTAL																| 8h	  | 7h + 4h |
+'-------------------------------------------------------------------'---------'---------'
+
+Yhteenveto:
+	Työtunteja: 11h - Miestyötunteja (3 x 7h + 4h) = 25h
+	Aika-arviot ylittyivät, mutta tavoitteet ehdittiin saavuttaa kahden viikon
+	sprintin aikana.
+
+Palaverit:
+	24.01.		20.30 - 00.00 		Komentotulkki, jne	(Jukka in charge)
+	31.01.		20.30 - 00.00 		MySQL..?			(Joakim in charge)
+
+
+
+==============================================================================================
+																				  Ryhmässä
+																				 /	  Itsenäisesti
+SPRINT 2																		/	 /
+.-------------------------------------------------------------------.---------.---------.
+| Tehtävä															|  Arvio  | Toteuma |
+|-------------------------------------------------------------------|---------|---------|
+| Tietokantayhteys													| 3h	  | 3h + 2h |
+| Kirjautumistietojen muutto käyttämään tietokantaa					| 2h	  | 2h		|
+| Lämpötilojen taulu + generaattori datan luomiseen					| 2h	  |      2h |
+| Käyttäjien ja lämpötilatietojen tulostus tietokannasta konsoliin	| 1h	  | 1h		|
+| Start/Stop/Restart -luokan teko alustavasti						| 1h	  |		 1h	|
+| add temp [temp] [sensor#], fileout userlist, jne					| 2h	  | 2h	 2h |
+| Ohjelmistotestaus + bugikorjaukset								| 1h	  | 	 1h |
+|-------------------------------------------------------------------|---------|---------|
+| TOTAL																| 10h	  | 8h + 8h |
+'-------------------------------------------------------------------'---------'---------'
+
+Yhteenveto:
+	Työtunteja: 16h - Miestyötunteja (3x8h + 8h) = 32h
+	Aika-arviot ylittyivät, mutta tavoitteet ehdittiin saavuttaa kahden viikon
+	sprintin aikana.
+
+Palaverit:
+	07.02.		20.30 - 00.30		MySQL..?			(Matti in charge)
+	12.02.		19.00 - 23.30		Sprint2 loppusilaus	(Matti in charge)
+
+
+
+
+==============================================================================================
+																				  Ryhmässä
+																				 /	  Itsenäisesti
+SPRINT 3																		/	 /
+.-------------------------------------------------------------------.---------.---------.
+| Tehtävä															|  Arvio  | Toteuma |
+|-------------------------------------------------------------------|---------|---------|
+|-------------------------------------------------------------------|---------|---------|
+| TOTAL																| Xh	  | Xh + Xh |
+'-------------------------------------------------------------------'---------'---------'
+
+Yhteenveto:
+	Työtunteja: XXh - Miestyötunteja (3xXh + Xh) = XXh
+
+
+
+==============================================================================================
+																				  Ryhmässä
+																				 /	  Itsenäisesti
+SPRINT 4																		/	 /
+.-------------------------------------------------------------------.---------.---------.
+| Tehtävä															|  Arvio  | Toteuma |
+|-------------------------------------------------------------------|---------|---------|
+|-------------------------------------------------------------------|---------|---------|
+| TOTAL																| Xh	  | Xh + Xh |
+'-------------------------------------------------------------------'---------'---------'
+
+Yhteenveto:
+	Työtunteja: XXh - Miestyötunteja (3xXh + Xh) = XXh
+
+
+
+==============================================================================================
