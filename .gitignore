@@ -13,3 +13,5 @@ java/testiprojekti/TempSens/nbproject/private/private.properties
 java/testiprojekti/TempSens/nbproject/private/private.properties
 /java/testiprojekti/TheTempSensClient/dist/
 /java/testiprojekti/TheTempSensServer/dist/
+/java/testiprojekti/TheTempSensSensor/nbproject/private/
+/java/testiprojekti/TheTempSensSensor/build/
