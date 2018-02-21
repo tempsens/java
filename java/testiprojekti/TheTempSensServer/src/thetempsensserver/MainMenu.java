@@ -88,12 +88,10 @@ public class MainMenu {
                         //Scanner input = new Scanner(System.in);  // Reading from System.in
                         //  System.out.print("\nGive username for new user: ");
                         // String newUserInput = input.next();
-
                         //System.out.print("Anna käyttäjä taso: ");
                         //int newUserLevel = Integer.parseInt(input.next());
                         // double UserLevel = Integer.parseInt(input.next());
                         //int newUserLevel = Integer.parseInt(String.format("%d", (int) UserLevel));
-
                     } else {
                         System.out.println(PERUSPALAUTE);
                     }
@@ -133,7 +131,25 @@ public class MainMenu {
                     commandLog = commandLog + today + "Server: " + komento + "\n";
                     fileout.userlist(soketti);
                     break;
-
+                case "add temp":
+                    try {
+                        String tempvalue=is.readLine();
+                       
+                        String sensori=is.readLine();                       
+                        
+                        DB db = new DB();
+                        db.connect();
+                        System.out.println(tempvalue);
+                        System.out.println(sensori);
+                        db.insertTemp(Double.parseDouble(tempvalue), Integer.parseInt(sensori), today);
+                        db.disconnect();
+                        
+                        
+                        
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+                    break;
                 case "test":			    // THIS CASE WILL BE REMOVED LATER
                     Shuffle shuffle = new Shuffle();
                     DB db = new DB();
