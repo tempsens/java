@@ -49,7 +49,7 @@ public class TheTempSensClient {
                 Scanner scanner = new Scanner(System.in);
                 String komento = "";
 
-                while (!komento.equals("exit")) {	    // exit ei toimi
+                while (!komento.equals("exit")) {
                     System.out.print(": ");
                     komento = scanner.nextLine();
 
@@ -57,7 +57,11 @@ public class TheTempSensClient {
 
                         AddUser addUser = new AddUser();
                         addUser.addNewUser(MyClient);
-
+		    } else if (komento.equals("add temp")) {
+			System.out.print("Anna lämpötila [double]: ");
+			os.writeBytes(scanner.nextLine());
+			System.out.print("Anna anturin numero [int]: ");
+			os.writeBytes(scanner.nextLine());
                     } else {
                         os.writeBytes(komento + "\n");
                     }
@@ -74,7 +78,9 @@ public class TheTempSensClient {
                 } // Ulompi While loppu (EXIT PROGRAM)
 
 // clean up:
-                System.out.println("PUHDISTAA");
+                System.out.println("Bye. Thanks for choosing this awesome software and we hope you will be using it again and recommend it"
+			+ "for your friends too! Some day we will be BIG and you may be proud about using this software from the beginning."
+			+ "It may also be nice if you would donate some change to poor students. Jukka has drinken teams all money...");
 
                 // close the output stream
                 // close the input stream

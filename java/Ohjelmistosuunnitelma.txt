@@ -22,7 +22,7 @@
 		case exit		{ }				// exit program								-Joakim			-Done
 // END OF USER INPUT SECTION
 	temp value generator				// inserts values in table 1/sec			-Joakim			-Done
-	server-client communication			// data transfer between server and clients			-Sprint 3 - TO DO
+	server-client communication			// data transfer between server and clients					-Done
 	Tietokantayhteyden luokka (query, insert, disconnect, -> loginCheck, listUsers)	-Matti/Joakim	-Done
 
 TODO:

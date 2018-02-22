@@ -21,56 +21,48 @@ public class TheTempSensSensor {
     /**
      * @param args the command line arguments
      */
+    private static final String HOSTNAME = "127.0.0.1";
     private static final int PORT = 1234;
 
     public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
-        long elapsedTime = 0L;
-        Socket MyClient = null;
-        DataOutputStream os = null;
-        ShuffleRefucked newShuffeli = new ShuffleRefucked();
-        DataInputStream is = null;
-        try {
-            MyClient = new Socket("127.0.0.1", PORT);
-            os = new DataOutputStream(MyClient.getOutputStream());
-      //      is = new DataInputStream(MyClient.getInputStream());
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: hostname");
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to: hostname");
-        }
-        // while (true) {
+	long startTime = System.currentTimeMillis();
+	long elapsedTime = 0L;
+	Socket MyClient = null;
+	DataInputStream is = null;
+	DataOutputStream os = null;
+	ShuffleRefucked newShuffeli = new ShuffleRefucked();
 
-        if (MyClient != null && os != null && is != null) {
+	try {
+	    MyClient = new Socket(HOSTNAME, PORT);
+	    os = new DataOutputStream(MyClient.getOutputStream());
+	} catch (UnknownHostException e) {
+	    System.err.println("Don't know about host: " + HOSTNAME);
+	} catch (IOException e) {
+	    System.err.println("Couldn't get I/O for the connection to: hostname");
+	}
 
-            while (true) {
-                try {
-                    while (elapsedTime < 4 * 1000) {
-                        //perform db poll/check
-                        elapsedTime = (new Date()).getTime() - startTime;
-                    }
-                    System.out.println("Ulkona Silmukassa");
-                    startTime = System.currentTimeMillis();
-                    elapsedTime = 0L;
+	if (MyClient != null && os != null) {
 
-                    os.writeBytes("add temp" + "\n");
-                    //arvottu lämpötila
-                    os.writeBytes(newShuffeli.ShuffleTemp(2) + "\n");
-                    // sensorin numero
-                    os.writeBytes("1\n");
-                    System.out.println("Sinne meni\n");
+	    while (true) {
+		try {
+		    while (elapsedTime < 4 * 1000) {
+			//perform db poll/check
+			elapsedTime = (new Date()).getTime() - startTime;
+		    }
+		    System.out.println("Ulkona Silmukassa");
+		    startTime = System.currentTimeMillis();
+		    elapsedTime = 0L;
 
-//    System.out.println(is.readLine());
-                    //is.close();
-                    //os.close();
-                    // MyClient.close();
-                } catch (IOException e) {
-                    System.err.println("Couldn't get I/O for the connection to: åååhostname");
-                }
-            }
-
-            // System.out.println(newShuffeli.ShuffleTemp(2));
-        }
-
+		    os.writeBytes("add temp" + "\n");
+		    //arvottu lämpötila
+		    os.writeBytes(newShuffeli.ShuffleTemp(2) + "\n");
+		    // sensorin numero
+		    os.writeBytes("1\n");
+		    System.out.println("Sinne meni\n");
+		} catch (IOException e) {
+		    System.err.println("Couldn't get I/O for the connection to: " + HOSTNAME);
+		}
+	    }
+	}
     }
 }

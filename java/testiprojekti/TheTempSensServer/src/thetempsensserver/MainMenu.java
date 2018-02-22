@@ -3,213 +3,159 @@ package thetempsensserver;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
  * @author Joakim
  */
-public class MainMenu {
+public class MainMenu implements Runnable {
 
-    static final String PERUSPALAUTE = "Kirjoita 'help' jos et muuta osaa!";
+    private static final String PERUSPALAUTE = "Kirjoita 'help' jos et muuta osaa!";
+    private static final int PORT = 1234; // Portin määritys
+    ServerSocket servu =	    null;
+    Socket clinu =		    null;
+    PrintStream os =		    null;
+    DataInputStream is =	    null;
 
-    void MainMenu() {
-
+    MainMenu(Socket clinu) { // Konstruktori, jossa määritetään I/O -toiminnot
+	try {
+	    this.clinu =    clinu;
+	    this.is =	    new DataInputStream(clinu.getInputStream());
+	    this.os =	    new PrintStream(clinu.getOutputStream());
+	} catch (IOException e) {
+	    System.out.println(e);
+	}
     }
 
-    public void SwitchCase(Socket soketti) {
-        int userLevel = 10;
-        PrintStream os = null;
-        DataInputStream is = null;
+    @Override
+    public void run() {
+	int userLevel = 10;
 
-        // Muuttujat ja luokat pääohjelmalle
-        String commandLog = "";
-        Inputti inputti = new Inputti();
-        FileOut fileout = new FileOut();
-        String komento = "";
+	// Muuttujat ja luokat pääohjelmalle
+	String commandLog = ""; // Aloitetaan tyhjällä komentologilla
+	String komento;
+	String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
 
-        String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
-        serverControl srvC = new serverControl();
-        try {
-            os = new PrintStream(soketti.getOutputStream());
-            is = new DataInputStream(soketti.getInputStream());
+	Inputti inputti = new Inputti(); // Tarvitaan help -tekstin tulostukseen
+	FileOut fileout = new FileOut(); // Tarvitaan tiedosto outputiin
+	serverControl srvC = new serverControl(); // Start/Stop/Restart
+	int ulosta = 0; // Muuttuja while -loopista poistumiseksi
 
-        } catch (IOException e) {
-            System.out.println(e);
+	while (ulosta < 1) { // Pääloop komentojen kuunteluun
+	    try {
+		komento = is.readLine();    // Luetaan yksi rivi muuttujaan
+	    } catch (IOException e) {
+		System.out.println(e);
+		break;		    // Poistutaan loopista jos luku epäonnistuu
+	    }
+	    switch (komento.toLowerCase()) {
+		case "help": // Tulostaa helpin
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    inputti.Help(clinu); // Tulostaa helpin
+		    break;
 
-        } finally {
-            if (os == null) {
-                System.exit(0);
-            }
-        }
-        while (true) {
-            //       while (!komento.equals("exit")) {
-            //           System.out.print("[" + userLevel + "]" + "Anna komento: ");	// Userlevel added to beginning
-//            komento = scanner.nextLine();
-            try {
-                komento = is.readLine();
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-            switch (komento.toLowerCase()) {
-                case "help": // OK
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    inputti.Help(soketti);
-                    break;
+		case "add": // Väärä syntaksi -> antaa vain virheilmoituksen
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    os.println("Missing parameter! (user or temp needed)");
+		    break;
 
-                case "add": // OK
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    os.println("Missing parameter! (user or temp needed)");
-                    break;
+		case "add user": // Lisätään käyttäjä
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    if (userLevel >= 10) {
+			try { // Luetaan kaksi riviä lisää
+			    int newUserLevel = Integer.parseInt(is.readLine());
+			    String newUserInput = is.readLine();
 
-                case "add user":
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    if (userLevel >= 10) {
-                        try {
-                            String nwUserLevel = is.readLine();
-                            int newUserLevel = Integer.parseInt(nwUserLevel);
-                            String newUserInput = is.readLine();
+			    DB uusiUseri = new DB();
+			    uusiUseri.connect();
+			    uusiUseri.insertUser(newUserLevel, newUserInput);
+			    uusiUseri.disconnect();
+			} catch (IOException e) {
+			    System.out.println(e);
+			}
+		    } else {
+			System.out.println(PERUSPALAUTE);
+		    }
+		    break;
 
-                            DB uusiUseri = new DB();
-                            uusiUseri.connect();
-                            uusiUseri.insertUser(newUserLevel, newUserInput);
-                            uusiUseri.disconnect();
-                        } catch (IOException e) {
-                            System.out.println(e);
-                        }
+		case "list": // Väärä syntaksi -> antaa vain virheilmoituksen
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    os.println("Missing parameter! (users or temps needed)");
+		    break;
 
-                        //Scanner input = new Scanner(System.in);  // Reading from System.in
-                        //  System.out.print("\nGive username for new user: ");
-                        // String newUserInput = input.next();
-                        //System.out.print("Anna käyttäjä taso: ");
-                        //int newUserLevel = Integer.parseInt(input.next());
-                        // double UserLevel = Integer.parseInt(input.next());
-                        //int newUserLevel = Integer.parseInt(String.format("%d", (int) UserLevel));
-                    } else {
-                        System.out.println(PERUSPALAUTE);
-                    }
-                    break;
+		case "list users": // Tulostaa listan käyttäjistä
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    if (userLevel >= 10) {
+			DB listuser = new DB();
+			listuser.listUsers(clinu);
+		    }
+		    break;
 
-                case "list": // OK
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    //System.out.println("Missing parameter! (users or temps needed)");
-                    os.println("Missing parameter! (users or temps needed)");
-                    break;
+		case "list temps": // Tulostaa listan lämpötiloista (100 viimeisintä)
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    DB listtemps = new DB();
+		    listtemps.listTemps(clinu);
+		    break;
 
-                case "list users": // OK
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    if (userLevel >= 10) {
-                        DB listuser = new DB();
-                        listuser.listUsers(soketti);
-                    }
-                    break;
+		case "fileout": // Väärä syntaksi -> antaa vain virheilmoituksen
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    os.println("Missing parameter! (console or userlist needed)");
+		    break;
 
-                case "list temps": // OK
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    DB listtemps = new DB();
-                    listtemps.listTemps(soketti);
-                    break;
+		case "fileout console": // Tulostetaan komentologi
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    fileout.console(commandLog, clinu);
+		    break;
 
-                case "fileout": // OK
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    os.println("Missing parameter! (console or userlist needed)");
-                    break;
+		case "fileout userlist": // Tulostetaan lista käyttäjistä
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    fileout.userlist(clinu);
+		    break;
+		case "add temp": // Lämpötilan lisääminen
+		    try {
+			String tempvalue = is.readLine();
+			String sensori = is.readLine();
 
-                case "fileout console": // OK
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    fileout.console(commandLog, soketti);
-                    break;
+			DB db = new DB();
+			db.connect();
+			System.out.println(tempvalue);
+			System.out.println(sensori);
+			db.insertTemp(Double.parseDouble(tempvalue), Integer.parseInt(sensori), today);
+			db.disconnect();
 
-                case "fileout userlist": // OK
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    fileout.userlist(soketti);
-                    break;
-                case "add temp":
-                    try {
-                        String tempvalue=is.readLine();
-                       
-                        String sensori=is.readLine();                       
-                        
-                        DB db = new DB();
-                        db.connect();
-                        System.out.println(tempvalue);
-                        System.out.println(sensori);
-                        db.insertTemp(Double.parseDouble(tempvalue), Integer.parseInt(sensori), today);
-                        db.disconnect();
-                        
-                        
-                        
-                    } catch (IOException e) {
-                        System.out.println(e);
-                    }
-                    break;
-                case "test":			    // THIS CASE WILL BE REMOVED LATER
-                    Shuffle shuffle = new Shuffle();
-                    DB db = new DB();
-                    String luku;
-                    db.connect();
+		    } catch (IOException e) {
+			System.out.println(e);
+		    }
+		    break;
+		case "exit": // OK!!
+		    os.println("QQ"); // Lähetetään QQ lähetyksen lopuksi
+		    ulosta = 1;	    // Poistuu while -loopista
+		    break;
+		case "start":	// Käynnistää tietojen välityksen
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    srvC.start(clinu);
+		    break;
+		case "stop":	// Pysäyttää tietojen välityksen
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    srvC.stop(clinu);
+		    break;
+		case "restart":	// Käynnistää tietojen välityksen uudelleen
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    srvC.restart(clinu);
+		    break;
+		case "status":	// Tulostaa tietojen välityksen tilan
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    os.println(srvC.getStatus());
+		    break;
 
-                    for (int laskuri = 1; laskuri <= 10; laskuri++) {
-                        luku = shuffle.ShuffleTemp(1);
-                        os.println(luku);
-                        db.insertTemp(Double.parseDouble(luku), 1, today);
-
-                    }
-                    break;
-
-                case "exit": // OK!!
-                    os.println("QQ");
-                    break;
-                case "start":
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    srvC.start(soketti);
-                    break;
-                case "stop":
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    srvC.stop(soketti);
-                    break;
-                case "restart":
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    srvC.restart(soketti);
-                    break;
-                case "status":
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    os.println(srvC.getStatus());
-                    break;
-
-                default:
-                    commandLog = commandLog + today + "Server: " + komento + "\n";
-                    String[] array = komento.split(" ", -1);
-                    if (array[0].equals("add") && array[1].equals("temp")) {
-                        if (srvC.getStatus() == 1) {
-                            if (1 == 1) {	// VAIHDA KUN KEKSIT MITEN TARKASTAA array[2] ja [3]!!!
-                                DB db3 = new DB();
-                                db3.connect();
-                                // System.out.println(array[2]); // Prints temp. Just for debugging
-                                db3.insertTemp(Double.parseDouble(array[2]), Integer.parseInt(array[3]), today);
-                                db3.disconnect();
-                            } else {
-                                os.println("Missing parameter! (temperature value and sensor number needed) ");
-                            }
-                        } else {
-                            os.println("NO-GO: Server is offline.");
-                        }
-
-                    } else {
-
-                        os.println(PERUSPALAUTE);
-
-                    }
-            }	// SWITCHin loppusulje
-            os.println("\nQQ");
-        }
-    }	// Ohjelmaloopin loppusulje 
-
-}
+		default:
+		    commandLog = commandLog + today + "Server: " + komento + "\n";
+		    os.println(PERUSPALAUTE);
+	    }   // SWITCHin loppusulje
+	}   // Ohjelmaloopin loppusulje (while)
+	os.println("\nQQ");
+    }	// Metodin loppusulje (void run)
+} // Luokan loppusulje (MainMenu)

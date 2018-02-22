@@ -13,10 +13,9 @@ import java.net.Socket;
  *
  * @author PetShopBoys
  */
-public class serverControl {
+public class serverControl extends TheTempSensServer {
 
     PrintStream os = null;
-    private int serverRunning = 0;
 
     public void start(Socket soketti) {
 	try {
