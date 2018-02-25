@@ -1,0 +1,23 @@
+Ohjelmistotestaus
+
+CLIENT
+
+login										OK?
+	ei käyttäjätunnusta (usern)				
+	ei salasanaa		(pwd)				
+	ei usern/pwd							
+	väärä usern								
+	väärä pwd								
+	väärä usern/pwd							
+	SQL injection usern						
+	SQL injection pwd						
+
+
+	
+	
+	
+	
+	
+	
+SENSOR
+	on case server crash					

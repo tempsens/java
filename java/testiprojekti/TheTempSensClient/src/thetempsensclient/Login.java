@@ -43,7 +43,7 @@ public class Login {
             os.writeBytes(passInput + "\n");
 
             responssi = is.readLine();
-            System.out.println(responssi);
+//            System.out.println(responssi);
 
             //DB user = new DB();
             //user.connect();
