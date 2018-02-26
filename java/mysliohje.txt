@@ -1,0 +1,12 @@
+Näin kirjaudutaan mysql databaseen:
+
+hakemisto: C:\Program Files\MySQL\MySQL Server 5.6\bin\
+
+komento:
+mysql --host=xxx-xxxxxxx.xxx -u xxxxxxx_user -p
+										  - jos PANEE tähän vain -p niin kysyy salasanaa '*-suojattuna'	
+										 /					/ ei tartte erikseen use -käskyä, kun PANEE tähän tietokannan nimen	
+									|					|
+mysql --host=localhost --user=myname --password=password mydb 
+tai:
+mysql -h localhost -u myname -ppassword mydb

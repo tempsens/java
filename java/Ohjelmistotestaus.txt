@@ -1,19 +1,35 @@
+TODO
+ - functioiden rajoittaminen userLevelillä
+ - Salasanan vaihtaminen
+ - admin kiinteäksi serverille, (jos MySQL ns. "finito-caput" -tilassa)
+ - ohjelmien (3) versiointi
+	pvm, tiedostonimi, tekijä, kuvaus
+ 
+*******************************************************************************
+ 
+ RAPORTTI
+ - Jukka-->SSL-yhteys lopuksi, jos jää aikaa
+
+ (: jos ei ehditä toteuttaa, niin raporttiin maininta asian tärkeydestä.)
+ http://www.jguru.com/faq/view.jsp?EID=32388
+ 
+*********************************************************************************
 Ohjelmistotestaus
 
 SERVER
 
-Socket
+Socket		Jukka
 	If port in use (double start)
-	Connection overflow
-	InputStream overflow
+	Connection overflow			(yhteyksien rajoittaminen)
+	InputStream overflow		(   - - - || - - -       )
 	
 
-MySQL										OK?
-	down									
-	login incorrect							
+MySQL			Jukka				DB.JAVA-stuff				OK?
+	down						(väärään osoitteeseen yrittäminen)			
+	login incorrect				(väärä tunnus ja/tai salasana)			
 
-Functions
-	help									
+Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?
+	help						(Huom! sisällön päivitys?)			
 	add									
 	login { line1: usrn, line2: pwd }
 		-> samat testit kuin client/login	
@@ -35,21 +51,24 @@ Functions
 	
 	default									
 
-Feedback									
+Feedback				Joakim					
 	log file (serverside)					
 	console (clietside)						
-	(clientside commandlog?)				
-
+	(clientside commandlog?) = turha			
+	Ajattele, että kun luet loki-tiedostoa, niin tiedät mitä on tullut tehtyä...
+	list temps --> palautetta ei kirjata lokiin...? Onko lähetty kyselijälle.
+		komennon loppuun "lähetetyy onnistuneesti"
+		Try Catch...
 
 
 
 
 CLIENT
 
-login										OK?
-	ei käyttäjätunnusta (usern)				
-	ei salasanaa		(pwd)				
-	ei usern/pwd							
+login				Joakim					OK?
+	ei käyttäjätunnusta (usern)				Java.Scanner estää	
+	ei salasanaa		(pwd)				Java.Scanner estää
+	ei usern/pwd							ei mahdollinen
 
 	väärä usern								
 	väärä pwd								
@@ -63,7 +82,7 @@ login										OK?
 
 
 
-SENSOR										OK?
+SENSOR			Matti							OK?
 
 	on case server crash					
 	on case network down					

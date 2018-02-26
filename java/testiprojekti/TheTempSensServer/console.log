@@ -43,3 +43,14 @@
 26.02.2018 21:33:39 Server: LOGIN: (u:sensoren)
 26.02.2018 21:40:07 Server: LOGIN: (u:admin)
 26.02.2018 21:41:00 Server: LOGIN: (u:sensoren)
+26.02.2018 21:39:58 Server: help
+26.02.2018 21:39:58 Server: list users
+26.02.2018 21:39:58 Server: list temps
+26.02.2018 21:39:58 Server: list temps
+26.02.2018 21:39:58 Server: help
+26.02.2018 21:39:58 Server: fileout
+26.02.2018 21:39:58 Server: fileout console
+
+26.02.2018 22:32:18 Server: LOGIN ERROR! (u:a2345678901234567890)
+26.02.2018 22:32:35 Server: LOGIN: (u:admin)
+26.02.2018 22:42:03 Server: LOGIN: (u:admin)
