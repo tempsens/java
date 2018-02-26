@@ -1,0 +1,10 @@
+26.02.2018 21:39:58 USERS LIST
+
+nro	Username	Userlevel
+---------------------------------------------------------
+3	admin		10
+4	admin2		10
+5	sensoren	2
+6	user1		2
+7	user2		3
+

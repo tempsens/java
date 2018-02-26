@@ -1,8 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//  Versio 0.1  26.2.2018    
+//              Siirrettiin login ulos isosta silmukasta, toimii
+//------------------------------------------------------------------------------
+
 package thetempsensserver;
 
 import java.io.IOException;

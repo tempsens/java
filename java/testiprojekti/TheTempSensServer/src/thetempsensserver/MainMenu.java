@@ -1,3 +1,6 @@
+//  Versio 0.1  26.2.2018   Joakim 
+//              Siirrettiin login ulos isosta silmukasta, toimii
+//------------------------------------------------------------------------------
 package thetempsensserver;
 
 import java.io.DataInputStream;

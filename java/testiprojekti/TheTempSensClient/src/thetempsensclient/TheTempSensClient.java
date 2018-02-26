@@ -1,3 +1,6 @@
+//  Versio 0.1     
+//              
+//------------------------------------------------------------------------------
 package thetempsensclient;
 
 import java.io.DataInputStream;
