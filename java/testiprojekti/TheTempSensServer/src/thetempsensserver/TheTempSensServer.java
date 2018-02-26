@@ -20,6 +20,7 @@ public class TheTempSensServer {
 	try {
 	    // Try to open a server socket on port PORT
 	    ServerSocket serveri = new ServerSocket(PORT);
+	    System.out.println("TempSensServer running...");
 	    while (true) { // Loopataan
 		Thread t = new Thread(new MainMenu(serveri.accept()));
 		t.start();

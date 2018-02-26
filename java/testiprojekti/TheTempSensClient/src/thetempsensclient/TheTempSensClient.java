@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package thetempsensclient;
 
 import java.io.DataInputStream;
@@ -14,25 +9,23 @@ import java.util.Scanner;
 
 /**
  *
- * @author Joakim
+ * @author PetShopBoys
  */
 public class TheTempSensClient {
 
     // CLIENT
-    /**
-     * @param args the command line arguments
-     */
-    private static final int PORT = 1234;
+    private static final String HOSTNAME = "127.0.0.1"; // Palvelimen osoite
+    private static final int PORT = 1234; // Määritetään käytettävä portti
 
     public static void main(String[] args) {
 
-	Socket MyClient = null;
-	DataOutputStream os = null;
-	DataInputStream is = null;
+	Socket MyClient =	null; // Alustetaan soketti
+	DataOutputStream os =	null; // Alustetaan output stream
+	DataInputStream is =	null; // Alustetaan input stream
 	try {
-	    MyClient = new Socket("127.0.0.1", PORT);
-	    os = new DataOutputStream(MyClient.getOutputStream());
-	    is = new DataInputStream(MyClient.getInputStream());
+	    MyClient =	new Socket(HOSTNAME, PORT);			    // Määritetään soketti
+	    os =	new DataOutputStream(MyClient.getOutputStream());   // Määritetään output stream
+	    is =	new DataInputStream(MyClient.getInputStream());	    // Määritetään input stream
 	} catch (UnknownHostException e) {
 	    System.err.println("Don't know about host: hostname");
 	} catch (IOException e) {
@@ -40,12 +33,6 @@ public class TheTempSensClient {
 	}
 	if (MyClient != null && os != null && is != null) {
 	    try {
-		// The capital string before each colon has a special meaning to SMTP
-		// you may want to read the SMTP specification, RFC1822/3
-		//        os.writeBytes("help\n");
-		// keep on reading from/to the socket till we receive the "Ok" from SMTP,
-		// once we received that then we want to break.
-
 		Scanner scanner = new Scanner(System.in);
 		String komento = "";
 		String loginresponssi = "0";
@@ -86,15 +73,14 @@ public class TheTempSensClient {
 			while (true) {
 			    String responssi = is.readLine();
 			    //System.out.println("Jumi 1");
-			    //System.out.println("responssi:" + responssi);
+			    System.out.println("outer loop: Saatiin palaute: " + responssi);
 
 			    if (responssi.contains("QQ")) {
-				System.out.println("Jumi 2");
-				System.out.println("responssi 2:" + responssi);
+				System.out.println("inner loop: Saatiin palaute QQ: " + responssi);
 
 				break;
 			    }
-			    System.out.println(responssi);
+//			    System.out.println(responssi);
 
 			} // Sisempi While loppu (MULTILINE)
 		    } // Ulompi While loppu (EXIT PROGRAM)

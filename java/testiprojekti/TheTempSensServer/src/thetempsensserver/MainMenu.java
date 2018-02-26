@@ -9,46 +9,46 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author Joakim
+ * @author PetShopBoys
  */
 public class MainMenu implements Runnable {
 
     private static final String PERUSPALAUTE = "Kirjoita 'help' jos et muuta osaa!";
     private static final int PORT = 1234; // Portin määritys
-    ServerSocket servu = null;
-    Socket clinu = null;
-    PrintStream os = null;
-    DataInputStream is = null;
+    ServerSocket servu =	null; // Palvelin soketin alustus
+    Socket clinu =		null; // Asiakas soketin alustus
+    PrintStream os =		null; // Output streamin alustus
+    DataInputStream is =	null; // Input streamin alustus
 
     MainMenu(Socket clinu) { // Konstruktori, jossa määritetään I/O -toiminnot
 	try {
-	    this.clinu = clinu;
-	    this.is = new DataInputStream(clinu.getInputStream());
-	    this.os = new PrintStream(clinu.getOutputStream());
+	    this.clinu =    clinu;					    // Soketti
+	    this.is =	    new DataInputStream(clinu.getInputStream());    // Input
+	    this.os =	    new PrintStream(clinu.getOutputStream());	    // Output
 	} catch (IOException e) {
-	    System.out.println("Main menun eka try");
+	    System.out.println("Main menun ekan try catch..");
 	    System.out.println(e);
 	}
     }
 
     @Override
     public void run() {
-	int userLevel = 10;
+	int userLevel = 10;	// TEMPORARY - LOGIN WILL OVERRIDE
 
 	// Muuttujat ja luokat pääohjelmalle
 	String commandLog = ""; // Aloitetaan tyhjällä komentologilla
 	String komento;
 	String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
 
-	Inputti inputti = new Inputti(); // Tarvitaan help -tekstin tulostukseen
-	FileOut fileout = new FileOut(); // Tarvitaan tiedosto outputiin
-	serverControl srvC = new serverControl(); // Start/Stop/Restart
+	Inputti inputti =	new Inputti(); // Tarvitaan help -tekstin tulostukseen
+	FileOut fileout =	new FileOut(); // Tarvitaan tiedosto outputiin
+	serverControl srvC =	new serverControl(); // Start/Stop/Restart
 	int ulosta = 0; // Muuttuja while -loopista poistumiseksi
 
 	while (ulosta < 1) { // Pääloop komentojen kuunteluun
 	    try {
 		komento = is.readLine();    // Luetaan yksi rivi muuttujaan
-		System.out.println(komento);
+		System.out.println(komento); // Tulostetaan komento		    DEBUG
 
 	    } catch (IOException e) {
 		System.out.println(e);
@@ -56,6 +56,7 @@ public class MainMenu implements Runnable {
 	    }
 	    switch (komento.toLowerCase()) {
 		case "help": // Tulostaa helpin
+		    System.out.println("Helpin tulostus...");
 		    commandLog = commandLog + today + "Server: " + komento + "\n";
 		    inputti.Help(clinu); // Tulostaa helpin
 		    break;
@@ -75,6 +76,7 @@ public class MainMenu implements Runnable {
 			int vastaus = user.checkUser(userName, userPass);
 
 			if (vastaus > 0) {
+			    userLevel = vastaus;		    // LISÄSIN TÄN (Jukka)
 			    os.println("1");
 			} else {
 			    os.println("Login incorrect");
@@ -184,6 +186,8 @@ public class MainMenu implements Runnable {
 
 	    os.println("\nQQ");
 	}   // Ohjelmaloopin loppusulje (while)
-
+	os.println("Server offline.\nexit\n");
+	System.out.println("Server offline.");
+	System.exit(-1);
     }	// Metodin loppusulje (void run)
 } // Luokan loppusulje (MainMenu)

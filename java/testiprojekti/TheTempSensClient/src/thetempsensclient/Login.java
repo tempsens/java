@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package thetempsensclient;
 
 import java.io.DataInputStream;
@@ -13,47 +8,36 @@ import java.util.Scanner;
 
 /**
  *
- * @author Joakim
+ * @author PetShopBoys
  */
 public class Login {
 
-    private String username;
-    private String password;
-    private int userLevel;
+    private String username;	// Alustetaan käyttäjätunnuksen muuttuja
+    private String password;	// Alustetaan salasanan muuttuja
+    private String responssi;	// Alustetaan palautteen muuttuja
 
     public String login(Socket soketti) {
-        DataOutputStream os = null;
-        DataInputStream is = null;
-        String responssi = "";
-        try {
-            os = new DataOutputStream(soketti.getOutputStream());
-            is = new DataInputStream(soketti.getInputStream());
+	try {
+	    DataOutputStream os =   new DataOutputStream(soketti.getOutputStream());	// Output stream
+	    DataInputStream is =    new DataInputStream(soketti.getInputStream());	// Input stream
+	    Scanner input =	    new Scanner(System.in);		    // Reading from System.in
 
-            Scanner input = new Scanner(System.in);  // Reading from System.in
-            //FileOut fileout = new FileOut();
+	    System.out.print("\nUsername: ");
+	    String userInput = input.next();	// Luetaan username käyttäjältä
 
-            System.out.print("\nUsername: ");
-            String userInput = input.next();
+	    System.out.print("Password: ");
+	    String passInput = input.next();	// Luetaan password käyttäjältä
 
-            System.out.print("Password: ");
-            String passInput = input.next();
+	    os.writeBytes("login\n");		// Lähetetään palvelimelle: login
+	    os.writeBytes(userInput + "\n");	// Lähetetään palvelimelle: username
+	    os.writeBytes(passInput + "\n");	// Lähetetään palvelimelle: password
 
-            os.writeBytes("login\n");
-            os.writeBytes(userInput + "\n");
-            os.writeBytes(passInput + "\n");
+	    responssi = is.readLine();		// Luetaan palvelimen vastaus
 
-            responssi = is.readLine();
-//            System.out.println(responssi);
-
-            //DB user = new DB();
-            //user.connect();
-        } catch (IOException e) {
-            System.err.println("IOException:  " + e);
-            responssi = "0";
-            //
-        }
-        //return (user.checkUser(userInput, passInput));
-
-        return responssi;
+	} catch (IOException e) {
+	    System.err.println("IOException:  " + e);
+	    responssi = "0";			// Jos epäonnistuu, niin palaute "0"
+	}
+	return responssi;			// Palautetaan palvelimen vastaus
     }
 }

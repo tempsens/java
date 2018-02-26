@@ -6,9 +6,13 @@ login										OK?
 	ei käyttäjätunnusta (usern)				
 	ei salasanaa		(pwd)				
 	ei usern/pwd							
+	
 	väärä usern								
 	väärä pwd								
 	väärä usern/pwd							
+	
+	usern/pwd yli 16 merkkiä				
+	
 	SQL injection usern						
 	SQL injection pwd						
 
@@ -21,3 +25,6 @@ login										OK?
 	
 SENSOR
 	on case server crash					
+	on case network down
+	
+	on case server mysql down
