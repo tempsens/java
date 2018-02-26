@@ -1,31 +1,76 @@
 Ohjelmistotestaus
 
+SERVER
+
+Socket
+	If port in use (double start)
+	Connection overflow
+	InputStream overflow
+	
+
+MySQL										OK?
+	down									
+	login incorrect							
+
+Functions
+	help									
+	add									
+	login { line1: usrn, line2: pwd }
+		-> samat testit kuin client/login	
+	add user { line1: lvl, line2: usrn }
+		-> samat testit kuin client/login	
+	list									
+	list users								
+	list temps								
+	fileout									
+	fileout console							
+	fileout userlist						
+	add temp								
+	quit									
+	
+	start									
+	stop									
+	restart									
+	status									
+	
+	default									
+
+Feedback									
+	log file (serverside)					
+	console (clietside)						
+	(clientside commandlog?)				
+
+
+
+
+
 CLIENT
 
 login										OK?
 	ei käyttäjätunnusta (usern)				
 	ei salasanaa		(pwd)				
 	ei usern/pwd							
-	
+
 	väärä usern								
 	väärä pwd								
 	väärä usern/pwd							
-	
+
 	usern yli 16 merkkiä					
-	pwd yli 16 merkkiä
-	
+	pwd yli 16 merkkiä						
+
 	SQL injection usern						
 	SQL injection pwd						
 
 
-	
-	
-	
-	
-	
-	
-SENSOR
+
+SENSOR										OK?
+
 	on case server crash					
-	on case network down
+	on case network down					
+
+	on case mysql down						
+
+	Double start of same sensor should fail	
 	
-	on case server mysql down
+	
+	

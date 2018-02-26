@@ -1,10 +1,12 @@
 TODO
 
+
 server
 	login response									V
 	login incorrect -> causes crash?!				
 
 	secure key check during transmissions with snsr	
+
 
 
 client
