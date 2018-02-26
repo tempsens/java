@@ -76,7 +76,7 @@ public class TheTempSensClient {
 			    System.out.println("outer loop: Saatiin palaute: " + responssi);
 
 			    if (responssi.contains("QQ")) {
-				System.out.println("inner loop: Saatiin palaute QQ: " + responssi);
+				System.out.println("inner loop: Saatiin palaute QQ: Ulos loopista.");
 
 				break;
 			    }

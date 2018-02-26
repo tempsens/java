@@ -11,7 +11,8 @@ login										OK?
 	väärä pwd								
 	väärä usern/pwd							
 	
-	usern/pwd yli 16 merkkiä				
+	usern yli 16 merkkiä					
+	pwd yli 16 merkkiä
 	
 	SQL injection usern						
 	SQL injection pwd						

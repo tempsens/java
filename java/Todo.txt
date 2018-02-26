@@ -2,7 +2,7 @@ TODO
 
 server
 	login response									V
-	login incorrect -> causes crash?!		
+	login incorrect -> causes crash?!				
 
 	secure key check during transmissions with snsr	
 
@@ -11,9 +11,9 @@ client
 	login questions									V
 	login out, level in								V
 
-	change pw								
+	change pw										
 
-	loop stucks after command				
+	loop stucks after command						
 
 
 

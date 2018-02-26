@@ -64,9 +64,11 @@ public class DB {
      * @param table	- Taulun nimi
      * @param where	- Hakuehdot (WHERE value > 20.0 AND value < 30.0) @ return	-
      * Palauttaa kaikkien valittujen kenttien (objects) arvot
+     * @return Palauttaa kyselyn tuloksen
      */
     public ResultSet query(String objects, String table, String where) {
 	try {
+	    this.connect();
 	    stmt = conn.createStatement();
 	    rs = stmt.executeQuery("SELECT " + objects + " FROM " + table + " " + where + " LIMIT 100");
 	} catch (SQLException ex) {
@@ -75,6 +77,7 @@ public class DB {
 	    System.out.println("SQLState: " + ex.getSQLState());
 	    System.out.println("VendorError: " + ex.getErrorCode());
 	}
+	this.disconnect();
 	return rs;
     }
 
