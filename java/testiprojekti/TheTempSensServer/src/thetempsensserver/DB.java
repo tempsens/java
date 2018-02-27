@@ -1,7 +1,6 @@
 //  Versio 0.1  26.2.2018    
 //              Siirrettiin login ulos isosta silmukasta, toimii
 //------------------------------------------------------------------------------
-
 package thetempsensserver;
 
 import java.io.IOException;
@@ -61,9 +60,9 @@ public class DB {
      *
      * @param objects	- Mitkä kentät valitaan
      * @param table	- Taulun nimi
-     * @param where	- Hakuehdot (WHERE value > 20.0 AND value < 30.0) @ return	-
-     * Palauttaa kaikkien valittujen kenttien (objects) arvot
-     * @return Palauttaa kyselyn tuloksen
+     * @param where	- Hakuehdot (WHERE value > 20.0 AND value < 30.0)
+     * @return		- Palauttaa kaikkien valittujen kenttien (objects) arvot
+     *
      */
     public ResultSet query(String objects, String table, String where) {
 	try {
@@ -109,7 +108,7 @@ public class DB {
 		rs = stmt.getResultSet();
 
 	    }
-	   System.out.println(dagen+" Temperature " + val1 + " \tadded to database from sensor "+ val2);
+	    System.out.println(dagen + " Temperature " + val1 + " \tadded to database from sensor " + val2);
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
 	    System.out.println("SQLState: " + ex.getSQLState());
@@ -132,15 +131,16 @@ public class DB {
 	    } else {				// Login failures to logfile -Suni-
 		fileout.loginError("u:" + user);
 	    }
+	    disconnect();
+	    return leveli;
+
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
 	    System.out.println("SQLState: " + ex.getSQLState());
 	    System.out.println("VendorError: " + ex.getErrorCode());
+	    disconnect();
+	    return -1;				// Palauttaa -1 virheessä -Suni-
 	}
-	disconnect();
-
-	return leveli;
-
     }
 
 // Käyttäjien listaaminen tietokannasta
@@ -155,7 +155,7 @@ public class DB {
 	    while (rs.next()) {
 		os.println(rs.getString("username"));
 	    }
-	 //   os.println("QQ");
+	    //   os.println("QQ");
 
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
@@ -193,7 +193,8 @@ public class DB {
 
     public String GetUsersFromDB() {
 	this.connect();
-	String palautus = "USERS LIST" + "\r\n\r\n" + "nro" + "\t" + "Username" + "\t" + "Userlevel" + "\r\n" + "---------------------------------------------------------" + "\r\n";
+	String palautus = "USERS LIST" + "\r\n\r\n" + "nro" + "\t" + "Username" + "\t" + "Userlevel" + "\r\n"
+				       + "---------------------------------------------------------" + "\r\n";
 	int i = 1;
 
 	try {

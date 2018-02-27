@@ -19,17 +19,17 @@ Ohjelmistotestaus
 SERVER
 
 Socket		Jukka
-	If port in use (double start)
-	Connection overflow			(yhteyksien rajoittaminen)
-	InputStream overflow		(   - - - || - - -       )
-	
+	If port in use (double start)								DONE (vaati loopin tiedostoon TheTempSensServer.java)
+	Connection overflow			(yhteyksien rajoittaminen)		DONE (KAATAA SERVUN) --> KORJAUS?
+	InputStream overflow		(   - - - || - - -       )		DONE (javassa kai sisäänrakennettuna suojaus)
+HUOM! Clientin droppaus aiheuttaa servun sammumisen!!! (MainMenu.java: 89)
 
 MySQL			Jukka				DB.JAVA-stuff				OK?
-	down						(väärään osoitteeseen yrittäminen)			
-	login incorrect				(väärä tunnus ja/tai salasana)			
+	down						(väärään osoitteeseen yrittäminen)	DONE (thread kaatuu, client jumiin! Selvityksessä...)
+	login incorrect				(väärä tunnus ja/tai salasana)		DONE (^ sama tilanne)
 
 Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?
-	help						(Huom! sisällön päivitys?)			
+	help						(Huom! sisällön päivitys?)		JA MAINMENU funktiot järjestykseen!
 	add									
 	login { line1: usrn, line2: pwd }
 		-> samat testit kuin client/login	
