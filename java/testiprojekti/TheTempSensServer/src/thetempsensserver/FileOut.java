@@ -1,7 +1,6 @@
 //  Versio 0.1      
 //              
 //------------------------------------------------------------------------------
-
 package thetempsensserver;
 
 import java.io.FileWriter;
@@ -32,6 +31,19 @@ public class FileOut {
         }
     }
 
+    public int clientEventLog(String viesti) {	    // Prints to file if login fails
+        try (FileWriter writer = new FileWriter("console.log", TRUE)) {
+            String textToWrite = today + "Client event (" + viesti + ")\n";
+            writer.write(textToWrite);
+            writer.close();
+            System.out.println(viesti);     // for DEBUG
+            return 1;
+        } catch (IOException ex) {
+            // System.out.println("IOException: " + ex.getMessage());
+            return 0;
+        }
+    }
+
     public int loginSuccess(String viesti) {	   // Prints to file who has logged in
         try (FileWriter writer = new FileWriter("console.log", TRUE)) {
             String textToWrite = today + "Server: LOGIN: (" + viesti + ")\n";
@@ -50,6 +62,7 @@ public class FileOut {
             String textToWrite = viesti;
             writer.write(textToWrite + "\n");
             writer.close();
+            clientEventLog("Console.log written");
             os.println("console.log written.");
 
             // return 1;

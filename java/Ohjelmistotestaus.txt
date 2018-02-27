@@ -1,4 +1,4 @@
-TODO
+﻿TODO
  - functioiden rajoittaminen userLevelillä
  - Salasanan vaihtaminen
  - admin kiinteäksi serverille, (jos MySQL ns. "finito-caput" -tilassa)
@@ -14,6 +14,14 @@ TODO
  http://www.jguru.com/faq/view.jsp?EID=32388
  
 *********************************************************************************
+HUOMIOITA
+	- fileout userlist --> tulostaa käyttäjälistan edellisen listan jatkeeksi... onko hyvä niin? / Joakim
+
+
+
+
+
+********************************************************************************
 Ohjelmistotestaus
 
 SERVER

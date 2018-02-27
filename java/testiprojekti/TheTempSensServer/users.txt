@@ -8,3 +8,14 @@ nro	Username	Userlevel
 6	user1		2
 7	user2		3
 
+27.02.2018 23:10:54 USERS LIST
+
+nro	Username	Userlevel
+---------------------------------------------------------
+1	admin		10
+2	admin2		10
+3	injectionTest		2
+4	sensoren		2
+5	user1		2
+6	user2		3
+
