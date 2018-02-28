@@ -1,3 +1,9 @@
+//  Versio 0.2	28.02.2018  Jukka
+//   Static VERSION -muuttuja ja versionumeron tulostus ohjelman alkuun
+//   AdminBackupLogin jos DB yhteys ei toimi
+//   server QUIT -käskyn ohjaus: server quit, client exit
+//   catch kuvaustekstejä debuggia helpottamaan
+//------------------------------------------------------------------------------
 //  Versio 0.1  26.2.2018   Joakim 
 //              Siirrettiin login ulos isosta silmukasta, toimii
 //------------------------------------------------------------------------------
@@ -16,6 +22,7 @@ import java.util.Date;
  */
 public class MainMenu implements Runnable {
 
+    private static final String VERSION = "0.2";
     private static final String PERUSPALAUTE = "Kirjoita 'help' jos et muuta osaa!";
     private static final int PORT = 1234; // Portin määritys
     ServerSocket servu = null; // Palvelin soketin alustus
@@ -30,8 +37,7 @@ public class MainMenu implements Runnable {
 	    this.os = new PrintStream(clinu.getOutputStream());	    // Output
 	    System.out.println("Connection from: " + clinu.getRemoteSocketAddress().toString());
 	} catch (IOException e) {
-	    System.out.println("Main menun ekan try catch..");
-	    System.out.println(e);
+	    System.out.println("is/os creation failed: " + e);
 	}
     }
 
@@ -59,35 +65,55 @@ public class MainMenu implements Runnable {
 
 			DB user = new DB();
 			user.connect();
-			int vastaus = user.checkUser(userName, userPass);
+			int vastaus = user.checkUser(clinu, userName, userPass);
 
 			if (vastaus > 0) {
-			    userLevel = vastaus;		    // LISÄSIN TÄN (Jukka)
+			    userLevel = vastaus; // Luetaan käyttäjätaso muuttujaan
 			    os.println("1");
 			} else {
-			    if(vastaus < 0) { os.print("Server database error! Only admin login possible."); }
-			    os.println("Login incorrect");
+			    if (vastaus < 0) {
+				os.println("Server database error! Only admin login possible.");
+				while (userLevel < 10) {
+				    komento = is.readLine();
+				    if (komento.equals("login")) {
+					try {
+					    userName = is.readLine();
+					    userPass = is.readLine();
+					    if (userName.equals("admin") && userPass.equals("0000")) {
+						userLevel = 10;
+						os.println("1");
+						//os.println("\nQQ");
+					    } else {
+						os.print("Server database error! Only admin login possible.");
+					    }
+					} catch (IOException e) {
+					    System.out.println("BackupAdminLoginLoop readLine fail: " + e);
+					}
+				    }
+				}
+			    }
 			}
 		    } catch (IOException e) {
-			System.out.println("Loginin exception..."); // FOR DEBUGGING
-			System.out.println(e);
+			System.out.println("LoginLoop db-login fail: " + e);
 		    }
 		}
 	    } catch (IOException e) {
-		System.out.println(e);
-		break;		    // Poistutaan loopista jos luku epäonnistuu
+		System.out.println("LoginLoop readLine fail: " + e);
+		is = null;  // Nollataan input streamin olio, jottei jää readLine looppi päälle
+		//break;		    // Poistutaan loopista jos luku epäonnistuu
 	    }
 	}
+	inputti.Help(clinu); // Tulostaa helpin
 
 	while (ulosta < 1 && userLevel > 0) { // Pääloop komentojen kuunteluun        LISÄTTY UserLevel vaatimus Joakim
 	    try {
 		komento = is.readLine();    // Luetaan yksi rivi muuttujaan
-		System.out.println(komento); // Tulostetaan komento		    DEBUG
+		System.out.println(clinu.getRemoteSocketAddress().toString() + ": " + komento); // DEBUG
 
 	    } catch (IOException e) {
-		System.out.println(e);
+		System.out.println("MainLoop readLine fail: " + e);
 		break;		    // Poistutaan loopista jos luku epäonnistuu
-		// ^		HUOM! Sammuttaa pääohjelman jos client droppaa!!! DAS IS NICHT GUT!
+		// ^	HUOM! Sammuttaa pääohjelman jos client droppaa!!! DAS IS NICHT GUT! -- EI OLLU TÄÄ -> Saa jäädä.
 	    }
 	    switch (komento.toLowerCase()) {
 		case "help": // Tulostaa helpin
@@ -100,30 +126,6 @@ public class MainMenu implements Runnable {
 		    commandLog = commandLog + today + "Server: " + komento + "\n";
 		    os.println("Missing parameter! (user or temp needed)");
 		    break;
-		/*       case "login": --> Siirretty Swichiä edeltävään omaan looppiin Joakim
-
-                    try {
-                        String userName = is.readLine();
-                        String userPass = is.readLine();
-
-                        DB user = new DB();
-                        user.connect();
-                        int vastaus = user.checkUser(userName, userPass);
-
-                        if (vastaus > 0) {
-                            userLevel = vastaus;		    // LISÄSIN TÄN (Jukka)
-                            os.println("1");
-                        } else {
-                            os.println("Login incorrect");
-                        }
-
-                    } catch (IOException e) {
-                        System.out.println("Loginin exception..."); // FOR DEBUGGING
-                        System.out.println(e);
-                        break;		    // Poistutaan loopista jos luku epäonnistuu
-                    }
-
-                    break; */
 		case "add user": // Lisätään käyttäjä
 		    commandLog = commandLog + today + "Server: " + komento + "\n";
 		    if (userLevel >= 10) {
@@ -193,6 +195,7 @@ public class MainMenu implements Runnable {
 		    }
 		    break;
 		case "quit": // OK!!
+		    os.println("Server quit.");
 		    os.println("QQ"); // Lähetetään QQ lähetyksen lopuksi
 		    ulosta = 1;	    // Poistuu while -loopista
 		    break;
@@ -217,12 +220,12 @@ public class MainMenu implements Runnable {
 		    commandLog = commandLog + today + "Server: " + komento + "\n";
 		    os.println(PERUSPALAUTE);
 	    }   // SWITCHin loppusulje
-	    System.out.println("Jumi 666");
+//	    System.out.println("Jumi 666");
 
 	    os.println("\nQQ");
 	}   // Ohjelmaloopin loppusulje (while)
-	os.println("Server offline.\nexit\n");
-	System.out.println("Server offline.");
+	os.println("Server shutdown.\nexit\n");
+	System.out.println("Server shutdown.");
 	System.exit(-1);
     }	// Metodin loppusulje (void run)
 } // Luokan loppusulje (MainMenu)

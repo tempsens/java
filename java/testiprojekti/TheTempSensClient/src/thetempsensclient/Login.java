@@ -1,4 +1,4 @@
-//  Versio 0.1     
+//  Versio 0.2
 //              
 //------------------------------------------------------------------------------
 package thetempsensclient;
@@ -15,8 +15,6 @@ import java.util.Scanner;
  */
 public class Login {
 
-    private String username;	// Alustetaan käyttäjätunnuksen muuttuja
-    private String password;	// Alustetaan salasanan muuttuja
     private String responssi;	// Alustetaan palautteen muuttuja
 
     public String login(Socket soketti) {

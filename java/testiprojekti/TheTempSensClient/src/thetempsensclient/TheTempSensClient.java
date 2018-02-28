@@ -1,3 +1,8 @@
+//  Versio 0.2	28.02.2018  Jukka
+//   Static VERSION -muuttuja ja versionumeron tulostus ohjelman alkuun
+//   server QUIT -käskyn ohjaus: server quit, client exit
+//   catch kuvaustekstejä debuggia helpottamaan
+//------------------------------------------------------------------------------
 //  Versio 0.1     
 //              
 //------------------------------------------------------------------------------
@@ -17,22 +22,24 @@ import java.util.Scanner;
 public class TheTempSensClient {
 
     // CLIENT
+    private static final String VERSION = "0.2";
     private static final String HOSTNAME = "127.0.0.1"; // Palvelimen osoite
     private static final int PORT = 1234; // Määritetään käytettävä portti
 
     public static void main(String[] args) {
 
-	Socket MyClient =	null; // Alustetaan soketti
-	DataOutputStream os =	null; // Alustetaan output stream
-	DataInputStream is =	null; // Alustetaan input stream
+	Socket MyClient = null;      // Alustetaan soketti
+	DataOutputStream os = null;  // Alustetaan output stream
+	DataInputStream is = null;   // Alustetaan input stream
+	System.out.println("TempSensClient, v" + VERSION);
 	try {
-	    MyClient =	new Socket(HOSTNAME, PORT);			    // Määritetään soketti
-	    os =	new DataOutputStream(MyClient.getOutputStream());   // Määritetään output stream
-	    is =	new DataInputStream(MyClient.getInputStream());	    // Määritetään input stream
+	    MyClient = new Socket(HOSTNAME, PORT);		   // Määritetään soketti
+	    os = new DataOutputStream(MyClient.getOutputStream()); // Määritetään output stream
+	    is = new DataInputStream(MyClient.getInputStream());   // Määritetään input stream
 	} catch (UnknownHostException e) {
-	    System.err.println("Don't know about host: hostname");
+	    System.err.println("Don't know about host: " + HOSTNAME);
 	} catch (IOException e) {
-	    System.err.println("Couldn't get I/O for the connection to: hostname");
+	    System.err.println("Couldn't get I/O for the connection to: " + HOSTNAME);
 	}
 	if (MyClient != null && os != null && is != null) {
 	    try {
@@ -42,24 +49,25 @@ public class TheTempSensClient {
 
 		// Kirjautuminen, tarkistetaan käyttöoikeudet
 		Login login = new Login();
-		while (true) {
+		while (true) { // Login loop
 		    loginresponssi = login.login(MyClient);
 		    if (loginresponssi.equals("1")) {
 			break;
 		    } else {
 			System.out.println(loginresponssi);
 		    }
-
 		}
-			System.out.println("DEBUG: ennen mainlooppia");
-
 		if (loginresponssi.equals("1")) {
-
-		    //  while (login.login(MyClient) == "1") {
 		    while (!komento.equals("exit")) {
 			System.out.print(": ");
 			komento = scanner.nextLine();
-
+			// Jos QUIT, niin ensin käsky serverille, sitten client ulos loopista
+			if (komento.equals("quit")) {
+			    os.writeBytes(komento + "\n");
+			    System.out.println(is.readLine());
+			    break;
+			}
+			// Jos käyttäjän lisääminen
 			if (komento.equals("add user")) {
 
 			    AddUser addUser = new AddUser();
@@ -72,41 +80,36 @@ public class TheTempSensClient {
 			} else {
 			    os.writeBytes(komento + "\n");
 			}
-//			while (!responssi.contains("QQ")) {
 			while (true) {
 			    String responssi = is.readLine();
-			    //System.out.println("Jumi 1");
-			    System.out.println("outer loop: Saatiin palaute: " + responssi);
-
 			    if (responssi.contains("QQ")) {
-				System.out.println("inner loop: Saatiin palaute QQ: Ulos loopista.");
-
 				break;
 			    }
-//			    System.out.println(responssi);
+			    System.out.println(responssi);
 
-			} // Sisempi While loppu (MULTILINE)
-		    } // Ulompi While loppu (EXIT PROGRAM)
-		}
+			} // Sisempi While loppusulje (MULTILINE)
+		    } // Ulompi While loppusulje (EXIT PROGRAM)
+		} // Login kyselyn loppusulje (IF login=1)
 
-// clean up:
-		System.out.println("Bye. Thanks for choosing this awesome software and we hope you will be using it again and recommend it"
-			+ "for your friends too! Some day we will be BIG and you may be proud about using this software from the beginning."
-			+ "It may also be nice if you would donate some change to poor students. Jukka has drinken teams all money...");
+		System.out.println("\nBye. Thanks for choosing this awesome software and "
+			+ "we hope you will continue using it and also recommend it "
+			+ "for your friends too! Some day we will be BIG and you will be "
+			+ "proud about using this software from the very beginning. "
+			+ "It may also be nice if you could donate some change for "
+			+ "us because Jukka has drinken teams all money... Again...\n");
 
-		// close the output stream
-		// close the input stream
-		// close the socket
-		os.close();
-		is.close();
-		MyClient.close();
+// clean up:		
+		os.close(); // close the output stream
+		is.close(); // close the input stream
+		MyClient.close(); // close the socket
 
 	    } catch (UnknownHostException e) {
 		System.err.println("Trying to connect to unknown host: " + e);
 	    } catch (IOException e) {
 		System.err.println("IOException:  " + e);
 	    }
+	} else {
+	    System.out.println("Socket, is or os is empty! Connection error!");
 	}
-    }
-
-}
+    } // Pääohjelman loppusulje (MAIN)
+} // Pääluokan loppusulje

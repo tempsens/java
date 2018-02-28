@@ -30,7 +30,7 @@ Socket		Jukka
 	If port in use (double start)								DONE (vaati loopin tiedostoon TheTempSensServer.java)
 	Connection overflow			(yhteyksien rajoittaminen)		DONE (KAATAA SERVUN) --> KORJAUS?
 	InputStream overflow		(   - - - || - - -       )		DONE (javassa kai sisäänrakennettuna suojaus)
-HUOM! Clientin droppaus aiheuttaa servun sammumisen!!! (MainMenu.java: 89)
+HUOM! Clientin droppaus aiheuttaa servun sammumisen!!! (MainMenu.java: 89) DONE (virheilmotus vois olla nätimpi)
 
 MySQL			Jukka				DB.JAVA-stuff				OK?
 	down						(väärään osoitteeseen yrittäminen)	DONE (thread kaatuu, client jumiin! Selvityksessä...)

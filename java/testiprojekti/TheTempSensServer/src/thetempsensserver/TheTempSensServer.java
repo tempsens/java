@@ -1,4 +1,4 @@
-//  Versio 0.1     
+//  Versio 0.2     
 //              
 //------------------------------------------------------------------------------
 package thetempsensserver;
@@ -12,9 +12,10 @@ import java.net.Socket;
  */
 public class TheTempSensServer {
 
-    public int serverRunning = 0;
+    private static final String VERSION = "0.2";
     private static final int PORT = 1234;
-    
+    public int serverRunning = 0;
+   
     public static void main(String args[]) throws InterruptedException {
 	// declaration section:
 	// declare a server socket and a client socket for the server

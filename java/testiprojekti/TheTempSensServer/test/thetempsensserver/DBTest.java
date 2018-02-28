@@ -105,11 +105,12 @@ public class DBTest {
     @Test
     public void testCheckUser() {
 	System.out.println("checkUser");
+	Socket clinu = null;
 	String user = "";
 	String pass = "";
 	DB instance = new DB();
 	int expResult = 0;
-	int result = instance.checkUser(user, pass);
+	int result = instance.checkUser(clinu, user, pass);
 	assertEquals(expResult, result);
 	// TODO review the generated test code and remove the default call to fail.
 	fail("The test case is a prototype.");
