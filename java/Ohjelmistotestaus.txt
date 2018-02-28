@@ -1,25 +1,20 @@
 ﻿TODO
- - functioiden rajoittaminen userLevelillä
- - Salasanan vaihtaminen
- - admin kiinteäksi serverille, (jos MySQL ns. "finito-caput" -tilassa)
- - ohjelmien (3) versiointi
-	pvm, tiedostonimi, tekijä, kuvaus
+ - functioiden rajoittaminen userLevelillä										DONE
+ - Salasanan vaihtaminen													T O D O -Joakim?-
+ - admin kiinteäksi serverille, (jos MySQL ns. "finito-caput" -tilassa)			DONE
+ - ohjelmien (3) versiointi	 pvm, tiedostonimi, tekijä, kuvaus					DONE
+	
  
 *******************************************************************************
  
  RAPORTTI
- - Jukka-->SSL-yhteys lopuksi, jos jää aikaa
+ - Jukka-->SSL-yhteys lopuksi, jos jää aikaa								T O D O -Jukka-
 
  (: jos ei ehditä toteuttaa, niin raporttiin maininta asian tärkeydestä.)
  http://www.jguru.com/faq/view.jsp?EID=32388
  
 *********************************************************************************
 HUOMIOITA
-	- fileout userlist --> tulostaa käyttäjälistan edellisen listan jatkeeksi... onko hyvä niin? / Joakim
-
-
-
-
 
 ********************************************************************************
 Ohjelmistotestaus
@@ -27,17 +22,17 @@ Ohjelmistotestaus
 SERVER
 
 Socket		Jukka
-	If port in use (double start)								DONE (vaati loopin tiedostoon TheTempSensServer.java)
-	Connection overflow			(yhteyksien rajoittaminen)		DONE (KAATAA SERVUN) --> KORJAUS?
-	InputStream overflow		(   - - - || - - -       )		DONE (javassa kai sisäänrakennettuna suojaus)
-HUOM! Clientin droppaus aiheuttaa servun sammumisen!!! (MainMenu.java: 89) DONE (virheilmotus vois olla nätimpi)
+	If port in use (double start)								(vaati loopin tiedostoon TheTempSensServer.java)		DONE
+	Connection overflow			(yhteyksien rajoittaminen)		(KAATAA SERVUN) --> KORJAUS?						T O D O
+	InputStream overflow		(   - - - || - - -       )		(javassa kai sisäänrakennettuna suojaus)				DONE
+HUOM! Clientin droppaus aiheuttaa servun sammumisen!!! (MainMenu.java: 89) DONE (virheilmotus vois olla nätimpi)	T O D O
 
 MySQL			Jukka				DB.JAVA-stuff				OK?
-	down						(väärään osoitteeseen yrittäminen)	DONE (thread kaatuu, client jumiin! Selvityksessä...)
-	login incorrect				(väärä tunnus ja/tai salasana)		DONE (^ sama tilanne)
+	down					(väärään osoitteeseen yrittäminen)  -> LOGIN DONE, muut vielä vaiheessa!				T O D Os
+	login incorrect			(väärä tunnus ja/tai salasana)		DONE (^ sama tilanne)									DONE
 
-Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?
-	help						(Huom! sisällön päivitys?)		JA MAINMENU funktiot järjestykseen!
+Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?													DONE
+	help						(Huom! sisällön päivitys?)		JA MAINMENU funktiot järjestykseen!					T O D O
 	add									
 	login { line1: usrn, line2: pwd }
 		-> samat testit kuin client/login	
@@ -60,20 +55,15 @@ Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?
 	default									
 
 Feedback				Joakim					
-	log file (serverside)					
-	console (clietside)						
-	(clientside commandlog?) = turha			
-	"Ajattele, että kun luet loki-tiedostoa, niin tiedät mitä on tullut tehtyä...
-	list temps --> palautetta ei kirjata lokiin...? Onko lähetty kyselijälle.
-		komennon loppuun "lähetetyy onnistuneesti"
-		Try Catch..."
-
+	log file (serverside)																	DONE
+	console (clietside)																	T O D O
+	(clientside commandlog?) = turha														?
 
 
 
 CLIENT
 
-login				Joakim					OK?
+login					Joakim
 	ei käyttäjätunnusta (usern)				Java.Scanner estää	
 	ei salasanaa		(pwd)				Java.Scanner estää
 	ei usern/pwd							ei mahdollinen
@@ -85,19 +75,18 @@ login				Joakim					OK?
 	usern yli 16 merkkiä					
 	pwd yli 16 merkkiä						
 
-	SQL injection usern 	DONE (lisäsin vauhtiin päästyäni myös suojauksen insertTemp, InsertUser	functioihin CheckUserin lisäksi)				
-	SQL injection pwd 	DONE						
+	SQL injection usern 																DONE
+		-> (lisäsin vauhtiin päästyäni myös suojauksen insertTemp, InsertUser	functioihin CheckUserin lisäksi)				
+	SQL injection pwd 																	DONE						
 
 
 
 SENSOR			Matti							OK?
 
-	on case server crash					
-	on case network down					
+	on case server crash																T O D O
+	on case network down																T O D O
 
-	on case mysql down						
+	on case mysql down																	T O D O
 
-	Double start of same sensor should fail	
-	
-	
-	
+	Double start of same sensor should fail												T O D O
+

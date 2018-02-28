@@ -12,10 +12,11 @@ import java.net.Socket;
  */
 public class TheTempSensServer {
 
+    private static final int MAX_CON_SPEED = 200;
     private static final String VERSION = "0.2";
     private static final int PORT = 1234;
     public int serverRunning = 0;
-   
+
     public static void main(String args[]) throws InterruptedException {
 	// declaration section:
 	// declare a server socket and a client socket for the server
@@ -23,13 +24,17 @@ public class TheTempSensServer {
 	int round = 1;
 
 	while (true) {
-	    System.out.println("TempSensServer starting...");
+	    System.out.println("TempSensServer v" + VERSION+ " starting...");
 	    try {
 		// Try to open a server socket on port PORT
 		ServerSocket serveri = new ServerSocket(PORT);
-		System.out.println("TempSensServer running...");
+		System.out.println("TempSensServer v" + VERSION+ " running...");
+		
+		MainMenu menu; // Alustetaan menu
+		
 		while (true) { // Loopataan uusia säikeitä aina kun uusi yhteys
-		    Thread t = new Thread(new MainMenu(serveri.accept()));
+		    menu = new MainMenu(serveri.accept()); // TODO: IF CONNS > 20 -> REFUSE -Jukka-
+		    Thread t = new Thread(menu);
 		    t.start();
 		}
 	    } catch (IOException e) {
