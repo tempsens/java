@@ -38,7 +38,7 @@ public class FileOut {
             String textToWrite = today + "Client event from("+IP+"): " + viesti + "\n";
             writer.write(textToWrite);
             writer.close();
-            System.out.println(viesti);     // for DEBUG
+            System.out.println(textToWrite);     // for DEBUG
             return 1;
         } catch (IOException ex) {
             // System.out.println("IOException: " + ex.getMessage());

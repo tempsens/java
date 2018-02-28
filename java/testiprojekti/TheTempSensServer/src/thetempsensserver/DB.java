@@ -96,7 +96,7 @@ public class DB {
             }
             System.out.println("User added to database.");
 
-            fileout.clientEventLog("New User added ( usr: " + val1 + " / lvl: " + val2, IP);
+            fileout.clientEventLog("New User added ( usr: " + val2 + " / lvl: " + val1+")", IP);
 
         } catch (SQLException ex) {		// handle any errors
             System.out.println("SQLException: " + ex.getMessage());
@@ -133,7 +133,7 @@ public class DB {
     }
 
 // Käyttäjätietojen tarkastaminen ("login")
-    public int checkUser(Socket clinu, String user, String pass, String IP) {            //SQL INJECTION SAFE
+    public int checkUser(String user, String pass, String IP) {            //SQL INJECTION SAFE
         int leveli = 0;
         try {
             if (conn == null) {
@@ -150,14 +150,14 @@ public class DB {
                 ResultSet resSet = preparedStatement.executeQuery();
                 FileOut fileout = new FileOut();
                 if (resSet.next()) {
-                    System.out.println("Login from: " + clinu.getRemoteSocketAddress().toString() // -Jukka-
+                    System.out.println("Login from: " + IP // -Jukka-
                             + " as '" + user + "' successfull.");				    // -Jukka-
-                    fileout.loginSuccess("u:" + user, clinu.getRemoteSocketAddress().toString());
+                    fileout.loginSuccess("u:" + user, IP);
                     leveli = resSet.getInt(1);
                 } else {
-                    System.out.println("Login from: " + clinu.getRemoteSocketAddress().toString() // -Jukka-
+                    System.out.println("Login from: " + IP // -Jukka-
                             + " as '" + user + "' FAIL!");					    // -Jukka-
-                    fileout.loginError("u:" + user, clinu.getRemoteSocketAddress().toString());
+                    fileout.loginError("u:" + user, IP);
                 }
                 disconnect();
                 return leveli;

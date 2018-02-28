@@ -36,7 +36,7 @@ public class MainMenu implements Runnable {
             this.is = new DataInputStream(clinu.getInputStream());    // Input
             this.os = new PrintStream(clinu.getOutputStream());	    // Output
             System.out.println("Connection from: " + clinu.getRemoteSocketAddress().toString());
-            
+
         } catch (IOException e) {
             System.out.println("is/os creation failed: " + e);
         }
@@ -68,7 +68,7 @@ public class MainMenu implements Runnable {
 
                         DB user = new DB();
                         user.connect();
-                        int vastaus = user.checkUser(clinu, userName, userPass, IP);
+                        int vastaus = user.checkUser(userName, userPass, IP);
 
                         if (vastaus > 0) {
                             userLevel = vastaus; // Luetaan käyttäjätaso muuttujaan
@@ -76,7 +76,7 @@ public class MainMenu implements Runnable {
                         } else {
                             if (vastaus < 0) {
                                 os.println("Server database error! Only admin login possible.");
-                                
+
                                 while (userLevel < 10) {
                                     komento = is.readLine();
                                     if (komento.equals("login")) {
@@ -89,12 +89,12 @@ public class MainMenu implements Runnable {
                                                 //os.println("\nQQ");
                                             } else {
                                                 os.print("Server database error! Only admin login possible.");
-                fileout.clientEventLog("Server database error! Only admin login possible.", IP);
+                                                fileout.clientEventLog("Server database error! Only admin login possible.", IP);
 
                                             }
                                         } catch (IOException e) {
                                             System.out.println("BackupAdminLoginLoop readLine fail: " + e);
-                                                                            fileout.clientEventLog("BackupAdminLoginLoop readLine fail", IP);
+                                            fileout.clientEventLog("BackupAdminLoginLoop readLine fail", IP);
 
                                         }
                                     }
@@ -107,7 +107,7 @@ public class MainMenu implements Runnable {
                 }
             } catch (IOException e) {
                 System.out.println("LoginLoop readLine fail: " + e);
-                                  fileout.clientEventLog("LoginLoop readLine fail", IP);
+                fileout.clientEventLog("LoginLoop readLine fail", IP);
 
                 is = null;  // Nollataan input streamin olio, jottei jää readLine looppi päälle
                 //break;		    // Poistutaan loopista jos luku epäonnistuu
@@ -220,6 +220,7 @@ public class MainMenu implements Runnable {
                             System.out.println(sensori);
                             db.insertTemp(Double.parseDouble(tempvalue), Integer.parseInt(sensori), today);
                             db.disconnect();
+                            
 
                         } catch (IOException e) {
                             System.out.println(e);
@@ -259,11 +260,11 @@ public class MainMenu implements Runnable {
                     break;
 
                 default:
-                    fileout.clientEventLog(komento, IP);
+                    //   fileout.clientEventLog(komento, IP);
 
                     //commandLog = commandLog + today + "Server: " + komento + "\n";
                     os.println(PERUSPALAUTE);
-                    fileout.clientEventLog("Unknown command", IP);
+                    fileout.clientEventLog("Unknown command(" + komento + ")", IP);
 
             }   // SWITCHin loppusulje
 //	    System.out.println("Jumi 666");
