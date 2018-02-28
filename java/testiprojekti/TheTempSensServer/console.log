@@ -37,22 +37,83 @@
 26.02.2018 19:58:05 Server: LOGIN ERROR! ()
 26.02.2018 20:00:32 Server: LOGIN: (u:admin)
 26.02.2018 21:19:55 Server: LOGIN: (u:admin)
+
 26.02.2018 21:30:47 Server: LOGIN: (u:admin)
+
 26.02.2018 21:31:51 Server: LOGIN: (u:sensoren)
-26.02.2018 21:33:06 Server: LOGIN ERROR! (u:sensorenx)
+
+6.02.2018 21:33:06 Server: LOGIN ERROR! (u:sensorenx)
+
 26.02.2018 21:33:39 Server: LOGIN: (u:sensoren)
+
 26.02.2018 21:40:07 Server: LOGIN: (u:admin)
+
 26.02.2018 21:41:00 Server: LOGIN: (u:sensoren)
+
 26.02.2018 21:39:58 Server: help
 26.02.2018 21:39:58 Server: list users
+
 26.02.2018 21:39:58 Server: list temps
+
 26.02.2018 21:39:58 Server: list temps
+
 26.02.2018 21:39:58 Server: help
 26.02.2018 21:39:58 Server: fileout
+
 26.02.2018 21:39:58 Server: fileout console
 
+
 26.02.2018 22:32:18 Server: LOGIN ERROR! (u:a2345678901234567890)
+
 26.02.2018 22:32:35 Server: LOGIN: (u:admin)
+
 26.02.2018 22:42:03 Server: LOGIN: (u:admin)
 27.02.2018 23:11:01 Server: LOGIN: (u:admin)
 27.02.2018 23:21:47 Server: LOGIN: (u:admin)
+28.02.2018 23:44:31 Client event from(/127.0.0.1:53269): Login succes | u:admin
+28.02.2018 23:44:31 Server: LOGIN: (u:admin)
+28.02.2018 23:44:21 Client event from(/127.0.0.1:53269): help
+
+28.02.2018 23:44:21 Client event from(/127.0.0.1:53269): help
+
+28.02.2018 23:45:12 Client event from(/127.0.0.1:53269): List users
+
+28.02.2018 23:45:31 Client event from(/127.0.0.1:53269): New User added ( usr: 3 / lvl: jorma
+
+28.02.2018 23:45:36 Client event from(/127.0.0.1:53269): List users
+
+28.02.2018 23:44:21 Client event from(/127.0.0.1:53269): quit
+
+28.02.2018 23:46:01 Client event from(/127.0.0.1:53277): Login succes | u:jorma
+
+28.02.2018 23:46:01 Server: LOGIN: (u:jorma)
+
+28.02.2018 23:45:54 Client event from(/127.0.0.1:53277): help
+
+28.02.2018 23:45:54 Client event from(/127.0.0.1:53277): fileot console
+
+28.02.2018 23:45:54 Client event from(/127.0.0.1:53277): Unknown command
+28.02.2018 23:53:20 Client event from(/127.0.0.1:53318): Login ERROR | u:admin'
+28.02.2018 23:53:20 Server: LOGIN ERROR! (u:admin')
+28.02.2018 23:53:06 Client event from(/127.0.0.1:53318): LoginLoop readLine fail
+28.02.2018 23:54:07 Client event from(/127.0.0.1:53320): Login succes | u:admin
+28.02.2018 23:54:07 Server: LOGIN: (u:admin)
+28.02.2018 23:54:00 Client event from(/127.0.0.1:53320): help
+28.02.2018 23:56:17 Client event from(/127.0.0.1:53320): List users
+28.02.2018 23:54:00 Client event from(/127.0.0.1:53320): skdjfhksdjhg
+28.02.2018 23:54:00 Client event from(/127.0.0.1:53320): Unknown command
+28.02.2018 23:54:00 Client event from(/127.0.0.1:53320): start
+28.02.2018 23:54:00 Client event from(/127.0.0.1:53320): stop
+01.03.2018 00:01:58 Client event from(/127.0.0.1:53355): Login succes | u:admin
+01.03.2018 00:01:58 Server: LOGIN: (u:admin)
+01.03.2018 00:01:49 Client event from(/127.0.0.1:53355): help
+01.03.2018 00:02:11 Client event from(/127.0.0.1:53355): List users
+01.03.2018 00:01:49 Client event from(/127.0.0.1:53355): Unknown command(lsdjfgslfgj)
+01.03.2018 00:01:49 Client event from(/127.0.0.1:53355): Unknown command(sdfjsfjk)
+01.03.2018 00:01:49 Client event from(/127.0.0.1:53355): Unknown command(xlcvxlvb)
+01.03.2018 00:03:45 Client event from(/127.0.0.1:53355): New User added ( usr: 666 / lvl: perkele
+01.03.2018 00:01:49 Client event from(/127.0.0.1:53355): Unknown command(list user)
+01.03.2018 00:05:41 Client event from(/127.0.0.1:53364): Login succes | u:admin
+01.03.2018 00:05:41 Server: LOGIN: (u:admin)
+01.03.2018 00:05:53 Client event from(/127.0.0.1:53364): New User added ( usr: perkele / lvl: 666
+01.03.2018 00:05:57 Client event from(/127.0.0.1:53364): List users
