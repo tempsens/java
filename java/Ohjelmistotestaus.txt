@@ -25,14 +25,15 @@ Socket		Jukka
 	If port in use (double start)								(vaati loopin tiedostoon TheTempSensServer.java)		DONE
 	Connection overflow			(yhteyksien rajoittaminen)		(KAATAA SERVUN) --> KORJAUS?						T O D O
 	InputStream overflow		(   - - - || - - -       )		(javassa kai sisäänrakennettuna suojaus)				DONE
-HUOM! Clientin droppaus aiheuttaa servun sammumisen!!! (MainMenu.java: 89) DONE (virheilmotus vois olla nätimpi)	T O D O
+HUOM! Clientin droppaus aiheuttaa servun sammumisen!!! (MainMenu.java: 89) DONE (virheilmotus vois olla nätimpi)		DONE
 
 MySQL			Jukka				DB.JAVA-stuff				OK?
 	down					(väärään osoitteeseen yrittäminen)  -> LOGIN DONE, muut vielä vaiheessa!				T O D Os
 	login incorrect			(väärä tunnus ja/tai salasana)		DONE (^ sama tilanne)									DONE
 
 Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?													DONE
-	help						(Huom! sisällön päivitys?)		JA MAINMENU funktiot järjestykseen!					T O D O
+	help						(Huom! sisällön päivitys?)																DONE
+																JA MAINMENU funktiot järjestykseen!					T O D O
 	add									
 	login { line1: usrn, line2: pwd }
 		-> samat testit kuin client/login	

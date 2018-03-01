@@ -14,8 +14,8 @@ public class TheTempSensServer {
 
     private static final int MAX_CON_SPEED = 200;
     private static final String VERSION = "0.2";
-    private static final int PORT = 1234;
-    public int serverRunning = 0;
+    private static final int PORT = 1234; // Palvelin kuuntelee tätä porttia
+    public static int serverRunning = 0; // Globaali muuttuja
 
     public static void main(String args[]) throws InterruptedException {
 	// declaration section:
@@ -39,8 +39,8 @@ public class TheTempSensServer {
 		}
 	    } catch (IOException e) {
 		System.out.println(e);
-		Thread.sleep(10000);
 		System.out.println("["+round+"] Trying again in 10 seconds...\n");
+		Thread.sleep(10000);	// Odottaa 10000ms = 10s
 		round++;
 	    }
 	}
