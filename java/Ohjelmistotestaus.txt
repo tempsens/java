@@ -84,10 +84,10 @@ login					Joakim
 
 SENSOR			Matti							OK?
 
-	on case server crash																T O D O
-	on case network down																T O D O
+	on case server crash							OK? 200 yritystä															T O D O
+	on case network down							OK? 200 yritystä															T O D O
 
-	on case mysql down																	T O D O
+	on case mysql down							EI MAHDOLLISTA, MySQL käyttäjä tarkistaminen																	T O D O
 
 	Double start of same sensor should fail												T O D O
 

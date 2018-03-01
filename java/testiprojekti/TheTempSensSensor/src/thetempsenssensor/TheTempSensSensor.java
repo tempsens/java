@@ -1,3 +1,6 @@
+//  Versio 0.2  01.03.2018  masa     
+//              lisätty inteval yhteyden luontiin
+//------------------------------------------------------------------------------
 //  Versio 0.1     
 //              
 //------------------------------------------------------------------------------
@@ -31,14 +34,18 @@ public class TheTempSensSensor {
 
         ShuffleRefucked newShuffeli = new ShuffleRefucked();
         int userLevel = 0;
+        int interval = 200;
 
-        try {
-            MyClient = new Socket(HOSTNAME, PORT);
-            os = new DataOutputStream(MyClient.getOutputStream());
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: " + HOSTNAME);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to: hostname");
+        while (interval > 0) {
+            interval--;
+            try {
+                MyClient = new Socket(HOSTNAME, PORT);
+                os = new DataOutputStream(MyClient.getOutputStream());
+            } catch (UnknownHostException e) {
+                System.err.println("Don't know about host: " + HOSTNAME);
+            } catch (IOException e) {
+                System.err.println("Couldn't get I/O for the connection to: hostname");
+            }
         }
         LoginSensor login = new LoginSensor();
 
