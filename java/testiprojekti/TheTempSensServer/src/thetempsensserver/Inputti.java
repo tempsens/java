@@ -23,6 +23,7 @@ public class Inputti {
 		    /*            + "newpass \t\t Change password\r\n"          // <-- to be needed? */
 		    + " help \t\t\t\t Displays this help\n"
 		    + " list temps\t\t\t Show list of temperatures\n"
+                    + " change pass\t\t\t Change password\n"
 		    + " exit \t\t\t\t Exit program\n\n");
 	    // Jos käyttäjälevel (userLevel suurempi kuin 4 tulostetaan myös lisätoiminnot
 	    if (userLevel > 4) {

@@ -96,7 +96,7 @@ public class DB {
             }
             System.out.println("User added to database.");
 
-            fileout.clientEventLog("New User added ( usr: " + val2 + " / lvl: " + val1+")", IP);
+            fileout.clientEventLog("New User added ( usr: " + val2 + " / lvl: " + val1 + ")", IP);
 
         } catch (SQLException ex) {		// handle any errors
             System.out.println("SQLException: " + ex.getMessage());
@@ -132,15 +132,46 @@ public class DB {
         //this.disconnect();
     }
 
+    public int changepass(int userID, String pass) {
+        int value = 0;
+        this.connect();
+        try {
+            if (conn != null) {
+
+                System.out.println("CONN = " + conn);
+                preparedStatement = conn.prepareStatement("UPDATE users SET password=? WHERE id=?");
+                preparedStatement.setString(1, pass);
+                preparedStatement.setInt(2, userID);
+
+                System.out.println(preparedStatement.executeUpdate());
+                //    rs = preparedStatement.getResultSet();
+                    value = 1;
+                    System.out.println("changePass: value 1");
+                
+
+            }
+        } catch (SQLException ex) {		// handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("changePass: value -1");
+
+            disconnect();
+            value = -1;
+        }
+        return value;
+    }
 // Käyttäjätietojen tarkastaminen ("login")
-    public int checkUser(String user, String pass, String IP) {            //SQL INJECTION SAFE
-        int leveli = 0;
+
+    public String checkUser(String user, String pass, String IP) {            //SQL INJECTION SAFE
+        String leveli = "";
+        int id = 0;
         try {
             if (conn == null) {
-                return -1;
+                return "-1";
             } else {
                 System.out.println("CONN = " + conn);
-                preparedStatement = conn.prepareStatement("SELECT userlvl FROM users WHERE username=? AND password=?");
+                preparedStatement = conn.prepareStatement("SELECT id, userlvl FROM users WHERE username=? AND password=?");
                 preparedStatement.setString(1, user);
                 preparedStatement.setString(2, pass);
 
@@ -153,21 +184,25 @@ public class DB {
                     System.out.println("Login from: " + IP // -Jukka-
                             + " as '" + user + "' successfull.");				    // -Jukka-
                     fileout.loginSuccess("u:" + user, IP);
-                    leveli = resSet.getInt(1);
+                    id = resSet.getInt(1);
+                    leveli = resSet.getString(2);
+                    System.out.println("CheckUser (id): " + id);
+                    System.out.println("CheckUser (leveli): " + leveli);
+
                 } else {
                     System.out.println("Login from: " + IP // -Jukka-
                             + " as '" + user + "' FAIL!");					    // -Jukka-
                     fileout.loginError("u:" + user, IP);
                 }
                 disconnect();
-                return leveli;
+                return leveli + "|" + Integer.toString(id);  // palautetaan userlevel ja userID
             }
         } catch (SQLException ex) {		// handle any errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
             disconnect();
-            return -1;				// Palauttaa -1 virheessä -Suni-
+            return "-1";				// Palauttaa -1 virheessä -Suni-
         }
     }
 
@@ -234,7 +269,7 @@ public class DB {
     }
 
     public String GetUsersFromDB(String IP) {                // NO NEED FOR SQL INJECTION PROTECTION
-           FileOut fileout = new FileOut();
+        FileOut fileout = new FileOut();
 
         this.connect();
         String palautus = "USERS LIST" + "\r\n\r\n" + "nro" + "\t" + "Username" + "\t" + "Userlevel" + "\r\n"
@@ -250,13 +285,13 @@ public class DB {
                 palautus += Integer.toString(i) + "\t" + rs.getString(1) + "\t\t" + rs.getString(2) + "\r\n";
                 i++;
             }
-                           fileout.clientEventLog("Get Users from DB", IP);
+            fileout.clientEventLog("Get Users from DB", IP);
 
         } catch (SQLException ex) {		// handle any errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-                           fileout.clientEventLog("Get Users from DB FAIL", IP);
+            fileout.clientEventLog("Get Users from DB FAIL", IP);
         }
         disconnect();
         return palautus;

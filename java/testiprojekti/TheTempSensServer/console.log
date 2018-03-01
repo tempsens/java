@@ -117,3 +117,58 @@
 01.03.2018 00:05:41 Server: LOGIN: (u:admin)
 01.03.2018 00:05:53 Client event from(/127.0.0.1:53364): New User added ( usr: perkele / lvl: 666
 01.03.2018 00:05:57 Client event from(/127.0.0.1:53364): List users
+01.03.2018 21:27:53 Client event from(/127.0.0.1:60718): LoginLoop readLine fail
+01.03.2018 21:29:38 Client event from(/127.0.0.1:60732): Login succes | u:admin
+01.03.2018 21:29:38 Server: LOGIN: (u:admin)
+01.03.2018 21:33:50 Client event from(/127.0.0.1:60791): Login succes | u:admin
+01.03.2018 21:33:50 Server: LOGIN: (u:admin)
+01.03.2018 21:35:23 Client event from(/127.0.0.1:60800): Login succes | u:admin
+01.03.2018 21:35:23 Server: LOGIN: (u:admin)
+01.03.2018 21:39:00 Client event from(/127.0.0.1:60812): Login succes | u:admin
+01.03.2018 21:39:00 Server: LOGIN: (u:admin)
+01.03.2018 21:41:19 Client event from(/127.0.0.1:60839): Login succes | u:admin
+01.03.2018 21:41:19 Server: LOGIN: (u:admin)
+01.03.2018 21:45:45 Client event from(/127.0.0.1:60884): Login succes | u:admin
+01.03.2018 21:45:45 Server: LOGIN: (u:admin)
+01.03.2018 21:48:38 Client event from(/127.0.0.1:60914): Login succes | u:admin
+01.03.2018 21:48:38 Server: LOGIN: (u:admin)
+01.03.2018 21:51:19 Client event from(/127.0.0.1:60925): Login succes | u:admin
+01.03.2018 21:51:19 Server: LOGIN: (u:admin)
+01.03.2018 21:51:14 Client event from(/127.0.0.1:60925): help
+01.03.2018 21:53:05 Client event from(/127.0.0.1:60931): Login succes | u:admin
+01.03.2018 21:53:05 Server: LOGIN: (u:admin)
+01.03.2018 21:57:11 Client event from(/127.0.0.1:60937): Login ERROR | u:admin
+01.03.2018 21:57:11 Server: LOGIN ERROR! (u:admin)
+01.03.2018 21:57:36 Client event from(/127.0.0.1:60939): Login succes | u:admin
+01.03.2018 21:57:36 Server: LOGIN: (u:admin)
+01.03.2018 22:00:41 Client event from(/127.0.0.1:60954): Login succes | u:admin
+01.03.2018 22:00:41 Server: LOGIN: (u:admin)
+01.03.2018 22:06:44 Client event from(/127.0.0.1:61165): Login succes | u:admin
+01.03.2018 22:06:44 Server: LOGIN: (u:admin)
+01.03.2018 22:10:27 Client event from(/127.0.0.1:61172): Login succes | u:admin
+01.03.2018 22:10:27 Server: LOGIN: (u:admin)
+01.03.2018 22:13:26 Client event from(/127.0.0.1:61196): Login succes | u:admin
+01.03.2018 22:13:26 Server: LOGIN: (u:admin)
+01.03.2018 22:26:04 Client event from(/127.0.0.1:61257): Login succes | u:admin
+01.03.2018 22:26:04 Server: LOGIN: (u:admin)
+01.03.2018 22:26:55 Client event from(/127.0.0.1:61262): Login succes | u:admin
+01.03.2018 22:26:55 Server: LOGIN: (u:admin)
+01.03.2018 22:30:47 Client event from(/127.0.0.1:61274): Login succes | u:admin
+01.03.2018 22:30:47 Server: LOGIN: (u:admin)
+01.03.2018 22:33:16 Client event from(/127.0.0.1:61282): Login succes | u:admin
+01.03.2018 22:33:16 Server: LOGIN: (u:admin)
+01.03.2018 22:36:08 Client event from(/127.0.0.1:61285): Login succes | u:admin
+01.03.2018 22:36:08 Server: LOGIN: (u:admin)
+01.03.2018 22:43:10 Client event from(/127.0.0.1:61342): Login ERROR | u:admin
+01.03.2018 22:43:10 Server: LOGIN ERROR! (u:admin)
+01.03.2018 22:43:26 Client event from(/127.0.0.1:61390): Login succes | u:admin
+01.03.2018 22:43:26 Server: LOGIN: (u:admin)
+01.03.2018 22:52:58 Client event from(/127.0.0.1:61475): Login succes | u:admin
+01.03.2018 22:52:58 Server: LOGIN: (u:admin)
+01.03.2018 22:52:53 Client event from(/127.0.0.1:61475): help
+01.03.2018 22:52:53 Client event from(/127.0.0.1:61475): help
+01.03.2018 22:52:53 Client event from(/127.0.0.1:61475): Unknown command(change users)
+01.03.2018 22:52:53 Client event from(/127.0.0.1:61475): help
+01.03.2018 22:53:58 Client event from(/127.0.0.1:61478): Login succes | u:admin
+01.03.2018 22:53:58 Server: LOGIN: (u:admin)
+01.03.2018 22:53:54 Client event from(/127.0.0.1:61478): quit
