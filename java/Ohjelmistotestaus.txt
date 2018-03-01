@@ -1,6 +1,6 @@
 ﻿TODO
  - functioiden rajoittaminen userLevelillä										DONE
- - Salasanan vaihtaminen													T O D O -Joakim?-
+ - Salasanan vaihtaminen														DONE
  - admin kiinteäksi serverille, (jos MySQL ns. "finito-caput" -tilassa)			DONE
  - ohjelmien (3) versiointi	 pvm, tiedostonimi, tekijä, kuvaus					DONE
 	
