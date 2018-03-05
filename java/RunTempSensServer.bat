@@ -1,7 +1,7 @@
 echo off
 cls
 
-java -jar "TempSensClient\dist\TempSensSrv.jar"
+java -jar "testiprojekti\TheTempSensServer\dist\TheTempSensServer.jar"
 
 echo.
 echo.

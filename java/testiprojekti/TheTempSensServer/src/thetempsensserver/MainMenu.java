@@ -1,3 +1,7 @@
+//  Versio 0.4  05.03.2018  Jukka
+//   listUsers from/to date ja sensor # lisätty
+//   loginiin mysql.disconnect (Too many connections -virhe)
+//------------------------------------------------------------------------------
 //  Versio 0.3  05.03.2018  Jukka
 //   päätoimintojen järjestäminen
 //   Virheenkäsittely kaikkiin tietokantaa käyttäviin toimintoihin
@@ -110,6 +114,7 @@ public class MainMenu implements Runnable {
 			    userID = Integer.parseInt(vastaukset[1]);
 			    os.println("1|" + userID);
 			} 
+			user.disconnect();
 			//	}
 		    } catch (IOException e) {
 			System.out.println("LoginLoop db-login fail: " + e);
@@ -237,7 +242,7 @@ public class MainMenu implements Runnable {
 		case "list temps": // Tulostaa listan lämpötiloista (100 viimeisintä)
 		    if (userLevel >= 5) {
 			DB listtemps = new DB();
-			int palaute = listtemps.listTemps(clinu);
+			int palaute = listtemps.listTemps(clinu, 0, "2018-03-01", "2018-03-04");
 			if (palaute == -1) {
 			    os.println("Server database error! Command not available.");
 			} else if (palaute == -2) {

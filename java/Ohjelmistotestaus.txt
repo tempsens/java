@@ -7,7 +7,7 @@
 *******************************************************************************
  
  RAPORTTI
- - Jukka-->SSL-yhteys lopuksi, jos jää aikaa								T O D O -Jukka-
+ - Jukka-->SSL-yhteys lopuksi, jos jää aikaa								T O D O -Jukka-								S K I P P E D
 
  (: jos ei ehditä toteuttaa, niin raporttiin maininta asian tärkeydestä.)
  http://www.jguru.com/faq/view.jsp?EID=32388
@@ -22,7 +22,7 @@ SERVER
 
 Socket		Jukka
 	If port in use (double start)								(vaati loopin tiedostoon TheTempSensServer.java)		DONE
-	Connection overflow			(yhteyksien rajoittaminen)		(KAATAA SERVUN) --> KORJAUS?						T O D O
+	Connection overflow			(yhteyksien rajoittaminen)		(KAATAA SERVUN) --> KORJAUS?							S K I P P E D
 	InputStream overflow		(   - - - || - - -       )		(javassa kai sisäänrakennettuna suojaus)				DONE
 HUOM! Clientin droppaus aiheuttaa servun sammumisen!!! (MainMenu.java: 89) DONE (virheilmotus vois olla nätimpi)		DONE
 
@@ -37,19 +37,21 @@ Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?												
 
 	add									
 	login { line1: usrn, line2: pwd }
+						JOS DB DOWN, niin Sensor jökkää.															T O D O ?
+						JOS antaa väärät tunnukset, niin client jökkää												T O D O ?
 		-> samat testit kuin client/login	
 	add user { line1: lvl, line2: usrn }
 		-> samat testit kuin client/login	
 	list									
 	list users								
-	list temps								
+	list temps								-> PARAMETRIT															T O D O			-Joakim-
 	fileout									
 	fileout userlist						
 	add temp								
 	quit									-> sammuttaa serverin
 	
 	start									
-	stop									-> ei passaa lämpötiloja
+	stop									-> ei passaa lämpötiloja												T O D O			-Matti-
 	restart									
 	status									
 	
@@ -84,5 +86,5 @@ SENSOR			Matti								OK?
 	on case server crash							OK? 200 yritystä												DONE
 	on case network down							OK? 200 yritystä												DONE
 	on case mysql down							EI MAHDOLLISTA, MySQL käyttäjä tarkistaminen						DONE
-	Double start of same sensor should fail																			T O D O
+	Double start of same sensor should fail																			T O D O		-Jukka-
 

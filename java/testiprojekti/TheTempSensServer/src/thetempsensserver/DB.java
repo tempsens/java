@@ -1,3 +1,7 @@
+//  Versio 0.4  05.03.2018  Jukka
+//   listUsers from/to date ja sensor # lisätty
+//   MySQL hakujen tulokset rajoitettu 100kpl
+//------------------------------------------------------------------------------
 //  Versio 0.3  05.03.2018  Jukka
 //   Virheenkäsittely metodeihin jos ei yhteyttä tietokantaan
 //------------------------------------------------------------------------------
@@ -68,6 +72,7 @@ public class DB {
      * Palauttaa kaikkien valittujen kenttien (objects) arvot @return
      *
      */
+    
     private ResultSet query(String objects, String table, String where) {
         try {
             this.connect();
@@ -230,7 +235,7 @@ public class DB {
         } else {
             try {
                 PrintStream os = new PrintStream(soketti.getOutputStream());
-                String query = "SELECT username FROM users";
+                String query = "SELECT username FROM users LIMIT 100";
                 stmt = conn.createStatement();
                 ResultSet res = stmt.executeQuery(query);
                 while (res.next()) {
@@ -258,9 +263,24 @@ public class DB {
     }
 
 // Lämpötila-arvojen listaaminen tietokannasta	    -- FROM temps LIMIT 50 pitäis lisätä?
-    public int listTemps(Socket soketti) { // OK      // NO NEED FOR SQL INJECTION PROTECTION
+    public int listTemps(Socket soketti, int sensNr, String fromDate, String toDate) { // OK      // NO NEED FOR SQL INJECTION PROTECTION
         FileOut fileout = new FileOut();
         int palaute;
+
+	String sensNrStr = "";
+	if(sensNr > 0) {
+	    sensNrStr = " AND sensor = "+sensNr;
+	}
+
+	String fromDateStr = "";
+	if(fromDate.length() > 0) {
+	    fromDateStr = " AND paivays > '"+fromDate+"'";
+	}
+
+	String toDateStr = "";
+	if(toDate.length() > 0) {
+	    toDateStr = " AND paivays < '"+toDate+"'";
+	}
 
         this.connect();
         if (conn == null) {
@@ -268,7 +288,10 @@ public class DB {
         } else {
             try {
                 PrintStream os = new PrintStream(soketti.getOutputStream());
-                String query = "SELECT paivays, value, sensor FROM temps";
+                String query = "SELECT paivays, value, sensor FROM temps WHERE 1"
+			+ sensNrStr + fromDateStr + toDateStr
+			+ " LIMIT 100";
+	System.out.println("DEBUG: listTemps query: " + query);	    // FOR DEBUG
                 stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {

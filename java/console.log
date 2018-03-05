@@ -1,0 +1,42 @@
+05.03.2018 22:44:07 Client event from(/127.0.0.1:62138): Login succes | u:sensoren
+05.03.2018 22:44:07 Server: LOGIN: (u:sensoren)
+05.03.2018 23:25:45 Client event from(/127.0.0.1:62909): Login succes | u:admin
+05.03.2018 23:25:45 Server: LOGIN: (u:admin)
+05.03.2018 23:25:59 Client event from(/127.0.0.1:62909): List temps FAIL
+05.03.2018 23:29:33 Client event from(/127.0.0.1:62920): Login succes | u:admin
+05.03.2018 23:29:33 Server: LOGIN: (u:admin)
+05.03.2018 23:29:52 Client event from(/127.0.0.1:62920): List temps
+05.03.2018 23:29:24 Client event from(/127.0.0.1:62920): quit
+05.03.2018 23:30:48 Client event from(/127.0.0.1:62927): Login succes | u:admin
+05.03.2018 23:30:48 Server: LOGIN: (u:admin)
+05.03.2018 23:30:51 Client event from(/127.0.0.1:62927): List temps
+05.03.2018 23:30:42 Client event from(/127.0.0.1:62927): quit
+05.03.2018 23:33:17 Client event from(/127.0.0.1:62949): Login succes | u:admin
+05.03.2018 23:33:17 Server: LOGIN: (u:admin)
+05.03.2018 23:33:19 Client event from(/127.0.0.1:62949): List temps
+05.03.2018 23:33:10 Client event from(/127.0.0.1:62949): quit
+05.03.2018 23:36:21 Client event from(/127.0.0.1:62961): Login succes | u:admin
+05.03.2018 23:36:21 Server: LOGIN: (u:admin)
+05.03.2018 23:36:23 Client event from(/127.0.0.1:62961): List temps
+05.03.2018 23:36:16 Client event from(/127.0.0.1:62961): quit
+05.03.2018 23:37:34 Client event from(/127.0.0.1:62964): Login succes | u:admin
+05.03.2018 23:37:34 Server: LOGIN: (u:admin)
+05.03.2018 23:37:37 Client event from(/127.0.0.1:62964): List temps
+05.03.2018 23:37:29 Client event from(/127.0.0.1:62964): quit
+05.03.2018 23:38:47 Client event from(/127.0.0.1:62968): Server database error! Only admin login possible.
+05.03.2018 23:38:47 Client event from(/127.0.0.1:62968): LoginLoop readLine fail
+05.03.2018 23:39:22 Client event from(/127.0.0.1:62969): help
+05.03.2018 23:39:22 Client event from(/127.0.0.1:62969): quit
+05.03.2018 23:42:55 Client event from(/127.0.0.1:62993): LoginLoop readLine fail
+05.03.2018 23:44:49 Client event from(/127.0.0.1:63000): Login succes | u:sensoren
+05.03.2018 23:44:49 Server: LOGIN: (u:sensoren)
+05.03.2018 23:58:24 Client event from(/127.0.0.1:63269): Login succes | u:admin
+05.03.2018 23:58:24 Server: LOGIN: (u:admin)
+05.03.2018 23:58:20 Client event from(/127.0.0.1:63269): status
+05.03.2018 23:58:20 Client event from(/127.0.0.1:63269): start
+05.03.2018 23:58:32 Client event from(/127.0.0.1:63269): Login succes | u:admin
+05.03.2018 23:58:32 Server: LOGIN: (u:admin)
+05.03.2018 23:58:16 Client event from(/127.0.0.1:63269): status
+05.03.2018 23:58:16 Client event from(/127.0.0.1:63269): stop
+05.03.2018 23:58:20 Client event from(/127.0.0.1:63269): status
+05.03.2018 23:58:20 Client event from(/127.0.0.1:63269): quit
