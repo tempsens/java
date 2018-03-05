@@ -32,7 +32,7 @@ public class DB {
 	try {
 	    // 	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/XXXXXXXX_tempsens?"
 	    //     + "user=XXXX_XXXXX&password=XXXXXXX"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
-	    conn = DriverManager.getConnection("jdbc:mysql://c-suncomet.com/juksohia_tempsens?"
+	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/juksohia_tempsens?"
 		    + "user=juksohia_user&password=!kayttaja1"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
 
 	} catch (SQLException ex) {		// handle any errors
@@ -199,6 +199,7 @@ public class DB {
 		    System.out.println("Login from: " + IP // -Jukka-
 			    + " as '" + user + "' FAIL!");					    // -Jukka-
 		    fileout.loginError("u:" + user, IP);
+
 		}
 		disconnect();
 		return leveli + "|" + Integer.toString(id);		    // palautetaan userlevel ja userID
