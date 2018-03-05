@@ -70,9 +70,9 @@ login					Joakim
 	ei salasanaa		(pwd)				Java.Scanner estää
 	ei usern/pwd							ei mahdollinen
 
-	väärä usern								
-	väärä pwd								
-	väärä usern/pwd							
+	väärä usern								KAATUU \
+	väärä pwd								KAATUU  --> EI VOI MITÄÄN
+	väärä usern/pwd							KAATUU /
 
 	usern yli 16 merkkiä					
 	pwd yli 16 merkkiä						

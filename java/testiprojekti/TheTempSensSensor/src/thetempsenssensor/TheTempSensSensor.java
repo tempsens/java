@@ -46,7 +46,7 @@ public class TheTempSensSensor {
             } catch (IOException e) {
                 System.err.println("Couldn't get I/O for the connection to: hostname");
             }
-        }
+        
         LoginSensor login = new LoginSensor();
 
         while (userLevel < 1) {
@@ -80,4 +80,5 @@ public class TheTempSensSensor {
             }
         }
     }
+}
 }

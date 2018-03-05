@@ -1394,3 +1394,59 @@
 05.03.2018 20:07:47 Client event from(/127.0.0.1:55532): List users
 05.03.2018 20:07:27 Client event from(/127.0.0.1:55532): Unknown command(list user)
 05.03.2018 20:07:57 Client event from(/127.0.0.1:55532): List users
+05.03.2018 20:30:43 Client event from(/127.0.0.1:56802): Login succes | u:sensoren
+05.03.2018 20:30:43 Server: LOGIN: (u:sensoren)
+05.03.2018 20:36:08 Client event from(/127.0.0.1:56973): Login succes | u:sensoren
+05.03.2018 20:36:08 Server: LOGIN: (u:sensoren)
+05.03.2018 20:36:52 Client event from(/127.0.0.1:56976): Login succes | u:admin
+05.03.2018 20:36:52 Server: LOGIN: (u:admin)
+05.03.2018 20:36:56 Client event from(/127.0.0.1:56976): List temps
+05.03.2018 20:40:12 Client event from(/127.0.0.1:57095): Login succes | u:sensoren
+05.03.2018 20:40:12 Server: LOGIN: (u:sensoren)
+05.03.2018 20:41:17 Client event from(/127.0.0.1:57120): Login succes | u:admin
+05.03.2018 20:41:17 Server: LOGIN: (u:admin)
+05.03.2018 20:41:11 Client event from(/127.0.0.1:57120): help
+05.03.2018 20:41:11 Client event from(/127.0.0.1:57120): Unknown command(add temp -12 2)
+05.03.2018 20:43:39 Client event from(/127.0.0.1:57196): Login succes | u:admin
+05.03.2018 20:43:39 Server: LOGIN: (u:admin)
+05.03.2018 20:46:27 Client event from(/127.0.0.1:57273): Login succes | u:admin
+05.03.2018 20:46:27 Server: LOGIN: (u:admin)
+05.03.2018 20:46:37 Client event from(/127.0.0.1:57273): List temps
+05.03.2018 20:47:54 Client event from(/127.0.0.1:57308): Login succes | u:admin
+05.03.2018 20:47:54 Server: LOGIN: (u:admin)
+05.03.2018 20:48:04 Client event from(/127.0.0.1:57308): New User added ( usr: TeroPerkele / lvl: 9)
+05.03.2018 20:48:09 Client event from(/127.0.0.1:57308): List users
+05.03.2018 20:48:42 Client event from(/127.0.0.1:57308): New User added ( usr: AnuSaukko / lvl: 6)
+05.03.2018 20:48:58 Client event from(/127.0.0.1:57308): New User added ( usr: PerSaukko / lvl: 9)
+05.03.2018 20:49:05 Client event from(/127.0.0.1:57308): List users
+05.03.2018 20:51:30 Client event from(/127.0.0.1:57460): Login succes | u:perkele
+05.03.2018 20:51:30 Server: LOGIN: (u:perkele)
+05.03.2018 20:51:47 Client event from(/127.0.0.1:57464): Login succes | u:perkele
+05.03.2018 20:51:47 Server: LOGIN: (u:perkele)
+05.03.2018 20:51:38 Client event from(/127.0.0.1:57464): help
+05.03.2018 20:54:28 Client event from(/127.0.0.1:57534): Login ERROR | u:haloo
+05.03.2018 20:54:28 Server: LOGIN ERROR! (u:haloo)
+05.03.2018 20:54:52 Client event from(/127.0.0.1:57560): LoginLoop readLine fail
+05.03.2018 20:59:39 Client event from(/127.0.0.1:57699): Login ERROR | u:admin
+05.03.2018 20:59:39 Server: LOGIN ERROR! (u:admin)
+05.03.2018 21:00:25 Client event from(/127.0.0.1:57726): Login ERROR | u:admin
+05.03.2018 21:00:25 Server: LOGIN ERROR! (u:admin)
+05.03.2018 21:03:00 Client event from(/127.0.0.1:57805): Login ERROR | u:admin
+05.03.2018 21:03:00 Server: LOGIN ERROR! (u:admin)
+05.03.2018 21:00:19 Client event from(/127.0.0.1:57805): LoginLoop readLine fail
+05.03.2018 21:02:53 Client event from(/127.0.0.1:57805): LoginLoop readLine fail
+05.03.2018 21:06:28 Client event from(/127.0.0.1:57906): Login ERROR | u:admin
+05.03.2018 21:06:28 Server: LOGIN ERROR! (u:admin)
+05.03.2018 21:06:22 Client event from(/127.0.0.1:57906): LoginLoop readLine fail
+05.03.2018 21:11:28 Client event from(/127.0.0.1:58037): Login ERROR | u:admin
+05.03.2018 21:11:28 Server: LOGIN ERROR! (u:admin)
+05.03.2018 21:15:31 Client event from(/127.0.0.1:58139): Login succes | u:sensoren
+05.03.2018 21:15:31 Server: LOGIN: (u:sensoren)
+05.03.2018 21:16:17 Client event from(/127.0.0.1:58153): Login succes | u:admin
+05.03.2018 21:16:17 Server: LOGIN: (u:admin)
+05.03.2018 21:16:20 Client event from(/127.0.0.1:58153): List temps
+05.03.2018 21:16:37 Client event from(/127.0.0.1:58153): List temps
+05.03.2018 21:17:07 Client event from(/127.0.0.1:58153): List temps
+05.03.2018 21:16:10 Client event from(/127.0.0.1:58153): help
+05.03.2018 21:16:10 Client event from(/127.0.0.1:58153): status
+05.03.2018 21:16:10 Client event from(/127.0.0.1:58153): help

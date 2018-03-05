@@ -55,7 +55,7 @@ public class MainMenu implements Runnable {
 	int userLevel = 0;	// TEMPORARY - LOGIN WILL OVERRIDE
 	int userID = 0;
 	// Muuttujat ja luokat pääohjelmalle
-	String commandLog = ""; // Aloitetaan tyhjällä komentologilla
+//	String commandLog = ""; // Aloitetaan tyhjällä komentologilla
 	String komento;
 	String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
 
@@ -100,14 +100,16 @@ public class MainMenu implements Runnable {
 
 				    }
 				}
-			    }
+                            }
+                        } else if(vastaus.equals("0")) {
+                            os.println("0");
 			} else {
 			    String[] vastaukset = vastaus.split("\\|");
 
 			    userLevel = Integer.parseInt(vastaukset[0]); // Luetaan käyttäjätaso muuttujaan
 			    userID = Integer.parseInt(vastaukset[1]);
-			    os.println("1|" + vastaukset[1]);
-			}
+			    os.println("1|" + userID);
+			} 
 			//	}
 		    } catch (IOException e) {
 			System.out.println("LoginLoop db-login fail: " + e);
@@ -167,7 +169,7 @@ public class MainMenu implements Runnable {
 		    break;
 
 		case "add user": // Lisätään käyttäjä
-		    if (userLevel >= 10) {
+		    if (userLevel == 10) {
 			try { // Luetaan kaksi riviä lisää
 			    int newUserLevel = Integer.parseInt(is.readLine());
 			    String newUserInput = is.readLine();
@@ -199,7 +201,8 @@ public class MainMenu implements Runnable {
 			    System.out.println(tempvalue);	// FOR DEBUG
 			    System.out.println(sensori);	// FOR DEBUG
 			    int palaute = uusiTemp.insertTemp(tempvalue, sensori, today, IP);
-			    if (palaute == -1) {
+			    System.out.println("add temp (insertTemp palaute: "+ palaute);
+                            if (palaute == -1) {
 				os.println("Server database error! Command not available.");
 			    } else if (palaute == -2) {
 				os.println("Server error!");
@@ -251,14 +254,14 @@ public class MainMenu implements Runnable {
 		    }
 		    break;
 
-		case "fileout console": // Tulostetaan komentologi		    TÄMÄ CLIENTIIN? -Jukka-
+/*              case "fileout console": // Tulostetaan komentologi		    TÄMÄ CLIENTIIN? -Jukka-
 		    if (userLevel >= 5) {
 			fileout.clientEventLog(komento, IP);
 
 			fileout.console(commandLog, clinu);
 		    }
 		    break;
-
+*/
 		case "fileout users": // Tulostetaan lista käyttäjistä
 		    if (userLevel >= 5) {
 			int palaute = fileout.userlist(clinu);
