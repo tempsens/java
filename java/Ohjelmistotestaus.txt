@@ -33,7 +33,7 @@ MySQL			Jukka				DB.JAVA-stuff				OK?
 Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?													DONE
 	help						(Huom! sisällön päivitys?)																DONE
 																JA MAINMENU funktiot järjestykseen!						DONE
-	fileout console				Siirto clientiin?																	T O D O
+	
 
 	add									
 	login { line1: usrn, line2: pwd }
@@ -44,13 +44,12 @@ Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?												
 	list users								
 	list temps								
 	fileout									
-	fileout console							
 	fileout userlist						
 	add temp								
-	quit									
+	quit									-> sammuttaa serverin
 	
 	start									
-	stop									
+	stop									-> ei passaa lämpötiloja
 	restart									
 	status									
 	
@@ -58,8 +57,8 @@ Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?												
 
 Feedback				Joakim					
 	log file (serverside)																								DONE
-	console (clietside)																								T O D O
-	(clientside commandlog?) = turha																					?
+	console (clietside)																									S K I P P E D
+	(clientside commandlog?) = turha																					DONE
 
 
 
@@ -71,7 +70,7 @@ login					Joakim
 	ei usern/pwd							ei mahdollinen
 
 	väärä usern								KAATUU \
-	väärä pwd								KAATUU  --> EI VOI MITÄÄN
+	väärä pwd								KAATUU  --> EI VOI MITÄÄN 											JUKKA SELVITTÄÄ, JOS EHTII
 	väärä usern/pwd							KAATUU /
 
 	usern yli 16 merkkiä					
@@ -82,8 +81,8 @@ login					Joakim
 	SQL injection pwd 																									DONE						
 
 SENSOR			Matti								OK?
-	on case server crash							OK? 200 yritystä												T O D O
-	on case network down							OK? 200 yritystä												T O D O
-	on case mysql down							EI MAHDOLLISTA, MySQL käyttäjä tarkistaminen						T O D O
+	on case server crash							OK? 200 yritystä												DONE
+	on case network down							OK? 200 yritystä												DONE
+	on case mysql down							EI MAHDOLLISTA, MySQL käyttäjä tarkistaminen						DONE
 	Double start of same sensor should fail																			T O D O
 
