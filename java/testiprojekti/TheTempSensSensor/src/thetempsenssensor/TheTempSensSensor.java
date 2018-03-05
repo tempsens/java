@@ -50,8 +50,10 @@ public class TheTempSensSensor {
         LoginSensor login = new LoginSensor();
 
         while (userLevel < 1) {
-	    String[] leveli = login.login(MyClient).split("\\|");
+	   
+            String[] leveli = login.login(MyClient).split("\\|");
             userLevel = Integer.parseInt(leveli[0]);
+            System.out.println(userLevel);
         }
 
         if (MyClient != null && os != null) {
