@@ -12,10 +12,11 @@ import java.net.Socket;
  */
 public class TheTempSensServer {
 
-    private static final int MAX_CON_SPEED = 200;
-    private static final String VERSION = "0.2";
+    private static final int MAX_CON_SPEED = 200; // Maksimi uudelleen yhdistysnopeus (EI VIELÄ KÄYTÖSSÄ)
+    private static final String VERSION = "0.3"; // Ohjelman versionumero
     private static final int PORT = 1234; // Palvelin kuuntelee tätä porttia
     public static int serverRunning = 0; // Globaali muuttuja
+    public static String IP = null; // Globaali muuttuja asiakkaan osoitteelle
 
     public static void main(String args[]) throws InterruptedException {
 	// declaration section:

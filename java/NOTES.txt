@@ -1,0 +1,97 @@
+
+1.3.2018 - 5.3.2018
+
+	change pass	loppuun				-Joakim-		(1h)
+
+	Sprint 3 lopetus
+	Sprint 4 aloitus
+
+	Korjaukset ohjelmistotestausta varten			(1h)
+	Ohjelmistotestaus								(20min)
+
+	MySQL väärä osoite failsafe		(Jukka)			(30min)
+
+	MainMenu funktiot järjestykseen JOKO TEHDÄÄN?	(10min)
+
+	Testaussoftan kehitys? Tuleeko mitään mieleen?
+
+
+
+
+	Dokumentaatio-note:
+		"Työlistan alkiot (item) voivat olla mitä tahansa esim:
+			-tuotteen ominaisuuksia
+			-käyttötapauksia (use case)
+			-käyttäjätarinoita (user story)
+			-vaatimuksia (requirements)
+			-virheraportteja
+			-dokumentaation kehittämistä"
+	--> Teksteihin siis, että olleen käytetty
+		"alkioina" noita kaikkia tilanteen mukaan
+
+	- Projektin kuvaus / Project description (projektin kuvaus/tarkoitus)
+			Lämpötilatallennin. Anturipäätteet lukevat lämpötiloja ja Java-palvelinsovellus lähettää ne MySQL -tietokantaan.
+
+	- Tekninen suunnittelu/ Technical design (sisältää vaatimukset sekä tiedot miten vaatimukset toteutettu)
+			Anturipäätteen Java-ohjelma
+			Käyttäjäpäätteen Java-ohjelma
+			Java-palvelinohjelma
+			MySQL -tietokantapalvelin
+
+	- Versionhallinta / Release change log (tiedot mitä uudet versiot ovat sisältäneet)
+			LOL
+
+	- Käyttöohjeet / User guide (ohjeet loppukäyttäjille)
+			Clientille help -komento
+
+	- Tukiohjeet / Support instruction (ohjeet koodista esimerkein tuleville JAVA/ tukihenkilöille)
+			Kommentoinnit koodin seassa
+
+	- Testausohjeet / Testing insturctions (tiedot miten testattu sekä miten jatkossa joku muu henkilö voi testata jos esim. erillinen sovellus jne)
+			TheTempSensTester -ohjelma
+			Testaus checklist kaavake
+
+			
+			
+			
+VERSIONHALLINTA
+
+Lyhyesti:
+	versio X.Y.Z
+		X = Julkaisuversio (kehitysversioissa 0.Y.Z)
+		Y = Revisioversio - kehityspäivitykset
+		Z = Patch -versio - bugikorjaukset jne
+
+~Lainaus wikipediasta~
+Versioiden merkitseminen
+
+Historiallisessa versioinnissa revisiot järjestetään ja ne identifioidaan järjestyksen mukaan. Identifioiminen voidaan tehdä esimerkiksi numeerisesti siten,
+ että suurin luku viittaa viimeisimpään revisioon. Tällöin revisioita merkittäessä käytetään yleensä kaksitasoista numerointia muodossa [V.R], missä V kuvastaa
+ julkaisunumeroa ja R tasonumeroa. Julkaisunumeroa kutsutaan myös versionumeroksi ja tasonumeroa revisioksi. Julkaisunumeron muutos kuvastaa suurta muutosta ja
+ revisionumeron muutos pienempää muutosta.
+
+Joskus versioninnissa käytetään lisäksi kolmatta tasoa, joka ilmaisee ohjelmaan tehdyn paikan (patch). Paikkausversioita käytetään ohjelmavirheiden korjauksissa.
+
+Ohjelmankehityksessä kehitystason versiot ovat tyypillisesti alle 1.0. Siihen kuuluvat testausversiot alfa-, beta- ja gammatestauksineen. Kun ohjelma on valmis
+ tuotantokäyttöön, se julkistetaan ja senhetkisen ohjelmankehityksen tilan versionumeroksi asetetaan 1.0. Julkistuksen jälkeen ohjelmasta julkaistaan
+ tuotantoversion päivityksiä. Ne ovat numeroinniltaan yli 1.0. Tuotantoversioiden päivitykset ovat tyypillisesti virheenkorjausversioita tai uusia ominaisuuksia
+ sisältäviä versioita. Versionumeroinnille ei ole olemassa täsmällistä ohjeistusta. Useiden tuotantokäytössä laajalti käytössä olevien ohjelmien versionumero on
+ esimerkiksi 0.15. Ja toisaalta on olemassa ohjelmia, joiden tuotantoversiot eivät täytä käyttäjän näkökulmasta toimvian ohjelman kriteerejä.
+
+Loogisen ja yhteistoiminnallisen versioinnin yhteydessä esiintyvien varianttien merkitsemiseen käytetään useimmiten määrättyjä nimiä numeroinnin sijaan, koska
+ variantit eivät välttämättä esiinny toistensa suhteen järjestyksessä.
+~Lainaus wikipediasta~
+
+
+
+
+
+
+
+
+
+
+
+
+
+

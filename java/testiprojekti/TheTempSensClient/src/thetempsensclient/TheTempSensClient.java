@@ -1,3 +1,6 @@
+//  Versio 0.3	05.03.2018  Jukka
+//   AddTemp luokan luonti
+//------------------------------------------------------------------------------
 //  Versio 0.2	28.02.2018  Jukka
 //   Static VERSION -muuttuja ja versionumeron tulostus ohjelman alkuun
 //   server QUIT -käskyn ohjaus: server quit, client exit
@@ -76,17 +79,14 @@ public class TheTempSensClient {
 
                         // Jos käyttäjän lisääminen
                         if (komento.equals("add user")) {
-
-                            AddUser addUser = new AddUser();
-                            addUser.addNewUser(MyClient);
+                            AddUser addUser = new AddUser();		    // Luodaan olio
+                            addUser.addNewUser(MyClient);		    // Kutsutaan metodia
                         } else if (komento.equals("add temp")) {
-                            System.out.print("Anna lämpötila [double]: ");
-                            os.writeBytes(scanner.nextLine());
-                            System.out.print("Anna anturin numero [int]: ");
-                            os.writeBytes(scanner.nextLine());
-                        } else if (komento.equals("change pass")) {
-                            ChangePassword newpass = new ChangePassword();
-                            newpass.change(MyClient, userID);
+			    AddTemp addTemp = new AddTemp();		    // Luodaan olio
+			    addTemp.addNewTemp(MyClient);		    // Kutsutaan metodia
+			} else if (komento.equals("change pass")) {
+                            ChangePassword newpass = new ChangePassword();  // Luodaan olio
+                            newpass.change(MyClient, userID);		    // Kutsutaan metodia
 
                         } else {
                             os.writeBytes(komento + "\n");
