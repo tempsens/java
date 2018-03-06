@@ -67,6 +67,7 @@ public class MainMenu implements Runnable {
 	Inputti inputti = new Inputti();          // Tarvitaan help -tekstin tulostukseen
 	FileOut fileout = new FileOut();          // Tarvitaan tiedosto outputiin
 	serverControl srvC = new serverControl(); // Start/Stop/Restart
+	sensorControl senC = new sensorControl();
 	int ulosta = 0;                           // Muuttuja while -loopista poistumiseksi
 
 	while (userLevel < 1) {	// Login loop
@@ -102,15 +103,15 @@ public class MainMenu implements Runnable {
 					fileout.clientEventLog("FailsafeAdminLoginLoop readLine fail", IP);
 				    }
 				}
-                            }
-                        } else if(vastaus.contains("0|")) {
-                            os.println("0");
+			    }
+			} else if (vastaus.contains("0|")) {
+			    os.println("0");
 			} else {
 			    String[] vastaukset = vastaus.split("\\|");  // Hajotetaan | -merkillä erottaen
 			    userLevel = Integer.parseInt(vastaukset[0]); // Luetaan käyttäjätaso muuttujaan
 			    userID = Integer.parseInt(vastaukset[1]);    // Luetaan ID muuttujaan
 			    os.println("1|" + userID);			 // Lähetetään tiedot clientille
-			} 
+			}
 			user.disconnect();
 		    } catch (IOException e) {
 			System.out.println("LoginLoop db-login fail: " + e);
@@ -122,7 +123,7 @@ public class MainMenu implements Runnable {
 		is = null;  // Nollataan input streamin olio, jottei jää readLine looppi päälle
 	    }
 	}
- // Pääohjelma loop komentojen kuunteluun
+	// Pääohjelma loop komentojen kuunteluun
 	while (ulosta < 1 && userLevel > 0) { // LISÄTTY UserLevel vaatimus Joakim
 	    try {
 		komento = is.readLine();      // Luetaan yksi rivi muuttujaan
@@ -191,16 +192,22 @@ public class MainMenu implements Runnable {
 			try {
 			    double tempvalue = Double.parseDouble(is.readLine());
 			    int sensori = Integer.parseInt(is.readLine());
+			    if (senC.getSensor(sensori) > 0) {
+				os.println("Sensor " + sensori + " already in use!");
+			    } else {
 
-			    DB uusiTemp = new DB();
-			    System.out.println(tempvalue);	// FOR DEBUG
-			    System.out.println(sensori);	// FOR DEBUG
-			    int palaute = uusiTemp.insertTemp(tempvalue, sensori, today, IP);
-			    System.out.println("add temp (insertTemp palaute: "+ palaute);
-                            if (palaute == -1) {
-				os.println("Server database error! Command not available.");
-			    } else if (palaute == -2) {
-				os.println("Server error!");
+				DB uusiTemp = new DB();
+				System.out.println(tempvalue);	// FOR DEBUG
+				System.out.println(sensori);	// FOR DEBUG
+				int palaute = uusiTemp.insertTemp(tempvalue, sensori, today, IP);
+				System.out.println("add temp (insertTemp palaute: " + palaute);
+				if (palaute == -1) {
+				    os.println("Server database error! Command not available.");
+				} else if (palaute == -2) {
+				    os.println("Server error!");
+				} else {
+				    senC.setSensor(sensori);
+				}
 			    }
 			} catch (IOException e) {
 			    System.out.println("readLine error in add temp: " + e);
@@ -210,7 +217,7 @@ public class MainMenu implements Runnable {
 			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
 		    }
 		    break;
- // Väärä syntaksi -> antaa vain virheilmoituksen
+		// Väärä syntaksi -> antaa vain virheilmoituksen
 		case "list":
 		    fileout.clientEventLog(komento, IP);
 		    os.println("Missing parameter! (users or temps needed)");
@@ -245,7 +252,7 @@ public class MainMenu implements Runnable {
 			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
 		    }
 		    break;
- // Väärä syntaksi -> antaa vain virheilmoituksen
+		// Väärä syntaksi -> antaa vain virheilmoituksen
 		case "fileout":
 		    if (userLevel >= 5) {
 			fileout.clientEventLog(komento, IP);
@@ -258,7 +265,7 @@ public class MainMenu implements Runnable {
 		case "fileout users": // Tulostetaan lista käyttäjistä
 		    if (userLevel >= 5) { // ..mutta vain jos on tarpeeksi korkea taso
 			int palaute = fileout.userlist(clinu);
-			if(palaute < 0) {
+			if (palaute < 0) {
 			    os.println("Server database error! Command not available.");
 			}
 		    } else {
