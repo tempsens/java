@@ -1,3 +1,9 @@
+//  Versio 0.4	06.03.2018  Jukka
+//   Pääohjelman komennot switch-case alle. Oli aiemmin if, else if, else
+//   Kommentointeja lisää
+//   Welcome -teksti lisätty
+//   Debug -tulosteet kommentoitu pois
+//------------------------------------------------------------------------------
 //  Versio 0.3	05.03.2018  Jukka
 //   AddTemp luokan luonti
 //------------------------------------------------------------------------------
@@ -25,16 +31,17 @@ import java.util.Scanner;
 public class TheTempSensClient {
 
     // CLIENT
-    private static final String VERSION = "0.2";
-    private static final String HOSTNAME = "127.0.0.1"; // Palvelimen osoite
-    private static final int PORT = 1234; // Määritetään käytettävä portti
+    private static final String WELCOME =   "Tervetuloa! Aloitappa vaikka komennolla 'help'";
+    private static final String VERSION =   "0.4";           // Ohjelman versionumero
+    private static final String HOSTNAME =  "127.0.0.1";     // Palvelimen osoite
+    private static final int PORT =         1234;            // Määritetään käytettävä portti
 
     public static void main(String[] args) {
         int userID = -1;
         Socket MyClient = null;      // Alustetaan soketti
         DataOutputStream os = null;  // Alustetaan output stream
         DataInputStream is = null;   // Alustetaan input stream
-        System.out.println("TempSensClient, v" + VERSION);
+        System.out.println("TempSensClient v" + VERSION); // Tulostetaan ohjelman versio
         try {
             MyClient = new Socket(HOSTNAME, PORT);		   // Määritetään soketti
             os = new DataOutputStream(MyClient.getOutputStream()); // Määritetään output stream
@@ -56,52 +63,61 @@ public class TheTempSensClient {
                     loginresponssi = login.login(MyClient);
                     if (loginresponssi.contains("1|")) {
                         String[] vastaus = loginresponssi.split("\\|");
-                        System.out.println(loginresponssi);
-                        System.out.println("Vastaus [1]: " + vastaus[1]);
-
+                        System.out.println("Login success: "+loginresponssi);	// FOR DEBUG
+                        //System.out.println("Vastaus [1]: " + vastaus[1]); // FOR DEBUG
                         userID = Integer.parseInt(vastaus[1]);
-                        break;
-
+                        break; // Exit login loop
                     } else {
-                        System.out.println(loginresponssi);
+                        System.out.println("Login fail: "+loginresponssi); // FOR DEBUG
+// JÄÄ JUMIIN JOS VÄÄRÄT TUNNUKSET
                     }
                 }
+		System.out.println("\n" + WELCOME + "\n");  // Print welcome message
                 if (loginresponssi.contains("1|")) {
-                    while (!komento.equals("exit")) {
-                        System.out.print(": ");
-                        komento = scanner.nextLine();
-                        // Jos QUIT, niin ensin käsky serverille, sitten client ulos loopista
-                        if (komento.equals("quit")) {
-                            os.writeBytes(komento + "\n");
-                            System.out.println(is.readLine());
-                            break;
-                        }
-
-                        // Jos käyttäjän lisääminen
-                        if (komento.equals("add user")) {
-                            AddUser addUser = new AddUser();		    // Luodaan olio
-                            addUser.addNewUser(MyClient);		    // Kutsutaan metodia
-                        } else if (komento.equals("add temp")) {
-			    AddTemp addTemp = new AddTemp();		    // Luodaan olio
-			    addTemp.addNewTemp(MyClient);		    // Kutsutaan metodia
-			} else if (komento.equals("change pass")) {
-                            ChangePassword newpass = new ChangePassword();  // Luodaan olio
-                            newpass.change(MyClient, userID);		    // Kutsutaan metodia
-
-                        } else {
-                            os.writeBytes(komento + "\n");
-                        }
-                        while (true) {
-                            String responssi = is.readLine();
-                            if (responssi.contains("QQ")) {
-                                break;
-                            }
-                            System.out.println(responssi);
-
-                        } // Sisempi While loppusulje (MULTILINE)
-                    } // Ulompi While loppusulje (EXIT PROGRAM)
+//		    OUTER: // WTF on lämä? Joku label? Ej tyhmä ummärrä :/ -Jukka-
+		    while (!komento.equals("exit")) {
+			System.out.print(": ");
+			komento = scanner.nextLine();
+			// Jos QUIT, niin ensin käsky serverille, sitten client ulos loopista
+			switch (komento) {
+// Palvelimen sammutus + client exit
+			    case "quit":
+				os.writeBytes(komento + "\n");
+				System.out.println(is.readLine());
+//				break OUTER; // Tässä ton OUTER -labelin breikki -Jukka-
+				komento = "exit"; // Lisätty quittaamaan WHILE:stäkin
+				break;       // Lisätty korvaamaan toi OUTER
+// Käyttäjän lisääminen
+			    case "add user":
+				AddUser addUser = new AddUser();		// Luodaan olio
+				addUser.addNewUser(MyClient);			// Kutsutaan metodia
+				break;
+// Lämpötilan lisääminen
+			    case "add temp":
+				AddTemp addTemp = new AddTemp();		// Luodaan olio
+				addTemp.addNewTemp(MyClient);			// Kutsutaan metodia
+				break;
+// Kirjautuneen käyttäjän salasanan vaihto
+			    case "change pass":
+				ChangePassword newpass = new ChangePassword();  // Luodaan olio
+				newpass.change(MyClient, userID);		// Kutsutaan metodia
+				break;
+// Jos annetaan tuntematon komento
+			    default:
+				os.writeBytes(komento + "\n");
+				break;
+			}
+// Looppi, jossa tulostetaan rivejä kunnes QQ annetaan ("Multiline loop")
+			while (true) {
+			    String responssi = is.readLine();
+			    if (responssi.contains("QQ")) {
+				break; // Lopeta loop, kun QQ saadaan
+			    }
+			    System.out.println(responssi);
+			} // "Multiline loopin" loppusulje
+		    } // Pääloopin loppusulje
                 } // Login kyselyn loppusulje (IF login=1)
-
+// Quit message
                 System.out.println("\nBye. Thanks for choosing this awesome software and "
                         + "we hope you will continue using it and also recommend it "
                         + "for your friends too! Some day we will be BIG and you will be "
@@ -109,7 +125,8 @@ public class TheTempSensClient {
                         + "It may also be nice if you could donate some change for "
                         + "us because Jukka has drinken teams all money... Again...\n");
 
-// clean up:		
+// clean up:
+//System.out.println("Shutting down client..."); // FOR DEBUG
                 os.close(); // close the output stream
                 is.close(); // close the input stream
                 MyClient.close(); // close the socket
@@ -120,7 +137,7 @@ public class TheTempSensClient {
                 System.err.println("IOException:  " + e);
             }
         } else {
-            System.out.println("Socket, is or os is empty! Connection error!");
+            System.out.println("Socket, is or os is empty! Server <-> client connection error!");
         }
     } // Pääohjelman loppusulje (MAIN)
 } // Pääluokan loppusulje

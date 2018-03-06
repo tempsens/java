@@ -35,7 +35,7 @@ public class Inputti {
 			+ " add user \t\t\t Add's user\n"
 			+ " add temp [value] [sensor] \t Add temperature to DB\n"
 			+ " list [args]\t\t\t Show list of [users]/[temps]\n"
-			+ " fileout [args]\t\t\t Writes [users]/[console] to a file\n"
+			+ " fileout users\t\t Write userlist to a file\n"
 			+ " quit\t\t\t\t Shutdown server\n");
 	    }
 

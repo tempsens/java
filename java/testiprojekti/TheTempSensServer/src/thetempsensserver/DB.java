@@ -31,14 +31,13 @@ public class DB {
     ResultSet rs = null;
     PreparedStatement preparedStatement = null;
 
-// YHTEYDEN MUODOSTUS
+// YHTEYDEN AVAUS
     public void connect() {
         try {
             // 	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/XXXXXXXX_tempsens?"
             //     + "user=XXXX_XXXXX&password=XXXXXXX"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
             conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/juksohia_tempsens?"
                     + "user=juksohia_user&password=!kayttaja1"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
-
         } catch (SQLException ex) {		// handle any errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -46,6 +45,7 @@ public class DB {
         }
     }
 
+// YHTEYDEN KATKAISU
     public void disconnect() {
         if (rs != null) {
             try {
@@ -61,31 +61,13 @@ public class DB {
             }		// handle any errors - EMPTY
             stmt = null;
         }
-    }
-
-// KYSELY
-    /**
-     *
-     * @param objects	- Mitkä kentät valitaan
-     * @param table	- Taulun nimi
-     * @param where	- Hakuehdot (WHERE value > 20.0 AND value < 30.0) @ return	-
-     * Palauttaa kaikkien valittujen kenttien (objects) arvot @return
-     *
-     */
-    
-    private ResultSet query(String objects, String table, String where) {
-        try {
-            this.connect();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT " + objects + " FROM " + table + " " + where + " LIMIT 100");
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+        if (conn != null) {		      // LISÄTTY - katotaan toimiiko... -Jukka-
+            try {
+                conn.close();
+            } catch (SQLException sqlEx) {
+            }		// handle any errors - EMPTY
+            conn = null;
         }
-        this.disconnect();
-        return rs;
     }
 
 // Käyttäjän lisääminen
@@ -120,8 +102,8 @@ public class DB {
             }
         }
     }
-// Lämpötilan lisääminen
 
+// Lämpötilan lisääminen
     public int insertTemp(double val1, int val2, String dagen, String IP) {            //SQL INJECTION SAFE  IF NEEDED
         this.connect();
 
@@ -151,36 +133,35 @@ public class DB {
         }
     }
 
+// Salasanan vaihtaminen
     public int changepass(int userID, String pass) {
-        int value = 0;
+        int value;
         this.connect();
         try {
             if (conn == null) {
                 return -1;
             } else {
-                System.out.println("CONN = " + conn);
+                // System.out.println("CONN = " + conn); // FOR DEBUG
                 preparedStatement = conn.prepareStatement("UPDATE users SET password=? WHERE id=?");
                 preparedStatement.setString(1, pass);
                 preparedStatement.setInt(2, userID);
 
                 System.out.println(preparedStatement.executeUpdate());
-                //    rs = preparedStatement.getResultSet();
                 value = 1;
-                System.out.println("changePass: value 1");
+                // System.out.println("changePass: value 1");	// FOR DEBUG
             }
         } catch (SQLException ex) {		// handle any errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-            System.out.println("changePass: value -1");
-
-            disconnect();
+            // System.out.println("changePass: value -1");  // FOR DEBUG
             value = -1;
         }
-        return value;
+       this.disconnect();
+       return value;
     }
 
-    // Käyttäjätietojen tarkastaminen ("login")
+// Käyttäjätietojen tarkastaminen ("login")
     public String checkUser(String user, String pass, String IP) {            //SQL INJECTION SAFE
         String leveli = "0";
         int id = 0;
@@ -188,7 +169,7 @@ public class DB {
             if (conn == null) {
                 return "-1";
             } else {
-                System.out.println("CONN = " + conn);
+                // System.out.println("CONN = " + conn); // FOR DEBUG
                 preparedStatement = conn.prepareStatement("SELECT id, userlvl FROM users WHERE username=? AND password=?");
                 preparedStatement.setString(1, user);
                 preparedStatement.setString(2, pass);
@@ -196,31 +177,28 @@ public class DB {
                 ResultSet resSet = preparedStatement.executeQuery();
                 FileOut fileout = new FileOut();
                 if (resSet.next()) {
-                    System.out.println("Login from: " + IP // -Jukka-
-                            + " as '" + user + "' successfull.");				    // -Jukka-
+                    System.out.println("Login from: " + IP                      // FOR DEBUG -Jukka-
+                            + " as '" + user + "' successfull.");               // FOR DEBUG -Jukka-
                     fileout.loginSuccess("u:" + user, IP);
                     id = resSet.getInt(1);
                     leveli = resSet.getString(2);
-                    System.out.println("CheckUser (id): " + id);
-                    System.out.println("CheckUser (leveli): " + leveli);
-
+                    System.out.println("CheckUser (id): " + id);                // FOR DEBUG -Jukka-
+                    System.out.println("CheckUser (leveli): " + leveli);        // FOR DEBUG -Jukka-
                 } else {
-                    System.out.println("Login from: " + IP // -Jukka-
-                            + " as '" + user + "' FAIL!");					    // -Jukka-
+                    System.out.println("Login from: " + IP                      // FOR DEBUG -Jukka-
+                            + " as '" + user + "' FAIL!");                      // FOR DEBUG -Jukka-
                     fileout.loginError("u:" + user, IP);
-
                 }
                 disconnect();
                 System.out.println("Check user (palautus) :"+leveli);
-                
-                return leveli + "|" + Integer.toString(id);		    // palautetaan userlevel ja userID
+                return leveli + "|" + Integer.toString(id);         // palautetaan userlevel ja userID
             }
-        } catch (SQLException ex) {					// handle any errors
+        } catch (SQLException ex) {                                 // handle any errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
             disconnect();
-            return "-1";						    // Palauttaa -1 virheessä -Suni-
+            return "-1";                                            // Palauttaa -1 virheessä -Suni-
         }
     }
 
@@ -258,11 +236,11 @@ public class DB {
             }
         }
         disconnect();
-        System.out.println("DB/listUsers palaute: " + palaute);
+        // System.out.println("DB/listUsers palaute: " + palaute); // FOR DEBUG
         return palaute;
     }
 
-// Lämpötila-arvojen listaaminen tietokannasta	    -- FROM temps LIMIT 50 pitäis lisätä?
+// Lämpötila-arvojen listaaminen tietokannasta
     public int listTemps(Socket soketti, int sensNr, String fromDate, String toDate) { // OK      // NO NEED FOR SQL INJECTION PROTECTION
         FileOut fileout = new FileOut();
         int palaute;
@@ -288,10 +266,10 @@ public class DB {
         } else {
             try {
                 PrintStream os = new PrintStream(soketti.getOutputStream());
-                String query = "SELECT paivays, value, sensor FROM temps WHERE 1"
+                String query = "SELECT paivays, value, sensor FROM temps WHERE 1 LIMIT 100"
 			+ sensNrStr + fromDateStr + toDateStr
 			+ " LIMIT 100";
-	System.out.println("DEBUG: listTemps query: " + query);	    // FOR DEBUG
+//	System.out.println("DEBUG: listTemps query: " + query);	    // FOR DEBUG
                 stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -317,7 +295,7 @@ public class DB {
         disconnect();
         return palaute;
     }
-
+// Listataan käyttäjät tietokannasta
     public String GetUsersFromDB(String IP) {                // NO NEED FOR SQL INJECTION PROTECTION
         FileOut fileout = new FileOut();
         String palaute = "";
@@ -333,10 +311,10 @@ public class DB {
             } else {
                 String query = "SELECT username, userlvl FROM users ORDER BY username ASC";
                 stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
+                ResultSet res = stmt.executeQuery(query);
+                while (res.next()) {
 
-                    palaute += Integer.toString(i) + "\t" + rs.getString(1) + "\t\t" + rs.getString(2) + "\r\n";
+                    palaute += Integer.toString(i) + "\t" + res.getString(1) + "\t\t" + res.getString(2) + "\r\n";
                     i++;
                 }
                 fileout.clientEventLog("Get Users from DB", IP);

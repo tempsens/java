@@ -38,7 +38,7 @@ Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?												
 	add									
 	login { line1: usrn, line2: pwd }
 						JOS DB DOWN, niin Sensor jökkää.															T O D O ?
-						JOS antaa väärät tunnukset, niin client jökkää												T O D O ?
+						JOS antaa väärät tunnukset, niin client jökkää													DONE
 		-> samat testit kuin client/login	
 	add user { line1: lvl, line2: usrn }
 		-> samat testit kuin client/login	

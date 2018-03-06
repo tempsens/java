@@ -1,3 +1,7 @@
+//  Versio 0.5
+//   status palauttaa nyt tekstin, ei pelkkää numero (0 tai 1)
+//   this.serverRunning muuttujaviittaukset vaihdettu serverControl.serverRunning
+//------------------------------------------------------------------------------
 //  Versio 0.2
 //              
 //------------------------------------------------------------------------------
@@ -18,8 +22,8 @@ public class serverControl extends TheTempSensServer {
     public void start(Socket soketti) {
 	try {
 	    os = new PrintStream(soketti.getOutputStream());
-	    if (this.serverRunning == 0) {
-		this.serverRunning = 1;
+	    if (serverControl.serverRunning == 0) {
+		serverControl.serverRunning = 1;
 		os.println("Server started.");
 	    } else {
 		os.println("Server already started.");
@@ -33,8 +37,8 @@ public class serverControl extends TheTempSensServer {
     public void stop(Socket soketti) {
 	try {
 	    os = new PrintStream(soketti.getOutputStream());
-	    if (this.serverRunning == 1) {
-		this.serverRunning = 0;
+	    if (serverControl.serverRunning == 1) {
+		serverControl.serverRunning = 0;
 		DB db = new DB();
 		db.disconnect();
 		os.println("Server stopped.");
@@ -55,8 +59,8 @@ public class serverControl extends TheTempSensServer {
 	}
 
 	// DO STOP
-	if (this.serverRunning == 1) {
-	    this.serverRunning = 0;
+	if (serverControl.serverRunning == 1) {
+	    serverControl.serverRunning = 0;
 	    DB db = new DB();
 	    db.disconnect();
 	    os.println("Server stopped.");
@@ -65,16 +69,22 @@ public class serverControl extends TheTempSensServer {
 	}
 
 	// DO START
-	if (this.serverRunning == 0) {
-	    this.serverRunning = 1;
+	if (serverControl.serverRunning == 0) {
+	    serverControl.serverRunning = 1;
 	    os.println("Server started.");
 	} else {
 	    os.println("Server already started.");
 	}
     }
 
-    public int getStatus() {
-	return this.serverRunning;
+    public String getStatus() {
+	String serverStatus;
+	if(serverControl.serverRunning == 1) {
+	    serverStatus = "Server started. ("+serverControl.serverRunning+")";
+	} else {
+	    serverStatus = "Server stopped. ("+serverControl.serverRunning+")";
+	}
+	return serverStatus;
     }
 
 }

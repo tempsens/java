@@ -1,3 +1,6 @@
+//  Versio 0.3     
+//   Käyttäjätunnut ja salasana kiinteisiin muuttujiin koodin alkuun
+//------------------------------------------------------------------------------
 //  Versio 0.2     
 //              
 //------------------------------------------------------------------------------
@@ -13,21 +16,21 @@ import java.net.Socket;
  * @author Joakim
  */
 public class LoginSensor {
-      private String username;	// Alustetaan käyttäjätunnuksen muuttuja
-    private String password;	// Alustetaan salasanan muuttuja
-    private String responssi;	// Alustetaan palautteen muuttuja
+    private final String username = "sensoren";	// Asetetaan kiinteä käyttäjätunnut
+    private final String password = "sensoren";	// Asetetaan kiinteä salasana
+    private String responssi;			// Alustetaan palautteen muuttuja
     
 
     public String login(Socket soketti) {
 	try {
-	    DataOutputStream os =   new DataOutputStream(soketti.getOutputStream());	// Output stream
-	    DataInputStream is =    new DataInputStream(soketti.getInputStream());	// Input stream
+	    DataOutputStream os = new DataOutputStream(soketti.getOutputStream());	// Output stream
+	    DataInputStream  is = new DataInputStream(soketti.getInputStream());	// Input stream
 	
             
 
 	    os.writeBytes("login\n");		// Lähetetään palvelimelle: login
-	    os.writeBytes("sensoren" + "\n");	// Lähetetään palvelimelle: username
-	    os.writeBytes("sensoren" + "\n");	// Lähetetään palvelimelle: password
+	    os.writeBytes(username + "\n");	// Lähetetään palvelimelle: username
+	    os.writeBytes(password + "\n");	// Lähetetään palvelimelle: password
 
 	    responssi = is.readLine();		// Luetaan palvelimen vastaus
 
