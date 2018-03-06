@@ -31,6 +31,7 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import static thetempsensserver.TheTempSensServer.IP;
+import static thetempsensserver.TheTempSensServer.serverRunning;
 
 /**
  * @author PetShopBoys
@@ -59,7 +60,6 @@ public class MainMenu implements Runnable {
 
     @Override
     public void run() {
-<<<<<<< HEAD
         int userLevel = 0; // Käyttäjätaso. Haetaan oikea arvo tietokannasta kirjautumisessa
         int userID = 0;    // Käyttäjän ID tietokannassa. Tarvitaan salasanan vaihtoon
         // Muuttujat ja luokat pääohjelmalle
@@ -68,14 +68,9 @@ public class MainMenu implements Runnable {
         Inputti inputti = new Inputti();          // Tarvitaan help -tekstin tulostukseen
         FileOut fileout = new FileOut();          // Tarvitaan tiedosto outputiin
         serverControl srvC = new serverControl(); // Start/Stop/Restart
+        sensorControl senC = new sensorControl();
         int ulosta = 0;                           // Muuttuja while -loopista poistumiseksi
-        int statu = 0;
-        if(srvC.getStatus().contains("(1)")){
-            statu = 1;
-        } /*else {
-            int statu = 0;
-        } */
-        
+
         while (userLevel < 1) {	// Login loop
             try {
                 komento = is.readLine();                 // Luetaan ensimmäinen rivi clientiltä
@@ -83,18 +78,6 @@ public class MainMenu implements Runnable {
                     try {
                         String userName = is.readLine(); // Luetaan clientiltä username
                         String userPass = is.readLine(); // Luetaan clientiltä password
-=======
-	int userLevel = 0; // Käyttäjätaso. Haetaan oikea arvo tietokannasta kirjautumisessa
-	int userID = 0;    // Käyttäjän ID tietokannassa. Tarvitaan salasanan vaihtoon
-	// Muuttujat ja luokat pääohjelmalle
-	String komento;
-	String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
-	Inputti inputti = new Inputti();          // Tarvitaan help -tekstin tulostukseen
-	FileOut fileout = new FileOut();          // Tarvitaan tiedosto outputiin
-	serverControl srvC = new serverControl(); // Start/Stop/Restart
-	sensorControl senC = new sensorControl();
-	int ulosta = 0;                           // Muuttuja while -loopista poistumiseksi
->>>>>>> a3542e4c3a3e4afa01b3ea9c65efb53cc20ec217
 
                         DB user = new DB();
                         user.connect();
@@ -103,7 +86,6 @@ public class MainMenu implements Runnable {
                         if (vastaus.equals("-1")) {      // Tietokantavirheen sattuessa "failsafeLogin"
                             os.println("Server database error! Only failsafe login possible.");
 
-<<<<<<< HEAD
                             while (userLevel < 10) {
                                 komento = is.readLine();          // Luetaan ensimmäinen rivi clientiltä
                                 if (komento.equals("login")) {    // Vaaditaan edelleen login -käsky ensin
@@ -123,7 +105,7 @@ public class MainMenu implements Runnable {
                                     }
                                 }
                             }
-                        } else if (vastaus.contains("0|")) {
+                        } else if (vastaus.contains("0|") && !vastaus.contains("10|")) {
                             os.println("0");
                         } else {
                             String[] vastaukset = vastaus.split("\\|");  // Hajotetaan | -merkillä erottaen
@@ -142,7 +124,6 @@ public class MainMenu implements Runnable {
                 is = null;  // Nollataan input streamin olio, jottei jää readLine looppi päälle
             }
         }
-
         // Pääohjelma loop komentojen kuunteluun
         while (ulosta < 1 && userLevel > 0) { // LISÄTTY UserLevel vaatimus Joakim
             try {
@@ -156,62 +137,6 @@ public class MainMenu implements Runnable {
                 break;
             }
             switch (komento.toLowerCase()) {
-=======
-			if (vastaus.equals("-1")) {      // Tietokantavirheen sattuessa "failsafeLogin"
-			    os.println("Server database error! Only failsafe login possible.");
-
-			    while (userLevel < 10) {
-				komento = is.readLine();          // Luetaan ensimmäinen rivi clientiltä
-				if (komento.equals("login")) {    // Vaaditaan edelleen login -käsky ensin
-				    try {
-					userName = is.readLine(); // Luetaan clientiltä username
-					userPass = is.readLine(); // Luetaan clientiltä password
-					if (userName.equals("admin") && userPass.equals("0000")) {
-					    userLevel = 10;       // Määritetään 10 taso, koska admin
-					    os.println("1|-1");   // Kerrotaan clientille, että onnistui ja userID -1
-					} else {
-					    os.print("Server database error! Only failsafe login possible.");
-					    fileout.clientEventLog("Server database error! Only failsafe login possible.", IP);
-					}
-				    } catch (IOException e) {
-					System.out.println("FailsafeAdminLoginLoop readLine fail: " + e);
-					fileout.clientEventLog("FailsafeAdminLoginLoop readLine fail", IP);
-				    }
-				}
-			    }
-			} else if (vastaus.contains("0|")) {
-			    os.println("0");
-			} else {
-			    String[] vastaukset = vastaus.split("\\|");  // Hajotetaan | -merkillä erottaen
-			    userLevel = Integer.parseInt(vastaukset[0]); // Luetaan käyttäjätaso muuttujaan
-			    userID = Integer.parseInt(vastaukset[1]);    // Luetaan ID muuttujaan
-			    os.println("1|" + userID);			 // Lähetetään tiedot clientille
-			}
-			user.disconnect();
-		    } catch (IOException e) {
-			System.out.println("LoginLoop db-login fail: " + e);
-		    }
-		}
-	    } catch (IOException e) {
-		System.out.println("LoginLoop readLine fail: " + e);
-		fileout.clientEventLog("LoginLoop readLine fail", IP);
-		is = null;  // Nollataan input streamin olio, jottei jää readLine looppi päälle
-	    }
-	}
-	// Pääohjelma loop komentojen kuunteluun
-	while (ulosta < 1 && userLevel > 0) { // LISÄTTY UserLevel vaatimus Joakim
-	    try {
-		komento = is.readLine();      // Luetaan yksi rivi muuttujaan
-		System.out.println(IP + ": " + komento); // DEBUG: Tulostaa serverin konsoliin
-	    } catch (IOException e) {
-		System.out.println("MainLoop readLine fail: " + e);
-		break;		    // Poistutaan loopista jos luku epäonnistuu
-	    }
-	    if (komento == null) {
-		break;
-	    }
-	    switch (komento.toLowerCase()) {
->>>>>>> a3542e4c3a3e4afa01b3ea9c65efb53cc20ec217
 // Tulostaa helpin
                 case "help":
                     // System.out.println("Helpin tulostus...");    // FOR DEBUG
@@ -237,6 +162,7 @@ public class MainMenu implements Runnable {
                     break;
 
                 case "add": // Väärä syntaksi -> antaa vain virheilmoituksen
+                   
                     fileout.clientEventLog(komento, IP);
                     os.println("Missing parameter! (user or temp needed)");
                     break;
@@ -263,79 +189,49 @@ public class MainMenu implements Runnable {
                     }
                     break;
 // Lämpötilan lisääminen tietokantaan
-<<<<<<< HEAD
                 case "add temp": // Lämpötilan lisääminen
-                    if (statu == 0) {
-                        os.println("kyllä se vielä joku päivä onnistuu");
 
-                    } else {
-                        if (userLevel >= 5) {
-                            try {
+                    if (userLevel >= 5) {
+                        try {
+                            if (serverRunning == 0) {
+                                os.println("Please, Write 'START' first");
+                                is.readLine();
+                                is.readLine();
+                            } else {
                                 double tempvalue = Double.parseDouble(is.readLine());
                                 int sensori = Integer.parseInt(is.readLine());
+                                if (senC.getSensor(sensori) > 0) {
+                                    os.println("Sensor " + sensori + " already in use!");
+                                } else {
 
-                                DB uusiTemp = new DB();
-                                System.out.println(tempvalue);	// FOR DEBUG
-                                System.out.println(sensori);	// FOR DEBUG
-                                int palaute = uusiTemp.insertTemp(tempvalue, sensori, today, IP);
-                                System.out.println("add temp (insertTemp palaute: " + palaute);
-                                if (palaute == -1) {
-                                    os.println("Server database error! Command not available.");
-                                } else if (palaute == -2) {
-                                    os.println("Server error!");
+                                    DB uusiTemp = new DB();
+                                    System.out.println(tempvalue);	// FOR DEBUG
+                                    System.out.println(sensori);	// FOR DEBUG
+                                    int palaute = uusiTemp.insertTemp(tempvalue, sensori, today, IP);
+                                    System.out.println("add temp (insertTemp palaute: " + palaute);
+                                    if (palaute == -1) {
+                                        os.println("Server database error! Command not available.");
+                                    } else if (palaute == -2) {
+                                        os.println("Server error!");
+                                    } else {
+                                        senC.setSensor(sensori);
+                                    }
                                 }
-                            } catch (IOException e) {
-                                System.out.println("readLine error in add temp: " + e);
                             }
-                        } else {
-                            System.out.println(PERUSPALAUTE);
-                            fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
+                        } catch (IOException e) {
+                            System.out.println("readLine error in add temp: " + e);
                         }
+                    } else {
+                        System.out.println(PERUSPALAUTE);
+                        fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
                     }
-                    break;
 
+                    break;
                 // Väärä syntaksi -> antaa vain virheilmoituksen
                 case "list":
                     fileout.clientEventLog(komento, IP);
                     os.println("Missing parameter! (users or temps needed)");
                     break;
-=======
-		case "add temp": // Lämpötilan lisääminen
-		    if (userLevel >= 5) {
-			try {
-			    double tempvalue = Double.parseDouble(is.readLine());
-			    int sensori = Integer.parseInt(is.readLine());
-			    if (senC.getSensor(sensori) > 0) {
-				os.println("Sensor " + sensori + " already in use!");
-			    } else {
-
-				DB uusiTemp = new DB();
-				System.out.println(tempvalue);	// FOR DEBUG
-				System.out.println(sensori);	// FOR DEBUG
-				int palaute = uusiTemp.insertTemp(tempvalue, sensori, today, IP);
-				System.out.println("add temp (insertTemp palaute: " + palaute);
-				if (palaute == -1) {
-				    os.println("Server database error! Command not available.");
-				} else if (palaute == -2) {
-				    os.println("Server error!");
-				} else {
-				    senC.setSensor(sensori);
-				}
-			    }
-			} catch (IOException e) {
-			    System.out.println("readLine error in add temp: " + e);
-			}
-		    } else {
-			System.out.println(PERUSPALAUTE);
-			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
-		    }
-		    break;
-		// Väärä syntaksi -> antaa vain virheilmoituksen
-		case "list":
-		    fileout.clientEventLog(komento, IP);
-		    os.println("Missing parameter! (users or temps needed)");
-		    break;
->>>>>>> a3542e4c3a3e4afa01b3ea9c65efb53cc20ec217
 // Listaa käyttäjät tietokannasta
                 case "list users": // Tulostaa listan käyttäjistä
                     if (userLevel >= 5) {
@@ -352,7 +248,6 @@ public class MainMenu implements Runnable {
                     }
                     break;
 // Listaa lämpötilat tietokannasta
-<<<<<<< HEAD
                 case "list temps": // Tulostaa listan lämpötiloista (100 viimeisintä)
                     if (userLevel >= 5) {
                         DB listtemps = new DB();
@@ -388,43 +283,6 @@ public class MainMenu implements Runnable {
                         fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
                     }
                     break;
-=======
-		case "list temps": // Tulostaa listan lämpötiloista (100 viimeisintä)
-		    if (userLevel >= 5) {
-			DB listtemps = new DB();
-			int palaute = listtemps.listTemps(clinu, 0, "2018-03-01", "2018-03-04");
-			if (palaute == -1) {
-			    os.println("Server database error! Command not available.");
-			} else if (palaute == -2) {
-			    os.println("Server error!");
-			}
-		    } else {
-			os.println(PERUSPALAUTE);
-			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
-		    }
-		    break;
-		// Väärä syntaksi -> antaa vain virheilmoituksen
-		case "fileout":
-		    if (userLevel >= 5) {
-			fileout.clientEventLog(komento, IP);
-			os.println("Missing parameter! (console or userlist needed)");
-		    } else {
-			os.println(PERUSPALAUTE);
-		    }
-		    break;
-// Kirjoita tiedostoon käyttäjistälista tietokannasta
-		case "fileout users": // Tulostetaan lista käyttäjistä
-		    if (userLevel >= 5) { // ..mutta vain jos on tarpeeksi korkea taso
-			int palaute = fileout.userlist(clinu);
-			if (palaute < 0) {
-			    os.println("Server database error! Command not available.");
-			}
-		    } else {
-			os.println(PERUSPALAUTE);
-			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
-		    }
-		    break;
->>>>>>> a3542e4c3a3e4afa01b3ea9c65efb53cc20ec217
 // Sammuttaa palvelinohjelman
                 case "quit": // OK!!
                     fileout.clientEventLog(komento, IP);
