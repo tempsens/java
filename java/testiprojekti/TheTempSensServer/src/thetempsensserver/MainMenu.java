@@ -46,262 +46,275 @@ public class MainMenu implements Runnable {
     DataInputStream is = null;            // Input streamin alustus
 
     MainMenu(Socket clinu) {              // Konstruktori, jossa määritetään I/O -oliot
-	try {
-	    this.clinu = clinu;					    // Soketti
-	    this.is = new DataInputStream(clinu.getInputStream());  // Input
-	    this.os = new PrintStream(clinu.getOutputStream());	    // Output
-	    IP = clinu.getRemoteSocketAddress().toString();	    // Clientin IP
-	    System.out.println("Connection from: " + IP);	// Ilmoitus yhteydestä
-	} catch (IOException e) {
-	    System.out.println("Socket/is/os creation failed: " + e);
-	}
+        try {
+            this.clinu = clinu;					    // Soketti
+            this.is = new DataInputStream(clinu.getInputStream());  // Input
+            this.os = new PrintStream(clinu.getOutputStream());	    // Output
+            IP = clinu.getRemoteSocketAddress().toString();	    // Clientin IP
+            System.out.println("Connection from: " + IP);	// Ilmoitus yhteydestä
+        } catch (IOException e) {
+            System.out.println("Socket/is/os creation failed: " + e);
+        }
     }
 
     @Override
     public void run() {
-	int userLevel = 0; // Käyttäjätaso. Haetaan oikea arvo tietokannasta kirjautumisessa
-	int userID = 0;    // Käyttäjän ID tietokannassa. Tarvitaan salasanan vaihtoon
-	// Muuttujat ja luokat pääohjelmalle
-	String komento;
-	String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
-	Inputti inputti = new Inputti();          // Tarvitaan help -tekstin tulostukseen
-	FileOut fileout = new FileOut();          // Tarvitaan tiedosto outputiin
-	serverControl srvC = new serverControl(); // Start/Stop/Restart
-	int ulosta = 0;                           // Muuttuja while -loopista poistumiseksi
+        int userLevel = 0; // Käyttäjätaso. Haetaan oikea arvo tietokannasta kirjautumisessa
+        int userID = 0;    // Käyttäjän ID tietokannassa. Tarvitaan salasanan vaihtoon
+        // Muuttujat ja luokat pääohjelmalle
+        String komento;
+        String today = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss ").format(new Date());
+        Inputti inputti = new Inputti();          // Tarvitaan help -tekstin tulostukseen
+        FileOut fileout = new FileOut();          // Tarvitaan tiedosto outputiin
+        serverControl srvC = new serverControl(); // Start/Stop/Restart
+        int ulosta = 0;                           // Muuttuja while -loopista poistumiseksi
+        int statu = 0;
+        if(srvC.getStatus().contains("(1)")){
+            statu = 1;
+        } /*else {
+            int statu = 0;
+        } */
+        
+        while (userLevel < 1) {	// Login loop
+            try {
+                komento = is.readLine();                 // Luetaan ensimmäinen rivi clientiltä
+                if (komento.equals("login")) {           // Vaaditaan ekana käskynä login
+                    try {
+                        String userName = is.readLine(); // Luetaan clientiltä username
+                        String userPass = is.readLine(); // Luetaan clientiltä password
 
-	while (userLevel < 1) {	// Login loop
-	    try {
-		komento = is.readLine();                 // Luetaan ensimmäinen rivi clientiltä
-		if (komento.equals("login")) {           // Vaaditaan ekana käskynä login
-		    try {
-			String userName = is.readLine(); // Luetaan clientiltä username
-			String userPass = is.readLine(); // Luetaan clientiltä password
+                        DB user = new DB();
+                        user.connect();
+                        String vastaus = user.checkUser(userName, userPass, IP);
 
-			DB user = new DB();
-			user.connect();
-			String vastaus = user.checkUser(userName, userPass, IP);
+                        if (vastaus.equals("-1")) {      // Tietokantavirheen sattuessa "failsafeLogin"
+                            os.println("Server database error! Only failsafe login possible.");
 
-			if (vastaus.equals("-1")) {      // Tietokantavirheen sattuessa "failsafeLogin"
-			    os.println("Server database error! Only failsafe login possible.");
-
-			    while (userLevel < 10) {
-				komento = is.readLine();          // Luetaan ensimmäinen rivi clientiltä
-				if (komento.equals("login")) {    // Vaaditaan edelleen login -käsky ensin
-				    try {
-					userName = is.readLine(); // Luetaan clientiltä username
-					userPass = is.readLine(); // Luetaan clientiltä password
-					if (userName.equals("admin") && userPass.equals("0000")) {
-					    userLevel = 10;       // Määritetään 10 taso, koska admin
-					    os.println("1|-1");   // Kerrotaan clientille, että onnistui ja userID -1
-					} else {
-					    os.print("Server database error! Only failsafe login possible.");
-					    fileout.clientEventLog("Server database error! Only failsafe login possible.", IP);
-					}
-				    } catch (IOException e) {
-					System.out.println("FailsafeAdminLoginLoop readLine fail: " + e);
-					fileout.clientEventLog("FailsafeAdminLoginLoop readLine fail", IP);
-				    }
-				}
+                            while (userLevel < 10) {
+                                komento = is.readLine();          // Luetaan ensimmäinen rivi clientiltä
+                                if (komento.equals("login")) {    // Vaaditaan edelleen login -käsky ensin
+                                    try {
+                                        userName = is.readLine(); // Luetaan clientiltä username
+                                        userPass = is.readLine(); // Luetaan clientiltä password
+                                        if (userName.equals("admin") && userPass.equals("0000")) {
+                                            userLevel = 10;       // Määritetään 10 taso, koska admin
+                                            os.println("1|-1");   // Kerrotaan clientille, että onnistui ja userID -1
+                                        } else {
+                                            os.print("Server database error! Only failsafe login possible.");
+                                            fileout.clientEventLog("Server database error! Only failsafe login possible.", IP);
+                                        }
+                                    } catch (IOException e) {
+                                        System.out.println("FailsafeAdminLoginLoop readLine fail: " + e);
+                                        fileout.clientEventLog("FailsafeAdminLoginLoop readLine fail", IP);
+                                    }
+                                }
                             }
-                        } else if(vastaus.contains("0|")) {
+                        } else if (vastaus.contains("0|")) {
                             os.println("0");
-			} else {
-			    String[] vastaukset = vastaus.split("\\|");  // Hajotetaan | -merkillä erottaen
-			    userLevel = Integer.parseInt(vastaukset[0]); // Luetaan käyttäjätaso muuttujaan
-			    userID = Integer.parseInt(vastaukset[1]);    // Luetaan ID muuttujaan
-			    os.println("1|" + userID);			 // Lähetetään tiedot clientille
-			} 
-			user.disconnect();
-		    } catch (IOException e) {
-			System.out.println("LoginLoop db-login fail: " + e);
-		    }
-		}
-	    } catch (IOException e) {
-		System.out.println("LoginLoop readLine fail: " + e);
-		fileout.clientEventLog("LoginLoop readLine fail", IP);
-		is = null;  // Nollataan input streamin olio, jottei jää readLine looppi päälle
-	    }
-	}
- // Pääohjelma loop komentojen kuunteluun
-	while (ulosta < 1 && userLevel > 0) { // LISÄTTY UserLevel vaatimus Joakim
-	    try {
-		komento = is.readLine();      // Luetaan yksi rivi muuttujaan
-		System.out.println(IP + ": " + komento); // DEBUG: Tulostaa serverin konsoliin
-	    } catch (IOException e) {
-		System.out.println("MainLoop readLine fail: " + e);
-		break;		    // Poistutaan loopista jos luku epäonnistuu
-	    }
-	    if (komento == null) {
-		break;
-	    }
-	    switch (komento.toLowerCase()) {
+                        } else {
+                            String[] vastaukset = vastaus.split("\\|");  // Hajotetaan | -merkillä erottaen
+                            userLevel = Integer.parseInt(vastaukset[0]); // Luetaan käyttäjätaso muuttujaan
+                            userID = Integer.parseInt(vastaukset[1]);    // Luetaan ID muuttujaan
+                            os.println("1|" + userID);			 // Lähetetään tiedot clientille
+                        }
+                        user.disconnect();
+                    } catch (IOException e) {
+                        System.out.println("LoginLoop db-login fail: " + e);
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("LoginLoop readLine fail: " + e);
+                fileout.clientEventLog("LoginLoop readLine fail", IP);
+                is = null;  // Nollataan input streamin olio, jottei jää readLine looppi päälle
+            }
+        }
+
+        // Pääohjelma loop komentojen kuunteluun
+        while (ulosta < 1 && userLevel > 0) { // LISÄTTY UserLevel vaatimus Joakim
+            try {
+                komento = is.readLine();      // Luetaan yksi rivi muuttujaan
+                System.out.println(IP + ": " + komento); // DEBUG: Tulostaa serverin konsoliin
+            } catch (IOException e) {
+                System.out.println("MainLoop readLine fail: " + e);
+                break;		    // Poistutaan loopista jos luku epäonnistuu
+            }
+            if (komento == null) {
+                break;
+            }
+            switch (komento.toLowerCase()) {
 // Tulostaa helpin
-		case "help":
-		    // System.out.println("Helpin tulostus...");    // FOR DEBUG
-		    fileout.clientEventLog(komento, IP);
-		    inputti.Help(clinu, userLevel); // Tulostaa helpin
-		    break;
+                case "help":
+                    // System.out.println("Helpin tulostus...");    // FOR DEBUG
+                    fileout.clientEventLog(komento, IP);
+                    inputti.Help(clinu, userLevel); // Tulostaa helpin
+                    break;
 // Salasanan vaihtaminen kirjautuneelle käyttäjälle tietokantaan
-		case "change pass":
-		    try {
-			String strUserID = is.readLine();
-			String strNewPass = is.readLine();
-			DB cp = new DB();
+                case "change pass":
+                    try {
+                        String strUserID = is.readLine();
+                        String strNewPass = is.readLine();
+                        DB cp = new DB();
 
-			if (cp.changepass(Integer.parseInt(strUserID), strNewPass) == 1) {
-			    os.println("Salasana vaihdettu!");
-			} else {
-			    os.println("Server database error! Command not available.");
-			}
-		    } catch (IOException e) {
-			System.out.println(e);
-			os.println("Error with change password readLine");
-		    }
-		    break;
+                        if (cp.changepass(Integer.parseInt(strUserID), strNewPass) == 1) {
+                            os.println("Salasana vaihdettu!");
+                        } else {
+                            os.println("Server database error! Command not available.");
+                        }
+                    } catch (IOException e) {
+                        System.out.println(e);
+                        os.println("Error with change password readLine");
+                    }
+                    break;
 
-		case "add": // Väärä syntaksi -> antaa vain virheilmoituksen
-		    fileout.clientEventLog(komento, IP);
-		    os.println("Missing parameter! (user or temp needed)");
-		    break;
+                case "add": // Väärä syntaksi -> antaa vain virheilmoituksen
+                    fileout.clientEventLog(komento, IP);
+                    os.println("Missing parameter! (user or temp needed)");
+                    break;
 // Käyttäjän lisääminen tietokantaan
-		case "add user": // Lisätään käyttäjä
-		    if (userLevel == 10) {
-			try { // Luetaan kaksi riviä lisää
-			    int newUserLevel = Integer.parseInt(is.readLine());
-			    String newUserInput = is.readLine();
+                case "add user": // Lisätään käyttäjä
+                    if (userLevel == 10) {
+                        try { // Luetaan kaksi riviä lisää
+                            int newUserLevel = Integer.parseInt(is.readLine());
+                            String newUserInput = is.readLine();
 
-			    DB uusiUseri = new DB();
-			    int palaute = uusiUseri.insertUser(newUserLevel, newUserInput, IP);
-			    if (palaute == -1) {
-				os.println("Server database error! Command not available.");
-			    } else if (palaute == -2) {
-				os.println("Server error!");
-			    }
-			} catch (IOException e) {
-			    System.out.println("readLine error in add user: " + e);
-			}
-		    } else {
-			System.out.println(PERUSPALAUTE);
-			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
-		    }
-		    break;
-// Lämpötilan lisääminen tietokantaan
-		case "add temp": // Lämpötilan lisääminen
-		    if (userLevel >= 5) {
-			try {
-			    double tempvalue = Double.parseDouble(is.readLine());
-			    int sensori = Integer.parseInt(is.readLine());
-
-			    DB uusiTemp = new DB();
-			    System.out.println(tempvalue);	// FOR DEBUG
-			    System.out.println(sensori);	// FOR DEBUG
-			    int palaute = uusiTemp.insertTemp(tempvalue, sensori, today, IP);
-			    System.out.println("add temp (insertTemp palaute: "+ palaute);
+                            DB uusiUseri = new DB();
+                            int palaute = uusiUseri.insertUser(newUserLevel, newUserInput, IP);
                             if (palaute == -1) {
-				os.println("Server database error! Command not available.");
-			    } else if (palaute == -2) {
-				os.println("Server error!");
-			    }
-			} catch (IOException e) {
-			    System.out.println("readLine error in add temp: " + e);
-			}
-		    } else {
-			System.out.println(PERUSPALAUTE);
-			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
-		    }
-		    break;
- // Väärä syntaksi -> antaa vain virheilmoituksen
-		case "list":
-		    fileout.clientEventLog(komento, IP);
-		    os.println("Missing parameter! (users or temps needed)");
-		    break;
+                                os.println("Server database error! Command not available.");
+                            } else if (palaute == -2) {
+                                os.println("Server error!");
+                            }
+                        } catch (IOException e) {
+                            System.out.println("readLine error in add user: " + e);
+                        }
+                    } else {
+                        System.out.println(PERUSPALAUTE);
+                        fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
+                    }
+                    break;
+// Lämpötilan lisääminen tietokantaan
+                case "add temp": // Lämpötilan lisääminen
+                    if (statu == 0) {
+                        os.println("kyllä se vielä joku päivä onnistuu");
+
+                    } else {
+                        if (userLevel >= 5) {
+                            try {
+                                double tempvalue = Double.parseDouble(is.readLine());
+                                int sensori = Integer.parseInt(is.readLine());
+
+                                DB uusiTemp = new DB();
+                                System.out.println(tempvalue);	// FOR DEBUG
+                                System.out.println(sensori);	// FOR DEBUG
+                                int palaute = uusiTemp.insertTemp(tempvalue, sensori, today, IP);
+                                System.out.println("add temp (insertTemp palaute: " + palaute);
+                                if (palaute == -1) {
+                                    os.println("Server database error! Command not available.");
+                                } else if (palaute == -2) {
+                                    os.println("Server error!");
+                                }
+                            } catch (IOException e) {
+                                System.out.println("readLine error in add temp: " + e);
+                            }
+                        } else {
+                            System.out.println(PERUSPALAUTE);
+                            fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
+                        }
+                    }
+                    break;
+
+                // Väärä syntaksi -> antaa vain virheilmoituksen
+                case "list":
+                    fileout.clientEventLog(komento, IP);
+                    os.println("Missing parameter! (users or temps needed)");
+                    break;
 // Listaa käyttäjät tietokannasta
-		case "list users": // Tulostaa listan käyttäjistä
-		    if (userLevel >= 5) {
-			DB listuser = new DB();
-			int palaute = listuser.listUsers(clinu);
-			if (palaute == -1) {
-			    os.println("Server database error! Command not available.");
-			} else if (palaute == -2) {
-			    os.println("Server error!");
-			}
-		    } else {
-			os.println(PERUSPALAUTE);
-			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
-		    }
-		    break;
+                case "list users": // Tulostaa listan käyttäjistä
+                    if (userLevel >= 5) {
+                        DB listuser = new DB();
+                        int palaute = listuser.listUsers(clinu);
+                        if (palaute == -1) {
+                            os.println("Server database error! Command not available.");
+                        } else if (palaute == -2) {
+                            os.println("Server error!");
+                        }
+                    } else {
+                        os.println(PERUSPALAUTE);
+                        fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
+                    }
+                    break;
 // Listaa lämpötilat tietokannasta
-		case "list temps": // Tulostaa listan lämpötiloista (100 viimeisintä)
-		    if (userLevel >= 5) {
-			DB listtemps = new DB();
-			int palaute = listtemps.listTemps(clinu, 0, "2018-03-01", "2018-03-04");
-			if (palaute == -1) {
-			    os.println("Server database error! Command not available.");
-			} else if (palaute == -2) {
-			    os.println("Server error!");
-			}
-		    } else {
-			os.println(PERUSPALAUTE);
-			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
-		    }
-		    break;
- // Väärä syntaksi -> antaa vain virheilmoituksen
-		case "fileout":
-		    if (userLevel >= 5) {
-			fileout.clientEventLog(komento, IP);
-			os.println("Missing parameter! (console or userlist needed)");
-		    } else {
-			os.println(PERUSPALAUTE);
-		    }
-		    break;
+                case "list temps": // Tulostaa listan lämpötiloista (100 viimeisintä)
+                    if (userLevel >= 5) {
+                        DB listtemps = new DB();
+                        int palaute = listtemps.listTemps(clinu, 0, "2018-03-01", "2018-03-04");
+                        if (palaute == -1) {
+                            os.println("Server database error! Command not available.");
+                        } else if (palaute == -2) {
+                            os.println("Server error!");
+                        }
+                    } else {
+                        os.println(PERUSPALAUTE);
+                        fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
+                    }
+                    break;
+                // Väärä syntaksi -> antaa vain virheilmoituksen
+                case "fileout":
+                    if (userLevel >= 5) {
+                        fileout.clientEventLog(komento, IP);
+                        os.println("Missing parameter! (console or userlist needed)");
+                    } else {
+                        os.println(PERUSPALAUTE);
+                    }
+                    break;
 // Kirjoita tiedostoon käyttäjistälista tietokannasta
-		case "fileout users": // Tulostetaan lista käyttäjistä
-		    if (userLevel >= 5) { // ..mutta vain jos on tarpeeksi korkea taso
-			int palaute = fileout.userlist(clinu);
-			if(palaute < 0) {
-			    os.println("Server database error! Command not available.");
-			}
-		    } else {
-			os.println(PERUSPALAUTE);
-			fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
-		    }
-		    break;
+                case "fileout users": // Tulostetaan lista käyttäjistä
+                    if (userLevel >= 5) { // ..mutta vain jos on tarpeeksi korkea taso
+                        int palaute = fileout.userlist(clinu);
+                        if (palaute < 0) {
+                            os.println("Server database error! Command not available.");
+                        }
+                    } else {
+                        os.println(PERUSPALAUTE);
+                        fileout.clientEventLog("Add User (UserLevel too low (" + userLevel + ")", IP);
+                    }
+                    break;
 // Sammuttaa palvelinohjelman
-		case "quit": // OK!!
-		    fileout.clientEventLog(komento, IP);
-		    os.println("Server quit."); // Infopläjäys
-		    os.println("QQ");           // Lähetetään QQ lähetyksen lopuksi
-		    ulosta = 1;                 // Poistuu while -loopista
-		    System.exit(-1);
-		    break;
+                case "quit": // OK!!
+                    fileout.clientEventLog(komento, IP);
+                    os.println("Server quit."); // Infopläjäys
+                    os.println("QQ");           // Lähetetään QQ lähetyksen lopuksi
+                    ulosta = 1;                 // Poistuu while -loopista
+                    System.exit(-1);
+                    break;
 // Käynnistää palvelimen lämpötilojen välittämisen tietokantaan
-		case "start":
-		    fileout.clientEventLog(komento, IP);
-		    srvC.start(clinu);
-		    break;
+                case "start":
+                    fileout.clientEventLog(komento, IP);
+                    srvC.start(clinu);
+                    break;
 // Pysäyttää palvelimen lämpötilojen välittämisen tietokantaan
-		case "stop":
-		    fileout.clientEventLog(komento, IP);
-		    srvC.stop(clinu);
-		    break;
+                case "stop":
+                    fileout.clientEventLog(komento, IP);
+                    srvC.stop(clinu);
+                    break;
 // Käynnistää uudelleen palvelimen lämpötilojen välittämisen tietokantaan		    
-		case "restart":
-		    fileout.clientEventLog(komento, IP);
-		    srvC.restart(clinu);
-		    break;
+                case "restart":
+                    fileout.clientEventLog(komento, IP);
+                    srvC.restart(clinu);
+                    break;
 // Tulostaa palvelimen lämpötilojen välittämisen tilan (0 tai 1)
-		case "status":
-		    fileout.clientEventLog(komento, IP);
-		    os.println(srvC.getStatus());
-		    break;
+                case "status":
+                    fileout.clientEventLog(komento, IP);
+                    os.println(srvC.getStatus());
+                    break;
 // Toiminto tuntemattomille komennoille
-		default:
-		    //   fileout.clientEventLog(komento, IP);
-		    os.println(PERUSPALAUTE);
-		    fileout.clientEventLog("Unknown command(" + komento + ")", IP);
-	    }   // SWITCHin loppusulje
-	    os.println("\nQQ");	// Tämä on loppumerkki clientin "multiline loopille"
-	}   // Ohjelmaloopin loppusulje (while)
-	System.out.println("Client disconnected.");
+                default:
+                    //   fileout.clientEventLog(komento, IP);
+                    os.println(PERUSPALAUTE);
+                    fileout.clientEventLog("Unknown command(" + komento + ")", IP);
+            }   // SWITCHin loppusulje
+            os.println("\nQQ");	// Tämä on loppumerkki clientin "multiline loopille"
+        }   // Ohjelmaloopin loppusulje (while)
+        System.out.println("Client disconnected.");
     }	// Metodin loppusulje (void run)
 } // Luokan loppusulje (MainMenu)
