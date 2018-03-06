@@ -5,24 +5,21 @@
  - ohjelmien (3) versiointi	 pvm, tiedostonimi, tekijä, kuvaus					DONE
 
 *******************************************************************************
- 
  RAPORTTI
- - Jukka-->SSL-yhteys lopuksi, jos jää aikaa								T O D O -Jukka-								S K I P P E D
+ - Jukka-->SSL-yhteys lopuksi, jos jää aikaa								T O D O -Jukka-							S K I P P E D
 
  (: jos ei ehditä toteuttaa, niin raporttiin maininta asian tärkeydestä.)
  http://www.jguru.com/faq/view.jsp?EID=32388
- 
-*********************************************************************************
-HUOMIOITA
+*******************************************************************************
 
-********************************************************************************
 Ohjelmistotestaus
+=================
 
 SERVER
 
 Socket		Jukka
 	If port in use (double start)								(vaati loopin tiedostoon TheTempSensServer.java)		DONE
-	Connection overflow			(yhteyksien rajoittaminen)		(KAATAA SERVUN) --> KORJAUS?							S K I P P E D
+	Connection overflow			(yhteyksien rajoittaminen)		(KAATAA SERVUN) --> KORJAUS?						S K I P P E D
 	InputStream overflow		(   - - - || - - -       )		(javassa kai sisäänrakennettuna suojaus)				DONE
 HUOM! Clientin droppaus aiheuttaa servun sammumisen!!! (MainMenu.java: 89) DONE (virheilmotus vois olla nätimpi)		DONE
 
@@ -37,21 +34,21 @@ Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?												
 
 	add									
 	login { line1: usrn, line2: pwd }
-						JOS DB DOWN, niin Sensor jökkää.															T O D O ?
+						JOS DB DOWN, niin Sensor jökkää.																DONE
 						JOS antaa väärät tunnukset, niin client jökkää													DONE
 		-> samat testit kuin client/login	
 	add user { line1: lvl, line2: usrn }
 		-> samat testit kuin client/login	
 	list									
 	list users								
-	list temps								-> PARAMETRIT															T O D O			-Joakim-
+	list temps								-> PARAMETRIT															T O D O		-Joakim-
 	fileout									
 	fileout userlist						
 	add temp								
 	quit									-> sammuttaa serverin
 	
 	start									
-	stop									-> ei passaa lämpötiloja												T O D O			-Matti-
+	stop									-> ei passaa lämpötiloja													DONE
 	restart									
 	status									
 	
@@ -59,7 +56,7 @@ Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?												
 
 Feedback				Joakim					
 	log file (serverside)																								DONE
-	console (clietside)																									S K I P P E D
+	console (clietside)																								S K I P P E D
 	(clientside commandlog?) = turha																					DONE
 
 
@@ -72,7 +69,7 @@ login					Joakim
 	ei usern/pwd							ei mahdollinen
 
 	väärä usern								KAATUU \
-	väärä pwd								KAATUU  --> EI VOI MITÄÄN 											JUKKA SELVITTÄÄ, JOS EHTII
+	väärä pwd								KAATUU  --> EI VOI MITÄÄN 													DONE
 	väärä usern/pwd							KAATUU /
 
 	usern yli 16 merkkiä					
@@ -83,8 +80,8 @@ login					Joakim
 	SQL injection pwd 																									DONE						
 
 SENSOR			Matti								OK?
-	on case server crash							OK? 200 yritystä												DONE
-	on case network down							OK? 200 yritystä												DONE
-	on case mysql down							EI MAHDOLLISTA, MySQL käyttäjä tarkistaminen						DONE
-	Double start of same sensor should fail																			T O D O		-Jukka-
+	on case server crash							OK? 200 yritystä													DONE
+	on case network down							OK? 200 yritystä													DONE
+	on case mysql down							EI MAHDOLLISTA, MySQL käyttäjä tarkistaminen							DONE
+	Double start of same sensor should fail																				DONE
 
