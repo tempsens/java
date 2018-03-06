@@ -17,6 +17,7 @@ public class TheTempSensServer {
     private static final int PORT = 1234; // Palvelin kuuntelee tätä porttia
     public static int serverRunning = 0; // Globaali muuttuja
     public static String IP = null; // Globaali muuttuja asiakkaan osoitteelle
+    public static int sensorTaulu[] = {0,0,0,0,0,0,0,0,0,0}; // Globaali taulu sensorien valvontaan
 
     public static void main(String args[]) throws InterruptedException {
         // declaration section:
@@ -31,6 +32,10 @@ public class TheTempSensServer {
                 ServerSocket serveri = new ServerSocket(PORT);
                 System.out.println("TempSensServer v" + VERSION + " running...");
 
+		sensorControl sC = new sensorControl();
+                Thread sCt = new Thread(sC);
+                sCt.start();
+		
                 MainMenu menu; // Alustetaan menu
 
                 while (true) { // Loopataan uusia säikeitä aina kun uusi yhteys

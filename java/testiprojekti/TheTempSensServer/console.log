@@ -1450,3 +1450,62 @@
 05.03.2018 21:16:10 Client event from(/127.0.0.1:58153): help
 05.03.2018 21:16:10 Client event from(/127.0.0.1:58153): status
 05.03.2018 21:16:10 Client event from(/127.0.0.1:58153): help
+06.03.2018 19:13:56 Client event from(/127.0.0.1:50540): Login succes | u:admin
+06.03.2018 19:13:56 Server: LOGIN: (u:admin)
+06.03.2018 19:14:02 Client event from(/127.0.0.1:50540): Login succes | u:admin
+06.03.2018 19:14:02 Server: LOGIN: (u:admin)
+06.03.2018 19:14:05 Client event from(/127.0.0.1:50540): Login ERROR | u:admin
+06.03.2018 19:14:05 Server: LOGIN ERROR! (u:admin)
+06.03.2018 19:14:31 Client event from(/127.0.0.1:50540): Login succes | u:perkele
+06.03.2018 19:14:31 Server: LOGIN: (u:perkele)
+06.03.2018 19:14:35 Client event from(/127.0.0.1:50540): List users
+06.03.2018 19:13:50 Client event from(/127.0.0.1:50540): Unknown command(exit)
+06.03.2018 19:15:27 Client event from(/127.0.0.1:50564): Login succes | u:admin
+06.03.2018 19:15:27 Server: LOGIN: (u:admin)
+06.03.2018 19:15:35 Client event from(/127.0.0.1:50564): Login succes | u:admin
+06.03.2018 19:15:35 Server: LOGIN: (u:admin)
+06.03.2018 19:15:38 Client event from(/127.0.0.1:50564): Login ERROR | u:admin
+06.03.2018 19:15:38 Server: LOGIN ERROR! (u:admin)
+06.03.2018 19:15:41 Client event from(/127.0.0.1:50564): Login succes | u:admin
+06.03.2018 19:15:41 Server: LOGIN: (u:admin)
+06.03.2018 19:15:51 Client event from(/127.0.0.1:50564): Login succes | u:jorma
+06.03.2018 19:15:51 Server: LOGIN: (u:jorma)
+06.03.2018 19:15:22 Client event from(/127.0.0.1:50564): help
+06.03.2018 19:15:22 Client event from(/127.0.0.1:50564): Unknown command(exit)
+06.03.2018 19:19:03 Client event from(/127.0.0.1:50574): Login succes | u:jorma
+06.03.2018 19:19:03 Server: LOGIN: (u:jorma)
+06.03.2018 19:18:57 Client event from(/127.0.0.1:50574): Unknown command(exit)
+06.03.2018 19:20:05 Client event from(/127.0.0.1:50576): Login succes | u:jorma
+06.03.2018 19:20:05 Server: LOGIN: (u:jorma)
+06.03.2018 19:19:59 Client event from(/127.0.0.1:50576): Unknown command(saasas)
+06.03.2018 19:19:59 Client event from(/127.0.0.1:50576): quit
+06.03.2018 19:21:40 Client event from(/127.0.0.1:50582): Login succes | u:jorma
+06.03.2018 19:21:40 Server: LOGIN: (u:jorma)
+06.03.2018 19:21:33 Client event from(/127.0.0.1:50582): Unknown command()
+06.03.2018 19:21:33 Client event from(/127.0.0.1:50582): Unknown command()
+06.03.2018 19:21:33 Client event from(/127.0.0.1:50582): quit
+06.03.2018 19:24:45 Client event from(/127.0.0.1:50595): Login succes | u:jorma
+06.03.2018 19:24:45 Server: LOGIN: (u:jorma)
+06.03.2018 19:24:40 Client event from(/127.0.0.1:50595): Unknown command()
+06.03.2018 19:24:40 Client event from(/127.0.0.1:50595): Add User (UserLevel too low (3)
+06.03.2018 19:24:40 Client event from(/127.0.0.1:50595): Unknown command(11.0)
+06.03.2018 19:24:40 Client event from(/127.0.0.1:50595): Unknown command(1)
+06.03.2018 19:24:40 Client event from(/127.0.0.1:50595): Unknown command()
+06.03.2018 19:24:40 Client event from(/127.0.0.1:50595): Add User (UserLevel too low (3)
+06.03.2018 19:24:40 Client event from(/127.0.0.1:50595): Unknown command(11.0)
+06.03.2018 19:24:40 Client event from(/127.0.0.1:50595): Unknown command(2)
+06.03.2018 19:24:40 Client event from(/127.0.0.1:50595): Unknown command(exit)
+06.03.2018 19:25:46 Client event from(/127.0.0.1:50598): LoginLoop readLine fail
+06.03.2018 19:27:29 Client event from(/127.0.0.1:50599): Login succes | u:perkele
+06.03.2018 19:27:29 Server: LOGIN: (u:perkele)
+06.03.2018 20:39:02 Client event from(/127.0.0.1:60887): Login succes | u:admin
+06.03.2018 20:39:02 Server: LOGIN: (u:admin)
+06.03.2018 20:46:30 Client event from(/127.0.0.1:60933): Login succes | u:admin
+06.03.2018 20:46:30 Server: LOGIN: (u:admin)
+06.03.2018 20:46:36 Client event from(/127.0.0.1:60933): Login succes | u:perkele
+06.03.2018 20:46:36 Server: LOGIN: (u:perkele)
+06.03.2018 20:51:43 Client event from(/127.0.0.1:60970): Login succes | u:perkele
+06.03.2018 20:51:43 Server: LOGIN: (u:perkele)
+06.03.2018 20:53:54 Client event from(/127.0.0.1:60982): Login succes | u:perkele
+06.03.2018 20:53:54 Server: LOGIN: (u:perkele)
+06.03.2018 20:53:36 Client event from(/127.0.0.1:60982): quit
