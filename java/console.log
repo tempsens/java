@@ -48,3 +48,17 @@
 07.03.2018 20:43:10 Client event from(/127.0.0.1:56052): start
 07.03.2018 20:46:27 Client event from(/127.0.0.1:56129): Login succes | u:sensoren
 07.03.2018 20:46:27 Server: LOGIN: (u:sensoren)
+07.03.2018 20:53:47 Client event from(/127.0.0.1:56340): Login succes | u:admin
+07.03.2018 20:53:47 Server: LOGIN: (u:admin)
+07.03.2018 21:08:02 Client event from(/127.0.0.1:56780): Login succes | u:admin
+07.03.2018 21:08:02 Server: LOGIN: (u:admin)
+07.03.2018 21:08:18 Client event from(/127.0.0.1:56780): List temps
+07.03.2018 21:11:13 Client event from(/127.0.0.1:56869): Login ERROR | u:admin
+07.03.2018 21:11:13 Server: LOGIN ERROR! (u:admin)
+07.03.2018 21:11:17 Client event from(/127.0.0.1:56869): Login succes | u:admin
+07.03.2018 21:11:17 Server: LOGIN: (u:admin)
+07.03.2018 21:11:34 Client event from(/127.0.0.1:56869): List temps
+07.03.2018 21:11:51 Client event from(/127.0.0.1:56869): List temps
+07.03.2018 21:19:00 Client event from(/127.0.0.1:57141): Login succes | u:admin
+07.03.2018 21:19:00 Server: LOGIN: (u:admin)
+07.03.2018 21:19:17 Client event from(/127.0.0.1:57141): List temps

@@ -157,8 +157,8 @@ public class DB {
             // System.out.println("changePass: value -1");  // FOR DEBUG
             value = -1;
         }
-       this.disconnect();
-       return value;
+        this.disconnect();
+        return value;
     }
 
 // Käyttäjätietojen tarkastaminen ("login")
@@ -177,7 +177,7 @@ public class DB {
                 ResultSet resSet = preparedStatement.executeQuery();
                 FileOut fileout = new FileOut();
                 if (resSet.next()) {
-                    System.out.println("Login from: " + IP                      // FOR DEBUG -Jukka-
+                    System.out.println("Login from: " + IP // FOR DEBUG -Jukka-
                             + " as '" + user + "' successfull.");               // FOR DEBUG -Jukka-
                     fileout.loginSuccess("u:" + user, IP);
                     id = resSet.getInt(1);
@@ -190,7 +190,7 @@ public class DB {
                     fileout.loginError("u:" + user, IP);
                 }
                 disconnect();
-                System.out.println("Check user (palautus) :"+leveli);
+                System.out.println("Check user (palautus) :" + leveli);
                 return leveli + "|" + Integer.toString(id);         // palautetaan userlevel ja userID
             }
         } catch (SQLException ex) {                                 // handle any errors
@@ -245,20 +245,36 @@ public class DB {
         FileOut fileout = new FileOut();
         int palaute;
 
-	String sensNrStr = "";
-	if(sensNr > 0) {
-	    sensNrStr = " AND sensor = "+sensNr;
-	}
+        String sensNrStr = "";
+        if (sensNr > 0) {
+            sensNrStr = " AND sensor = " + sensNr;
+        }
 
-	String fromDateStr = "";
-	if(fromDate.length() > 0) {
-	    fromDateStr = " AND paivays > '"+fromDate+"'";
-	}
+        String fromDateStr = "";
+        String toDateStr = "";
+        /*  
+                              if (fromDate.length() > 0 && toDate.length() > 0) {
+                                  fromDateStr = " AND (DATE(paivays) BETWEEN '" + fromDate + "' AND '" + toDate + "')";
+                              } else {
 
-	String toDateStr = "";
-	if(toDate.length() > 0) {
-	    toDateStr = " AND paivays < '"+toDate+"'";
-	}
+                                  if (fromDate.length() > 0) {
+                                      fromDateStr = " AND 'paivays' >= '" + fromDate + "'";
+                                  }
+                                  if (toDate.length() > 0) {
+                                      toDateStr = " AND 'paivays' <= '" + toDate + "'";
+                                  }   
+                              }
+         */
+        if (fromDate.length() < 1) {
+            fromDate = "2000-01-01";
+        }
+        if (toDate.length() < 1) {
+            toDate = "CURDATE()";
+        }
+        if (!toDate.equals("CURDATE()")) {
+            toDate = "'" + toDate + "'";
+        }
+        fromDateStr = " AND (DATE(paivays) BETWEEN '" + fromDate + "' AND " + toDate + ")";
 
         this.connect();
         if (conn == null) {
@@ -267,9 +283,9 @@ public class DB {
             try {
                 PrintStream os = new PrintStream(soketti.getOutputStream());
                 String query = "SELECT paivays, value, sensor FROM temps WHERE 1"
-			+ sensNrStr + fromDateStr + toDateStr
-			+ " LIMIT 100";
-	System.out.println("DEBUG: listTemps query: " + query);	    // FOR DEBUG
+                        + sensNrStr + fromDateStr + toDateStr
+                        + " LIMIT 100";
+                System.out.println("DEBUG: listTemps query: " + query);	    // FOR DEBUG
                 stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -296,6 +312,7 @@ public class DB {
         return palaute;
     }
 // Listataan käyttäjät tietokannasta
+
     public String GetUsersFromDB(String IP) {                // NO NEED FOR SQL INJECTION PROTECTION
         FileOut fileout = new FileOut();
         String palaute = "";

@@ -45,23 +45,28 @@ public class ListTemps {
                     break;
                 }
             }
-            
 
-            System.out.println("saatu alkupvm: " + startDate);
-            System.out.println("saatu loppupvm: " + endDate);
-
-            if (!startDate.equals("x") && (!endDate.equals("x"))) {
-            
+         //   System.out.println("saatu alkupvm: " + startDate);
+         //   System.out.println("saatu loppupvm: " + endDate);
+            int ulosta = 0;
+            if (startDate.equals("x") && endDate.equals("x")) {
+                ulosta = 1;
+                // poistu
+                os.writeBytes("QQ" + "\n");
+            }
+            if (ulosta == 0) {
                 if (startDate.equals("x")) {
-                startDate = "";
-            }
-            if (endDate.equals("x")) {
-                endDate = "";
-            }
+                    startDate = "";
+                }
+                if (endDate.equals("x")) {
+                    endDate = "";
+                }
+
                 os.writeBytes("list temps" + "\n");
                 os.writeBytes(startDate + "\n");
                 os.writeBytes(endDate + "\n");
             }
+
         } catch (IOException e) {
             System.err.println("IOException:  " + e);
         }
