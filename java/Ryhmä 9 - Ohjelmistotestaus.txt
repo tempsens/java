@@ -41,7 +41,7 @@ Functions	Commandlogi muutettava! Commandlogia rajoitettava-->ei...?												
 		-> samat testit kuin client/login	
 	list									
 	list users								
-	list temps								-> PARAMETRIT															T O D O		-Joakim-
+	list temps								-> PARAMETRIT																DONE
 	fileout									
 	fileout userlist						
 	add temp								
