@@ -45,17 +45,19 @@ public class ListTemps {
                     break;
                 }
             }
-            if (startDate.equals("x")) {
-                startDate = "";
-            }
-            if (endDate.equals("x")) {
-                startDate = "";
-            }
+            
 
             System.out.println("saatu alkupvm: " + startDate);
             System.out.println("saatu loppupvm: " + endDate);
 
             if (!startDate.equals("x") && (!endDate.equals("x"))) {
+            
+                if (startDate.equals("x")) {
+                startDate = "";
+            }
+            if (endDate.equals("x")) {
+                endDate = "";
+            }
                 os.writeBytes("list temps" + "\n");
                 os.writeBytes(startDate + "\n");
                 os.writeBytes(endDate + "\n");

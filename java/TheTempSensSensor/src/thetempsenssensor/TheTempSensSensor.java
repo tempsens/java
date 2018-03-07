@@ -32,7 +32,7 @@ import static jdk.nashorn.internal.objects.NativeString.trim;
 public class TheTempSensSensor {
 
     private static final int SENSORNUM = 1;                  // Oletus anturin numero
-    private static final int INTERVAL = 5;                   // Lähetystaajuus (sekuntia)
+    private static final int INTERVAL = 3;                   // Lähetystaajuus (sekuntia)
     private static final String VERSION = "0.4";             // Ohjelman versionumero
     private static final String HOSTNAME = "127.0.0.1";      // Palvelimen osoite
     private static final int PORT = 1234;                    // Määritetään käytettävä portti
