@@ -266,10 +266,10 @@ public class DB {
         } else {
             try {
                 PrintStream os = new PrintStream(soketti.getOutputStream());
-                String query = "SELECT paivays, value, sensor FROM temps WHERE 1 LIMIT 100"
+                String query = "SELECT paivays, value, sensor FROM temps WHERE 1"
 			+ sensNrStr + fromDateStr + toDateStr
 			+ " LIMIT 100";
-//	System.out.println("DEBUG: listTemps query: " + query);	    // FOR DEBUG
+	System.out.println("DEBUG: listTemps query: " + query);	    // FOR DEBUG
                 stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {

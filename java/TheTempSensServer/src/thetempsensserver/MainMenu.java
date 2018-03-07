@@ -166,7 +166,7 @@ public class MainMenu implements Runnable {
                     break;
 
                 case "add": // Väärä syntaksi -> antaa vain virheilmoituksen
-                   
+
                     fileout.clientEventLog(komento, IP);
                     os.println("Missing parameter! (user or temp needed)");
                     break;
@@ -212,18 +212,18 @@ public class MainMenu implements Runnable {
                                     System.out.println(tempvalue);	// FOR DEBUG
                                     System.out.println(sensori);	// FOR DEBUG
                                     int palaute = uusiTemp.insertTemp(tempvalue, sensori, today, IP);
-				    //System.out.println("add temp (insertTemp palaute): " + palaute); // FOR DEBUG
-				    switch (palaute) {
-				    	case -1:
-					    os.println("Server database error! Command not available.");
-					    break;
-				    	case -2:
-					    os.println("Server error!");
-					    break;
-				    	default:
-					    senC.setSensor(sensori);
-					    break;
-				    }
+                                    //System.out.println("add temp (insertTemp palaute): " + palaute); // FOR DEBUG
+                                    switch (palaute) {
+                                        case -1:
+                                            os.println("Server database error! Command not available.");
+                                            break;
+                                        case -2:
+                                            os.println("Server error!");
+                                            break;
+                                        default:
+                                            senC.setSensor(sensori);
+                                            break;
+                                    }
                                 }
                             }
                         } catch (IOException e) {
@@ -258,12 +258,18 @@ public class MainMenu implements Runnable {
 // Listaa lämpötilat tietokannasta
                 case "list temps": // Tulostaa listan lämpötiloista (100 viimeisintä)
                     if (userLevel >= 5) {
-                        DB listtemps = new DB();
-                        int palaute = listtemps.listTemps(clinu, 0, "2018-03-01", "2018-03-04");
-                        if (palaute == -1) {
-                            os.println("Server database error! Command not available.");
-                        } else if (palaute == -2) {
-                            os.println("Server error!");
+                        try {
+                            DB listtemps = new DB();
+                            String startDate = is.readLine();
+                            String endDate = is.readLine();
+
+                            int palaute = listtemps.listTemps(clinu, 0, startDate, endDate);
+                            if (palaute == -1) {
+                                os.println("Server database error! Command not available.");
+                            } else if (palaute == -2) {
+                                os.println("Server error!");
+                            }
+                        } catch (IOException e) {
                         }
                     } else {
                         os.println(PERUSPALAUTE);
@@ -296,7 +302,7 @@ public class MainMenu implements Runnable {
                     fileout.clientEventLog(komento, IP);
                     os.println("Server quit."); // Infopläjäys
                     os.println("QQ");           // Lähetetään QQ lähetyksen lopuksi
-		    System.out.println("Server shutting down...");
+                    System.out.println("Server shutting down...");
                     System.exit(-1);		// Sammuttaa ohjelman
                     break;
 // Käynnistää palvelimen lämpötilojen välittämisen tietokantaan
@@ -320,10 +326,10 @@ public class MainMenu implements Runnable {
                     os.println(srvC.getStatus());
                     break;
 // Client sammuttaa ohjelman
-		case "exit":
+                case "exit":
                     fileout.clientEventLog(komento, IP);
-		    ulosta = 1;
-		    break;
+                    ulosta = 1;
+                    break;
 // Toiminto tuntemattomille komennoille
                 default:
                     //   fileout.clientEventLog(komento, IP);
