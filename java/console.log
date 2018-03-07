@@ -1,0 +1,41 @@
+07.03.2018 15:26:52 Client event from(/127.0.0.1:50640): Login succes | u:sensoren
+07.03.2018 15:26:52 Server: LOGIN: (u:sensoren)
+07.03.2018 15:31:03 Client event from(/127.0.0.1:50657): Login succes | u:sensoren
+07.03.2018 15:31:03 Server: LOGIN: (u:sensoren)
+07.03.2018 15:35:49 Client event from(/127.0.0.1:50743): Login succes | u:sensoren
+07.03.2018 15:35:49 Server: LOGIN: (u:sensoren)
+07.03.2018 15:36:28 Client event from(/127.0.0.1:50746): Login succes | u:sensoren
+07.03.2018 15:36:28 Server: LOGIN: (u:sensoren)
+07.03.2018 15:37:23 Client event from(/127.0.0.1:50751): Login succes | u:sensoren
+07.03.2018 15:37:23 Server: LOGIN: (u:sensoren)
+07.03.2018 15:41:24 Client event from(/127.0.0.1:50757): Login succes | u:sensoren
+07.03.2018 15:41:24 Server: LOGIN: (u:sensoren)
+07.03.2018 15:46:29 Client event from(/127.0.0.1:50768): Login succes | u:admin
+07.03.2018 15:46:29 Server: LOGIN: (u:admin)
+07.03.2018 15:46:24 Client event from(/127.0.0.1:50768): start
+07.03.2018 15:46:42 Client event from(/127.0.0.1:50770): Login succes | u:sensoren
+07.03.2018 15:46:42 Server: LOGIN: (u:sensoren)
+07.03.2018 15:55:09 Client event from(/127.0.0.1:50796): Login succes | u:sensoren
+07.03.2018 15:55:09 Server: LOGIN: (u:sensoren)
+07.03.2018 15:55:23 Client event from(/127.0.0.1:50798): Login succes | u:admin
+07.03.2018 15:55:23 Server: LOGIN: (u:admin)
+07.03.2018 15:55:19 Client event from(/127.0.0.1:50798): start
+07.03.2018 15:55:19 Client event from(/127.0.0.1:50798): help
+07.03.2018 15:55:19 Client event from(/127.0.0.1:50798): Unknown command(exit)
+07.03.2018 16:27:10 Client event from(/127.0.0.1:50929): Login succes | u:sensoren
+07.03.2018 16:27:10 Server: LOGIN: (u:sensoren)
+07.03.2018 16:51:28 Client event from(/127.0.0.1:51003): Login succes | u:sensoren
+07.03.2018 16:51:28 Server: LOGIN: (u:sensoren)
+07.03.2018 16:52:43 Client event from(/127.0.0.1:51011): Login succes | u:sensoren
+07.03.2018 16:52:43 Server: LOGIN: (u:sensoren)
+07.03.2018 16:53:35 Client event from(/127.0.0.1:51013): Login succes | u:sensoren
+07.03.2018 16:53:35 Server: LOGIN: (u:sensoren)
+07.03.2018 16:56:13 Client event from(/127.0.0.1:51031): Login succes | u:admin
+07.03.2018 16:56:13 Server: LOGIN: (u:admin)
+07.03.2018 16:56:10 Client event from(/127.0.0.1:51031): start
+07.03.2018 16:56:10 Client event from(/127.0.0.1:51031): status
+07.03.2018 16:56:10 Client event from(/127.0.0.1:51031): exit
+07.03.2018 16:56:42 Client event from(/127.0.0.1:51033): Login succes | u:sensoren
+07.03.2018 16:56:42 Server: LOGIN: (u:sensoren)
+07.03.2018 16:56:46 Client event from(/127.0.0.1:51035): Login succes | u:sensoren
+07.03.2018 16:56:46 Server: LOGIN: (u:sensoren)
