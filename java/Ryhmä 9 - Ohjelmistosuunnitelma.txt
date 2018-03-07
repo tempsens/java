@@ -7,14 +7,14 @@
 		case list						// --> error: argument needed								-Done
 			users		{ }				// show users (and logged users)							-Done
 			temps						// list last 100 rows				100?					-Done
-				from					// --> error: no date given							-Sprint 4 - TO DO
-					DATE { }			// list last 100 rows from date		100?			-Sprint 4 - TO DO
-						to				// --> error: no date given							-Sprint 4 - TO DO
-							DATE { }	// list last 100 rows from range	100?			-Sprint 4 - TO DO
-				lt						// --> error: no value given						-Sprint 4 - TO DO
-					VALUE { }			// list 100 smallest rows			100?			-Sprint 4 - TO DO
-				gt						// --> error: no value given						-Sprint 4 - TO DO
-					VALUE { }			// list 100 greatest rows			100?			-Sprint 4 - TO DO
+				from					// --> error: no date given									-Done
+					DATE { }			// list last 100 rows from date		100?					-Done
+						to				// --> error: no date given									-Done
+							DATE { }	// list last 100 rows from range	100?					-Done
+				lt						// --> error: no value given								-Skipped
+					VALUE { }			// list 100 smallest rows			100?					-Skipped
+				gt						// --> error: no value given								-Skipped
+					VALUE { }			// list 100 greatest rows			100?					-Skipped
 		case fileout					// --> error: missing parameter				- Matti/Jukka	-Done
 			console		{ }				// write console to logfile(s)								-Done
 			userlist	{ }				// write userlist to file					-Joakim			-Done
