@@ -40,6 +40,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 import static thetempsensserver.TheTempSensServer.serverRunning;
 
 /**
@@ -332,7 +333,7 @@ public class MainMenu implements Runnable {
 		    os.println("Server quit.");          // Infopläjäys
 		    os.println("QQ");                    // Lähetetään QQ lähetyksen lopuksi
 		    System.out.println("Server shutting down...");
-		    System.exit(-1);		         // Sammuttaa ohjelman
+		    System.exit(0);		         // Sammuttaa ohjelman
 		    break;
 // Käynnistää palvelimen lämpötilojen välittämisen tietokantaan
 		case "start":
@@ -358,6 +359,17 @@ public class MainMenu implements Runnable {
 		case "exit":
 		    fileout.clientEventLog(komento, IP); // Tulostaa komennon lokitiedostoon
 		    ulosta = 1;                          // ylemmästä loopista poistuminen
+		    break;
+// Kehittäjille: listaa säikeet
+		case "list threads":
+		    Set<Thread> threads = Thread.getAllStackTraces().keySet();
+		    for (Thread t : threads) {
+			String name = t.getName();
+			Thread.State state = t.getState();
+			int priority = t.getPriority();
+			String type = t.isDaemon() ? "Daemon" : "Normal";
+			os.printf("%-30s \t %s \t %d \t %s\n", name, state, priority, type);
+		    }
 		    break;
 // Toiminto tuntemattomille komennoille
 		default:
