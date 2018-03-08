@@ -1,5 +1,6 @@
 //  Versio 0.5  07.03.2018  Joakim
 //   list temps komento ja list temps luokka
+//------------------------------------------------------------------------------
 //  Versio 0.4	06.03.2018  Jukka
 //   Pääohjelman komennot switch-case alle. Oli aiemmin if, else if, else
 //   Kommentointeja lisää
@@ -15,7 +16,7 @@
 //   catch kuvaustekstejä debuggia helpottamaan
 //------------------------------------------------------------------------------
 //  Versio 0.1     
-//              
+//  Versionumeroinnin aloitus
 //------------------------------------------------------------------------------
 package thetempsensclient;
 

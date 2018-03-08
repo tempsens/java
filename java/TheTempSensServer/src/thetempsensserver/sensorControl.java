@@ -1,5 +1,5 @@
 //  Versio 0.5  06.03.2018  Jukka
-//
+//  Versionumeroinnin aloitus
 //------------------------------------------------------------------------------
 package thetempsensserver;
 
@@ -35,8 +35,8 @@ private final int INTERVAL = 1;   // Taulujen countdown taajuus (sekuntia)
     public void listSensors() {
 //	System.out.println("Lista sensorien tiloista:"                          // FOR DEBUG -Jukka-
 //		+ "-----------------------------------");                       // FOR DEBUG -Jukka-
-	for (int i = 0; i < 10; i++) {
-	    System.out.print(sensorTaulu[i] + " | ");
+	for (int i = 1; i < 11; i++) {
+	    System.out.print(i+"="+sensorTaulu[i]+"  ");
 	}
 	System.out.println();
     }
@@ -52,7 +52,7 @@ private final int INTERVAL = 1;   // Taulujen countdown taajuus (sekuntia)
 
     public void purgeTable() {
 //	System.out.println("purgeTable: Emptying table...");			// FOR DEBUG -Jukka-
-	for (int i = 0; i < 10; i++) {
+	for (int i = 1; i < 11; i++) {
 	    if (sensorTaulu[i] > 0) {
 		sensorTaulu[i]--;
 	    }

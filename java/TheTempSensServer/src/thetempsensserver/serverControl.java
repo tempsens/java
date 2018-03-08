@@ -3,7 +3,7 @@
 //   this.serverRunning muuttujaviittaukset vaihdettu serverControl.serverRunning
 //------------------------------------------------------------------------------
 //  Versio 0.2
-//              
+//  Versionumeroinnin aloitus
 //------------------------------------------------------------------------------
 package thetempsensserver;
 

@@ -1,5 +1,5 @@
 //  Versio 0.2
-//              
+//  Versionumeroinnin aloitus
 //------------------------------------------------------------------------------
 package thetempsensserver;
 
@@ -10,7 +10,6 @@ import static java.lang.Boolean.TRUE;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import static thetempsensserver.TheTempSensServer.IP;
 
 /**
  * @author PetShopBoys
@@ -21,7 +20,7 @@ public class FileOut {
 
     public int loginError(String viesti, String IP) {	    // Prints to file if login fails
 	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
-	    String textToWrite = today + "Server: LOGIN ERROR! (" + viesti + ")\n";
+	    String textToWrite = today + "Server: LOGIN ERROR! (" + viesti + ")\r\n";
 	    clientEventLog("Login ERROR | " + viesti, IP);
 
 	    writer.write(textToWrite);
@@ -36,7 +35,7 @@ public class FileOut {
 
     public int clientEventLog(String viesti, String IP) {	    // Prints to file if login fails
 	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
-	    String textToWrite = today + "Client event from(" + IP + "): " + viesti + "\n";
+	    String textToWrite = today + "Client event from(" + IP + "): " + viesti + "\r\n";
 	    writer.write(textToWrite);
 	    writer.close();
 	    // System.out.println(textToWrite);     // for DEBUG
@@ -49,8 +48,8 @@ public class FileOut {
 
     public int loginSuccess(String viesti, String IP) {	   // Prints to file who has logged in
 	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
-	    String textToWrite = today + "Server: LOGIN: (" + viesti + ")\n";
-	    clientEventLog("Login succes | " + viesti, IP);
+	    String textToWrite = today + "Server: LOGIN: (" + viesti + ")\r\n";
+	    clientEventLog("Login successful | " + viesti, IP);
 
 	    writer.write(textToWrite);
 	    writer.close();
@@ -61,7 +60,7 @@ public class FileOut {
 	}
     }
 
-    public void console(String viesti, Socket soketti) { // OK
+    public void console(String viesti, Socket soketti, String IP) { // OK
 	try (FileWriter writer = new FileWriter("console.log", TRUE)) {
 	    PrintStream os = new PrintStream(soketti.getOutputStream());
 	    String textToWrite = viesti;
@@ -77,8 +76,8 @@ public class FileOut {
 	}
     }
 
-    public int userlist(Socket soketti) {// OK
-	String fileName="users.txt";
+    public int userlist(Socket soketti, String IP) {// OK
+	String fileName = "users.txt";
 	try (FileWriter writer = new FileWriter(fileName, TRUE)) {
 	    PrintStream os = new PrintStream(soketti.getOutputStream());
 	    DB db = new DB();

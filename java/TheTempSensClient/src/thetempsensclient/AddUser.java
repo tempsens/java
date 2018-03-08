@@ -1,5 +1,5 @@
 //  Versio 0.2
-//              
+//  Versionumeroinnin aloitus
 //------------------------------------------------------------------------------
 package thetempsensclient;
 

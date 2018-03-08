@@ -1,9 +1,8 @@
 //  Versio 0.1     
-//              
+//  Versionumeroinnin aloitus
 //------------------------------------------------------------------------------
 package ohjelmistotestaus;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -16,12 +15,11 @@ import java.util.Scanner;
  */
 public class Ohjelmistotestaus {
 
-    private static final String VERSION = "0.1";
-    private static final String HOSTNAME = "127.0.0.1";
-    private static final int PORT = 1234;
+    private static final String VERSION = "0.1";            // Ohjelman versionumero
+    private static final String HOSTNAME = "127.0.0.1";     // Palvelimen osoite
+    private static final int PORT = 1234;                   // Määritetään käytettävä portti
 
     public static void main(String[] args) {
-	DataInputStream is = null;
 	DataOutputStream os = null;
 	Socket MyClient = null;
 
@@ -31,13 +29,13 @@ public class Ohjelmistotestaus {
 	long round = 0; // Loop round counter variable
 
 	while (getOut == 0) {
-	    System.out.println("\n\n\n\n\n\n\nTempSens ohjelmistotestaus, v" + VERSION);
-	    System.out.println("----------------------------------\n"
-		    + "Toiminnot:\n"
-		    + " 0 = EXIT\n"
-		    + " 1 = Server connection overflow\n"
-		    + " 2 = Server input overflow\n");
-	    System.out.print("Anna toiminto: ");
+	    System.out.print("\n\n\n\n\n\n\nTempSens ohjelmistotestaus, v" + VERSION
+	                               + "\n----------------------------------\n\n"
+		                       + "Toiminnot:\n"
+		                       + " 0 = EXIT\n"
+		                       + " 1 = Server connection overflow\n"
+		                       + " 2 = Server input overflow\n\n"
+	                               + "Anna toiminto: ");
 	    toiminto = skanneri.nextLine();
 	    switch (toiminto) {
 		case "0":
@@ -48,7 +46,7 @@ public class Ohjelmistotestaus {
 		    try {
 			while (true) { // Start connection overflow looper!
 			    MyClient = new Socket(HOSTNAME, PORT);
-			    System.out.println("[" + round + "] LOOPER START"); // Show how how many rounds looped
+			    System.out.println("Round " + round); // Show how how many rounds looped
 			    round++;
 			}
 		    } catch (UnknownHostException e) {
@@ -79,6 +77,7 @@ public class Ohjelmistotestaus {
 			} // WHILE LOPPUSULJE
 		    } // IF LOPPUSULJE
 		    break;
+
 		default:
 	    } // SWITCH LOPPUSULJE
 	} // PÄÄLOOPIN LOPPUSULJE

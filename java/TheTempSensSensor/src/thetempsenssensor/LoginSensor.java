@@ -2,7 +2,7 @@
 //   Käyttäjätunnut ja salasana kiinteisiin muuttujiin koodin alkuun
 //------------------------------------------------------------------------------
 //  Versio 0.2     
-//              
+//  Versionumeroinnin aloitus
 //------------------------------------------------------------------------------
 package thetempsenssensor;
 
