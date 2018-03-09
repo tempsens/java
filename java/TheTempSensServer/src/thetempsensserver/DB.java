@@ -33,10 +33,10 @@ public class DB {
 // YHTEYDEN AVAUS
     public void connect() {
 	try {
-	    // 	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/XXXXXXXX_tempsens?"
-	    //     + "user=XXXX_XXXXX&password=XXXXXXX"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
+	    // 	    conn = DriverManager.getConnection("jdbc:mysql://MYSQL_HOSTNAME/DATABASE?"
+	    //     + "user=USERNAME&password=PASSWORD");
 	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/juksohia_tempsens?"
-		    + "user=juksohia_user&password=!kayttaja1"); // MUISTA LISÄTÄ TIETOKANNAN NIMI, USER JA PWD
+		    + "user=juksohia_user&password=!kayttaja1");
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
 	    System.out.println("SQLState: " + ex.getSQLState());

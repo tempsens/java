@@ -1,3 +1,6 @@
+//  Versio 1.0  09.03.2018  Tiimi
+//   Julkaisu
+//------------------------------------------------------------------------------
 //  Versio 0.5  08.03.2018  Jukka
 //   Virhelooppia paranneltu
 //   Palvelimen palautteen tulostus lisätty
@@ -37,12 +40,12 @@ import static jdk.nashorn.internal.objects.NativeString.trim;
  */
 public class TheTempSensSensor {
 
-    private static final int SENSORNUM = 1;                  // Oletus anturin numero
-    private static final int INTERVAL = 3;                   // Lähetystaajuus (sekuntia)
-    private static final String VERSION = "0.5";             // Ohjelman versionumero
+    private static final String VERSION = "1.0";             // Ohjelman versionumero
     private static final String HOSTNAME = "127.0.0.1";      // Palvelimen osoite
     private static final int PORT = 1234;                    // Määritetään käytettävä portti
     private static final int RETRIES = 200;                  // Yhteyden muodostuksen uudelleenyrityksiä
+    private static final int SENSORNUM = 1;                  // Oletus anturin numero
+    private static final int INTERVAL = 10;                  // Lähetystaajuus (sekuntia)
 
     public static void main(String[] args) {
 	int sensori;                                         // Anturin numero

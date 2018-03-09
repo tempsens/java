@@ -1,3 +1,6 @@
+//  Versio 1.0  09.03.2018  Tiimi
+//   Julkaisu
+//------------------------------------------------------------------------------
 //  Versio 0.7   Jukka
 //  Kommentointeja lisätty
 //------------------------------------------------------------------------------
@@ -14,7 +17,7 @@ import java.net.ServerSocket;
  */
 public class TheTempSensServer {
 
-    private static final String VERSION = "0.6"; // Ohjelman versionumero
+    private static final String VERSION = "1.0"; // Ohjelman versionumero
     private static final int PORT = 1234;        // Palvelin kuuntelee tätä porttia
     public static int serverRunning = 0;         // Globaali muuttuja
     public static int sensorTaulu[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // Globaali taulu sensorien valvontaan

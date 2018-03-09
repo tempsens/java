@@ -1,3 +1,6 @@
+//  Versio 1.0  09.03.2018  Tiimi
+//   Julkaisu
+//------------------------------------------------------------------------------
 //  Versio 0.5  07.03.2018  Joakim
 //   list temps komento ja list temps luokka
 //------------------------------------------------------------------------------
@@ -35,7 +38,7 @@ public class TheTempSensClient {
 
     // CLIENT
     private static final String WELCOME = "Tervetuloa! Aloitappa vaikka komennolla 'help'";
-    private static final String VERSION = "0.5";            // Ohjelman versionumero
+    private static final String VERSION = "1.0";            // Ohjelman versionumero
     private static final String HOSTNAME = "127.0.0.1";     // Palvelimen osoite
     private static final int PORT = 1234;                   // Määritetään käytettävä portti
 
