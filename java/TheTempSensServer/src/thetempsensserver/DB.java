@@ -35,8 +35,8 @@ public class DB {
 	try {
 	    // 	    conn = DriverManager.getConnection("jdbc:mysql://MYSQL_HOSTNAME/DATABASE?"
 	    //     + "user=USERNAME&password=PASSWORD");
-	    conn = DriverManager.getConnection("jdbc:mysql://c3-suncomet.com/juksohia_tempsens?"
-		    + "user=juksohia_user&password=!kayttaja1");
+	    conn = DriverManager.getConnection("jdbc:mysql://localhost/juksohia_tempsens?"
+		    + "user=tempsens&password=tempsens");
 	} catch (SQLException ex) {		// handle any errors
 	    System.out.println("SQLException: " + ex.getMessage());
 	    System.out.println("SQLState: " + ex.getSQLState());

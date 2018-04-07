@@ -12,7 +12,7 @@ import static thetempsensserver.TheTempSensServer.sensorTaulu;
  * @author PetShopBoys
  */
 public class sensorControl implements Runnable {
-private final int BEGINVALUE = 4; // Alkuarvo, josta aloitetaan countdown
+private final int BEGINVALUE = 9; // Alkuarvo, josta aloitetaan countdown
 private final int INTERVAL = 1;   // Taulujen countdown taajuus (sekuntia)
 
     @Override

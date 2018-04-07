@@ -1,0 +1,47 @@
+10.03.2018 12:26:39 Client event from(/127.0.0.1:50022): Login successful | u:admin
+10.03.2018 12:26:39 Server: LOGIN: (u:admin)
+10.03.2018 12:26:37 Client event from(/127.0.0.1:50022): User login: 2 with level 10
+10.03.2018 12:26:59 Client event from(/127.0.0.1:50022): List temps
+10.03.2018 12:26:37 Client event from(/127.0.0.1:50022): quit
+10.03.2018 12:29:07 Client event from(/127.0.0.1:50032): Login successful | u:sensoren
+10.03.2018 12:29:07 Server: LOGIN: (u:sensoren)
+10.03.2018 12:29:07 Client event from(/127.0.0.1:50032): User login: 15 with level 7
+10.03.2018 12:29:17 Client event from(/127.0.0.1:50034): Login successful | u:sensoren
+10.03.2018 12:29:17 Server: LOGIN: (u:sensoren)
+10.03.2018 12:29:17 Client event from(/127.0.0.1:50034): User login: 15 with level 7
+10.03.2018 12:30:47 Client event from(/127.0.0.1:50040): Login successful | u:admin
+10.03.2018 12:30:47 Server: LOGIN: (u:admin)
+10.03.2018 12:30:34 Client event from(/127.0.0.1:50040): User login: 2 with level 10
+10.03.2018 12:30:34 Client event from(/127.0.0.1:50040): start
+10.03.2018 12:33:20 Client event from(/127.0.0.1:50060): Login successful | u:sensoren
+10.03.2018 12:33:20 Server: LOGIN: (u:sensoren)
+10.03.2018 12:33:19 Client event from(/127.0.0.1:50060): User login: 15 with level 7
+10.03.2018 12:33:48 Client event from(/127.0.0.1:50064): Login successful | u:sensoren
+10.03.2018 12:33:48 Server: LOGIN: (u:sensoren)
+10.03.2018 12:33:48 Client event from(/127.0.0.1:50064): User login: 15 with level 7
+10.03.2018 13:31:12 Client event from(/127.0.0.1:50256): Login successful | u:admin
+10.03.2018 13:31:12 Server: LOGIN: (u:admin)
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): User login: 2 with level 10
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): help
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): start
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): help
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): Unknown command(list temp)
+10.03.2018 13:35:07 Client event from(/127.0.0.1:50256): List temps
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): help
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): Unknown command(add users)
+10.03.2018 13:36:45 Client event from(/127.0.0.1:50256): New User added ( usr: teppo / lvl: 6)
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): add user teppo with level teppo
+10.03.2018 13:37:06 Client event from(/127.0.0.1:50336): Login successful | u:teppo
+10.03.2018 13:37:06 Server: LOGIN: (u:teppo)
+10.03.2018 13:36:55 Client event from(/127.0.0.1:50336): User login: 24 with level 6
+10.03.2018 13:36:55 Client event from(/127.0.0.1:50336): change pass for 24
+10.03.2018 13:37:42 Client event from(/127.0.0.1:50348): Login successful | u:teppo
+10.03.2018 13:37:42 Server: LOGIN: (u:teppo)
+10.03.2018 13:37:37 Client event from(/127.0.0.1:50348): User login: 24 with level 6
+10.03.2018 13:37:37 Client event from(/127.0.0.1:50348): exit
+10.03.2018 13:36:55 Client event from(/127.0.0.1:50336): exit
+10.03.2018 13:38:59 Client event from(/127.0.0.1:50256): List users
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): Unknown command(ehelp')
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): help
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): Unknown command(ehlp)
+10.03.2018 13:30:57 Client event from(/127.0.0.1:50256): help
